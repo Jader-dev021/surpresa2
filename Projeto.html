@@ -1,0 +1,3376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eu e Você ❤️</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #050505;
+            color: #fff;
+            font-family: Georgia, "Times New Roman", serif;
+            overflow-x: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            font: inherit;
+        }
+
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        #intro {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #291018,
+                    #080808 60%,
+                    #000
+                );
+
+            transition:
+                opacity 1.5s ease,
+                visibility 1.5s ease;
+        }
+
+        #intro.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .intro-content {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .eyebrow {
+            margin-bottom: 20px;
+
+            color: #f19caf;
+
+            font-size: .75rem;
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+        }
+
+        .intro-content h1 {
+            margin-bottom: 20px;
+
+            font-size:
+                clamp(3rem, 10vw, 6rem);
+
+            font-weight: normal;
+        }
+
+        .intro-content p {
+            margin-bottom: 35px;
+
+            color: #ccc;
+
+            line-height: 1.8;
+        }
+
+        #startBtn {
+            padding: 15px 32px;
+
+            color: #fff;
+
+            background:
+                rgba(255, 255, 255, .05);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .3);
+
+            border-radius: 999px;
+
+            cursor: pointer;
+
+            transition: .4s ease;
+        }
+
+        #startBtn:hover {
+            background: #fff;
+            color: #000;
+
+            transform: scale(1.06);
+        }
+
+
+        /* =========================
+           MÚSICA
+        ========================= */
+
+        #musicControl {
+            position: fixed;
+
+            right: 18px;
+            bottom: 18px;
+
+            z-index: 5000;
+
+            width: 45px;
+            height: 45px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .25);
+
+            border-radius: 50%;
+
+            color: #fff;
+
+            background:
+                rgba(0, 0, 0, .65);
+
+            cursor: pointer;
+
+            backdrop-filter: blur(10px);
+        }
+
+
+        /* =========================
+           GERAL
+        ========================= */
+
+        section {
+            min-height: 80vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 120px 20px;
+        }
+
+        .container {
+            width: min(1050px, 100%);
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+
+            font-size:
+                clamp(2.8rem, 8vw, 5.5rem);
+
+            font-weight: normal;
+
+            line-height: 1.05;
+        }
+
+        .section-text {
+            max-width: 750px;
+
+            margin: auto;
+
+            color: #ccc;
+
+            line-height: 1.9;
+
+            font-size: 1.05rem;
+        }
+
+        .accent {
+            color: #f19caf;
+        }
+
+
+        /* =========================
+           REVEAL
+        ========================= */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(60px);
+
+            transition:
+                opacity 1.2s ease,
+                transform 1.2s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            position: relative;
+
+            min-height: 100svh;
+
+            text-align: center;
+
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,.05),
+                    rgba(0,0,0,.55),
+                    #050505
+                );
+        }
+
+        .hero-image {
+            position: absolute;
+
+            width: min(82vw, 620px);
+
+            height: 72vh;
+
+            object-fit: cover;
+
+            border-radius:
+                43px
+                16px
+                52px
+                23px;
+
+            transform: rotate(-1.5deg);
+
+            filter: brightness(.72);
+
+            box-shadow:
+                0 30px 100px
+                rgba(0, 0, 0, .8);
+        }
+
+        .hero-content {
+            position: relative;
+
+            z-index: 2;
+
+            margin-top: 55vh;
+        }
+
+        .hero h1 {
+            font-size:
+                clamp(3.5rem, 12vw, 7rem);
+
+            font-weight: normal;
+
+            line-height: .9;
+        }
+
+        .hero p {
+            margin-top: 20px;
+
+            color: #ddd;
+
+            font-style: italic;
+        }
+
+
+        /* =========================
+           VÍDEOS
+        ========================= */
+
+        .video-section {
+            text-align: center;
+        }
+
+        .video-frame {
+            width: min(400px, 100%);
+            margin: 50px auto 0;
+            overflow: hidden;
+            border-radius: 25px;
+            background: #111;
+            box-shadow:
+                0 30px 100px
+                rgba(0, 0, 0, .6);
+        }
+
+        video {
+            display: block;
+            width: 100%;
+        }
+
+
+        /* =========================
+           TIMELINE
+        ========================= */
+
+        .timeline {
+            position: relative;
+
+            width: 100%;
+
+            margin-top: 80px;
+        }
+
+        .timeline::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            bottom: 0;
+
+            left: 50%;
+
+            width: 1px;
+
+            background:
+                rgba(255, 255, 255, .16);
+
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+
+            width: 50%;
+
+            padding: 40px 50px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-right: auto;
+
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+
+            text-align: left;
+        }
+
+        .timeline-item::after {
+            content: "";
+
+            position: absolute;
+
+            top: 65px;
+
+            width: 12px;
+            height: 12px;
+
+            border-radius: 50%;
+
+            background: #f19caf;
+
+            box-shadow:
+                0 0 0 6px #050505,
+                0 0 20px
+                rgba(241, 156, 175, .5);
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -6px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -6px;
+        }
+
+        .timeline-item > img {
+            width: 100%;
+
+            max-width: 240px;
+
+            height: auto;
+
+            border-radius: 18px;
+
+            cursor: zoom-in;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, .5);
+
+            transition:
+                transform .5s ease,
+                filter .5s ease;
+        }
+
+        .timeline-item:nth-child(odd) > img {
+            margin-left: auto;
+        }
+
+        .timeline-item:nth-child(even) > img {
+            margin-right: auto;
+        }
+
+        .timeline-item > img:hover {
+            transform: scale(1.04);
+
+            filter: brightness(1.08);
+        }
+
+        .timeline-item h3 {
+            margin-top: 22px;
+            margin-bottom: 12px;
+
+            font-size: 1.8rem;
+
+            font-weight: normal;
+        }
+
+        .timeline-item p {
+            max-width: 340px;
+
+            color: #bbb;
+
+            line-height: 1.8;
+        }
+
+        .timeline-item:nth-child(odd) p {
+            margin-left: auto;
+        }
+
+
+        /* =========================
+           PRINTS
+        ========================= */
+
+        .conversation-prints,
+        .love-messages,
+        .route-prints {
+            display: flex;
+
+            gap: 15px;
+
+            align-items: flex-start;
+        }
+
+        .timeline-item:nth-child(odd)
+        .conversation-prints,
+        .timeline-item:nth-child(odd)
+        .love-messages,
+        .timeline-item:nth-child(odd)
+        .route-prints {
+            justify-content: flex-end;
+        }
+
+        .conversation-prints img,
+        .love-messages img,
+        .route-prints img {
+            width: 48%;
+
+            max-width: 240px;
+
+            border-radius: 18px;
+
+            cursor: zoom-in;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, .5);
+
+            transition:
+                transform .5s ease,
+                filter .5s ease;
+        }
+
+        .conversation-prints img:hover,
+        .love-messages img:hover,
+        .route-prints img:hover {
+            transform: scale(1.04);
+
+            filter: brightness(1.08);
+        }
+
+
+        /* =========================
+           GALERIA
+        ========================= */
+
+        .proof-section {
+            min-height: 75vh;
+
+            text-align: center;
+        }
+
+        .gallery-start {
+            margin-top: 45px;
+
+            padding: 16px 30px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .25);
+
+            border-radius: 999px;
+
+            color: white;
+
+            background:
+                rgba(255, 255, 255, .05);
+
+            cursor: pointer;
+
+            transition: .4s ease;
+        }
+
+        .gallery-start:hover {
+            background: white;
+
+            color: black;
+
+            transform: scale(1.05);
+        }
+
+        .proof-gallery {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9000;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            background:
+                rgba(0, 0, 0, .97);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity .5s ease,
+                visibility .5s ease;
+        }
+
+        .proof-gallery.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .gallery-content {
+            width: min(700px, 100%);
+
+            text-align: center;
+        }
+
+        .gallery-counter {
+            margin-bottom: 20px;
+
+            color: #f19caf;
+
+            font-size: .85rem;
+
+            letter-spacing: 2px;
+        }
+
+        .gallery-photo-container {
+            width: 100%;
+
+            max-height: 65vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            border-radius: 22px;
+        }
+
+        .gallery-photo-container img {
+            max-width: 100%;
+
+            max-height: 65vh;
+
+            object-fit: contain;
+
+            border-radius: 22px;
+
+            user-select: none;
+
+            transition:
+                opacity .3s ease,
+                transform .3s ease;
+        }
+
+        .gallery-caption {
+            max-width: 600px;
+
+            margin: 25px auto 0;
+
+            color: #ddd;
+
+            font-size: 1.1rem;
+
+            line-height: 1.8;
+        }
+
+        .gallery-hint {
+            margin-top: 25px;
+
+            color: #777;
+
+            font-size: .8rem;
+        }
+
+        .gallery-close {
+            position: absolute;
+
+            top: 15px;
+            right: 25px;
+
+            border: none;
+
+            background: none;
+
+            color: white;
+
+            font-size: 3rem;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           FINAL GALERIA
+        ========================= */
+
+        .gallery-ending {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9100;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            text-align: center;
+
+            background: #050505;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity 1s ease,
+                visibility 1s ease;
+        }
+
+        .gallery-ending.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .gallery-ending-content {
+            width: min(800px, 100%);
+        }
+
+        .gallery-ending p {
+            margin-bottom: 30px;
+
+            color: #ddd;
+
+            font-size:
+                clamp(1.3rem, 3vw, 2rem);
+
+            line-height: 1.7;
+
+            opacity: 0;
+
+            transform: translateY(20px);
+
+            transition:
+                opacity 1s ease,
+                transform 1s ease;
+        }
+
+        .gallery-ending p.show {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+        .gallery-ending .final-line {
+            margin-top: 60px;
+
+            color: #f19caf;
+
+            font-size:
+                clamp(1.7rem, 4vw, 3rem);
+        }
+
+
+        /* =========================
+           PÔR DO SOL
+        ========================= */
+
+        .sunset-section {
+            min-height: 100vh;
+
+            text-align: center;
+        }
+
+        .sunset-intro {
+            max-width: 750px;
+
+            margin: 0 auto 60px;
+        }
+
+        .sunset-intro h2 {
+            font-size:
+                clamp(3rem, 9vw, 6rem);
+
+            font-weight: normal;
+        }
+
+        .sunset-gallery {
+            display: grid;
+
+            grid-template-columns:
+                1.3fr .7fr;
+
+            gap: 18px;
+
+            align-items: stretch;
+        }
+
+        .sunset-gallery img {
+            width: 100%;
+
+            height: 100%;
+
+            min-height: 250px;
+
+            object-fit: cover;
+
+            border-radius: 22px;
+
+            cursor: zoom-in;
+
+            transition:
+                transform .5s ease;
+        }
+
+        .sunset-gallery img:hover {
+            transform: scale(1.02);
+        }
+
+        .sunset-main {
+            grid-row: span 2;
+        }
+
+        .sunset-text {
+            max-width: 650px;
+
+            margin: 50px auto 0;
+
+            color: #ccc;
+
+            line-height: 1.9;
+
+            font-size: 1.05rem;
+        }
+
+
+        /* =========================
+           CARTA
+        ========================= */
+
+        .letter {
+            max-width: 750px;
+
+            margin: 50px auto 0;
+
+            padding: 50px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .1);
+
+            border-radius: 25px;
+
+            background:
+                rgba(255, 255, 255, .03);
+
+            box-shadow:
+                0 30px 80px
+                rgba(0, 0, 0, .4);
+        }
+
+        .letter p {
+            margin-bottom: 20px;
+
+            color: #ddd;
+
+            font-size: 1.1rem;
+
+            line-height: 2;
+        }
+
+
+        /* =========================
+           FINAL
+        ========================= */
+
+        .final-section {
+            min-height: 100svh;
+
+            flex-direction: column;
+
+            text-align: center;
+
+            background: #000;
+        }
+
+        .final-section h2 {
+            font-size:
+                clamp(3rem, 10vw, 7rem);
+
+            font-weight: normal;
+
+            opacity: 0;
+
+            transform: translateY(50px);
+
+            transition:
+                opacity 2s ease,
+                transform 2s ease;
+        }
+
+        .final-section.active h2 {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+        .final-heart {
+            margin-top: 30px;
+
+            color: #f19caf;
+
+            font-size: 2rem;
+
+            opacity: 0;
+
+            transition:
+                opacity 2s ease 1s;
+        }
+
+        .final-section.active
+        .final-heart {
+            opacity: 1;
+        }
+
+
+        /* =========================
+           PERGUNTA
+        ========================= */
+
+        #question {
+            display: none;
+
+            min-height: 100svh;
+
+            flex-direction: column;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #260f17,
+                    #000 65%
+                );
+        }
+
+        #question.show {
+            display: flex;
+        }
+
+        #question h2 {
+            margin-bottom: 50px;
+
+            font-size:
+                clamp(2.5rem, 8vw, 5rem);
+
+            font-weight: normal;
+        }
+
+        .buttons {
+            position: relative;
+
+            width: min(600px, 90vw);
+
+            height: 170px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 25px;
+        }
+
+        .answer-btn {
+            min-width: 120px;
+
+            padding: 15px 28px;
+
+            border-radius: 999px;
+
+            cursor: pointer;
+
+            transition:
+                transform .35s ease;
+        }
+
+        #yesBtn {
+            color: #fff;
+
+            background: #b94b64;
+
+            border:
+                1px solid
+                #d66a83;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.08);
+        }
+
+        #noBtn {
+            position: absolute;
+
+            color: #ddd;
+
+            background: #111;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .15);
+
+            transition:
+                transform .3s ease;
+        }
+
+        #noMessage {
+            min-height: 30px;
+
+            margin-top: 15px;
+
+            color: #f19caf;
+        }
+
+
+        /* =========================
+           CONTADOR
+        ========================= */
+
+        #relationship {
+            display: none;
+
+            min-height: 100svh;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #260f17,
+                    #050505 65%
+                );
+        }
+
+        #relationship.show {
+            display: flex;
+        }
+
+        .relationship-content {
+            width: min(1000px, 100%);
+        }
+
+        .relationship-content h2 {
+            margin-bottom: 20px;
+
+            font-size:
+                clamp(2.4rem, 7vw, 5rem);
+
+            font-weight: normal;
+
+            line-height: 1.1;
+        }
+
+        .relationship-subtitle {
+            margin-bottom: 50px;
+
+            color: #aaa;
+
+            font-style: italic;
+        }
+
+        .counter {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .counter-box {
+            padding: 25px 10px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .1);
+
+            border-radius: 20px;
+
+            background:
+                rgba(255, 255, 255, .025);
+        }
+
+        .counter-number {
+            display: block;
+
+            color: #f19caf;
+
+            font-size:
+                clamp(2rem, 6vw, 4rem);
+        }
+
+        .counter-label {
+            display: block;
+
+            margin-top: 10px;
+
+            color: #aaa;
+
+            font-size: .75rem;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .counter-footer {
+            margin-top: 50px;
+
+            color: #ddd;
+
+            font-style: italic;
+        }
+
+
+        /* =========================
+           PÉTALAS
+        ========================= */
+
+        .petal {
+            position: fixed;
+
+            top: -40px;
+
+            width: 12px;
+            height: 18px;
+
+            border-radius:
+                100% 0 100% 0;
+
+            background: #f19caf;
+
+            opacity: .65;
+
+            pointer-events: none;
+
+            z-index: 100;
+
+            animation:
+                fall
+                linear
+                forwards;
+        }
+
+        @keyframes fall {
+
+            to {
+
+                transform:
+                    translateY(110vh)
+                    rotate(500deg)
+                    translateX(100px);
+
+                opacity: 0;
+            }
+
+        }
+
+
+        /* =========================
+           LIGHTBOX
+        ========================= */
+
+        #lightbox {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9998;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0, 0, 0, .95);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition: .4s ease;
+        }
+
+        #lightbox.active {
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+        #lightbox img {
+            max-width: 95%;
+
+            max-height: 90vh;
+
+            border-radius: 20px;
+        }
+
+        #closeLightbox {
+            position: absolute;
+
+            top: 15px;
+            right: 25px;
+
+            border: none;
+
+            background: none;
+
+            color: #fff;
+
+            font-size: 3rem;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            section {
+                padding: 90px 20px;
+            }
+
+            .hero-image {
+                width: 88vw;
+                height: 68vh;
+            }
+
+            .hero-content {
+                margin-top: 52vh;
+            }
+
+            .timeline::before {
+                left: 15px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+
+                width: 100%;
+
+                margin: 0;
+
+                padding:
+                    35px 0
+                    35px 45px;
+
+                text-align: left;
+            }
+
+            .timeline-item::after,
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+
+                left: 9px;
+                right: auto;
+            }
+
+            .timeline-item > img {
+
+                width: 100%;
+
+                max-width: 100%;
+
+                margin: 0;
+            }
+
+            .timeline-item:nth-child(odd) p {
+                margin-left: 0;
+            }
+
+            .conversation-prints,
+            .love-messages,
+            .route-prints {
+
+                justify-content:
+                    flex-start !important;
+            }
+
+            .conversation-prints img,
+            .love-messages img,
+            .route-prints img {
+
+                width: 50%;
+
+                max-width: none;
+            }
+
+            .sunset-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .sunset-main {
+                grid-row: auto;
+            }
+
+            .sunset-gallery img {
+                min-height: 220px;
+            }
+
+            .letter {
+                padding: 30px 25px;
+            }
+
+            .counter {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .buttons {
+                height: 190px;
+            }
+
+            .gallery-photo-container {
+                max-height: 58vh;
+            }
+
+            .gallery-photo-container img {
+                max-height: 58vh;
+            }
+
+            .gallery-caption {
+                font-size: 1rem;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         INTRO
+    ========================= -->
+
+    <div id="intro">
+
+        <div class="intro-content">
+
+            <div class="eyebrow">
+                uma história nossa
+            </div>
+
+            <h1>
+                Antes de começar...
+            </h1>
+
+            <p>
+                Coloque o volume,
+                respire fundo
+                e vem comigo.
+            </p>
+
+            <button id="startBtn">
+                Começar ❤️
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MÚSICA
+    ========================= -->
+
+    <audio
+        id="music"
+        loop
+        preload="auto"
+    >
+
+        <source
+            src="assets/musica2.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <button id="musicControl">
+        ♪
+    </button>
+
+
+    <!-- =========================
+         1 — CAPA
+    ========================= -->
+
+    <section class="hero">
+
+        <img
+            src="assets/capa.jpeg"
+            class="hero-image"
+            alt="Nós dois"
+        >
+
+        <div class="hero-content reveal">
+
+            <div class="eyebrow">
+                para você
+            </div>
+
+            <h1>
+                Nossa história.
+            </h1>
+
+            <p>
+                E tudo que aconteceu
+                até chegarmos aqui.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         2 — VÍDEO DELA
+    ========================= -->
+
+    <section class="video-section">
+
+        <div class="container reveal">
+
+            <div class="eyebrow">
+                antes de tudo
+            </div>
+
+            <h2 class="section-title">
+                Quero que você veja uma coisa.
+            </h2>
+
+            <p class="section-text">
+
+                Antes de continuar nossa história,
+                quero que você veja o que diria
+                para você mesma se soubesse
+                que esse momento estava chegando.
+
+            </p>
+
+            <div class="video-frame">
+
+                <video
+                    controls
+                    playsinline
+                    preload="metadata"
+                >
+
+                    <source
+                        src="assets/video-dela.mp4"
+                        type="video/mp4"
+                    >
+
+                </video>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         3 — TIMELINE
+    ========================= -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="eyebrow reveal">
+                nossa história
+            </div>
+
+            <h2 class="section-title reveal">
+
+                Antes de chegar
+                <span class="accent">
+                    aqui.
+                </span>
+
+            </h2>
+
+
+            <div class="timeline">
+
+
+                <!-- 01 — COMEÇO -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/primeiro-story.jpeg"
+                        alt="O começo"
+                    >
+
+                    <h3>
+                        O começo.
+                    </h3>
+
+                    <p>
+                        Quem diria que uma conversa que parecia tão
+                        normal ia acabar trazendo a gente até aqui.
+                        No começo eu nem imaginava o tanto de coisa
+                        que ainda ia acontecer entre nós.
+                    </p>
+
+                </div>
+
+
+                <!-- 02 — PRIMEIRAS CONVERSAS -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/primeira-conversa.jpeg"
+                        alt="Primeiras conversas"
+                    >
+
+                    <h3>
+                        Quando tudo começou a mudar.
+                    </h3>
+
+                    <p>
+                        Aos poucos a gente foi conversando mais,
+                        se conhecendo mais e, quando eu percebi,
+                        já estava esperando uma mensagem sua.
+                    </p>
+
+                </div>
+
+
+                <!-- 03 — PRIMEIRO EU TE AMO -->
+
+                <div class="timeline-item reveal">
+
+                    <div class="love-messages">
+
+                        <img
+                            src="assets/eu-te-amo-1.jpeg"
+                            alt="Meu primeiro eu te amo"
+                        >
+
+                        <img
+                            src="assets/eu-te-amo-2.jpeg"
+                            alt="Primeiro eu te amo dela"
+                        >
+
+                    </div>
+
+                    <h3>
+                        O primeiro "eu te amo". ❤️
+                    </h3>
+
+                    <p>
+                        E pensar que a gente ainda tinha combinado
+                        de falar isso só depois do beijo... Só que
+                        aparentemente nenhum dos dois conseguiu
+                        esperar. KKKK. Acho que foi aí que ficou
+                        ainda mais claro que já não era só uma
+                        brincadeira.
+                    </p>
+
+                </div>
+
+
+                <!-- 04 — PRIMEIRO ENCONTRO -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/primeiro-encontro.jpeg"
+                        alt="Primeiro encontro"
+                    >
+
+                    <h3>
+                        Finalmente, pessoalmente.
+                    </h3>
+
+                    <p>
+                        Depois de tanta conversa, finalmente chegou
+                        o momento de estar ali com você de verdade.
+                        E foi muito melhor do que eu tinha imaginado.
+                    </p>
+
+                </div>
+
+
+                <!-- 05 — PRIMEIRO BEIJO -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/primeiro-beijo.jpeg"
+                        alt="Primeiro beijo"
+                    >
+
+                    <h3>
+                        O primeiro beijo. ❤️
+                    </h3>
+
+                    <p>
+                        E então aconteceu. Depois de esperar,
+                        imaginar e provavelmente ficar nervoso demais,
+                        finalmente aconteceu nosso primeiro beijo.
+                    </p>
+
+                </div>
+
+
+                <!-- 06 — ELA QUIS DESISTIR -->
+
+                <div class="timeline-item reveal">
+
+                    <div class="conversation-prints">
+
+                        <img
+                            src="assets/desistir-dela.jpeg"
+                            alt="Ela dizendo que não estava pronta"
+                        >
+
+                        <img
+                            src="assets/desistir-eu.jpeg"
+                            alt="Minha resposta"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Teve uma hora em que quase não chegamos até aqui.
+                    </h3>
+
+                    <p>
+                        Depois de tudo que já tinha acontecido,
+                        você teve medo e achou que talvez não estivesse
+                        pronta. Eu entendi seu lado, mas também sabia
+                        o quanto queria continuar conhecendo você.
+                        Então eu insisti. E ainda bem que insisti.
+                    </p>
+
+                </div>
+
+
+                <!-- 07 — PEQUENOS DETALHES -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/presente.jpeg"
+                        alt="Pequenos detalhes"
+                    >
+
+                    <h3>
+                        Pequenas coisas.
+                    </h3>
+
+                    <p>
+                        Nem tudo precisa ser um momento gigantesco.
+                        Às vezes é só uma conversa, uma risada,
+                        um olhar ou alguma besteira que a gente fala.
+                        E são justamente essas coisas que eu mais
+                        gosto quando estou com você.
+                    </p>
+
+                </div>
+
+
+                <!-- 08 — OS CAMINHOS ATÉ ELA -->
+
+                <div class="timeline-item reveal">
+
+                    <div class="route-prints">
+
+                        <img
+                            src="assets/percurso-01.jpeg"
+                            alt="Percurso que eu fazia para ver ela"
+                        >
+
+                        <img
+                            src="assets/percurso-02.jpeg"
+                            alt="Outro percurso que eu fazia para ver ela"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Olha o tanto que eu andava por você. KKKK
+                    </h3>
+
+                    <p>
+                        Talvez olhando assim pareça só um caminho
+                        no mapa. Mas eu lembro de cada vez que fiz
+                        esse caminho só porque queria te ver.
+                        E, sinceramente? Eu faria de novo.
+                    </p>
+
+                </div>
+
+
+                <!-- 09 — OUTRO MOMENTO -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/momento-01.jpeg"
+                        alt="Um momento nosso"
+                    >
+
+                    <h3>
+                        E fomos criando os nossos momentos.
+                    </h3>
+
+                    <p>
+                        Cada encontro foi deixando alguma lembrança.
+                        Algumas eu provavelmente vou lembrar pra sempre,
+                        outras a gente vai rir quando lembrar daqui
+                        a alguns anos.
+                    </p>
+
+                </div>
+
+
+                <!-- 10 — OUTRO MOMENTO -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/momento-02.jpeg"
+                        alt="Mais um momento"
+                    >
+
+                    <h3>
+                        Mais um pra coleção. 😂
+                    </h3>
+
+                    <p>
+                        Porque aparentemente a gente não sabe tirar
+                        poucas fotos juntos.
+                    </p>
+
+                </div>
+
+                <!-- 07 — PRIMEIRO PRESENTE -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/primeiro-presente.jpeg"
+                        alt="Meu primeiro presente para ela"
+                    >
+
+                    <h3>
+                        O primeiro presente. 🎁
+                    </h3>
+
+                    <p>
+                        Talvez tenha sido só uma coisa naquele dia,
+                        mas hoje, olhando pra trás, eu gosto de pensar
+                        que foi uma das primeiras vezes que coloquei
+                        em alguma coisa o carinho que eu já estava
+                        começando a sentir por você.
+                    </p>
+
+                </div>
+
+
+                <!-- 11 — NÓS DOIS -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/momento-03.jpeg"
+                        alt="Nós dois"
+                    >
+
+                    <h3>
+                        Nós dois.
+                    </h3>
+
+                    <p>
+                        É engraçado pensar em como tudo começou e
+                        olhar pra onde a gente chegou. Em tão pouco
+                        tempo, você conseguiu se tornar alguém muito
+                        importante pra mim.
+                    </p>
+
+                </div>
+
+
+                <!-- 12 — ESCOLHERIA DE NOVO -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/momento-04.jpeg"
+                        alt="Um momento especial"
+                    >
+
+                    <h3>
+                        E eu escolheria tudo de novo.
+                    </h3>
+
+                    <p>
+                        As conversas, os encontros, os nervosismos,
+                        as risadas e até as pequenas confusões.
+                        Porque tudo isso trouxe a gente até aqui.
+                    </p>
+
+                </div>
+
+
+                <!-- 13 — ALMOÇO NA PRAÇA -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/almoco-praca.jpeg"
+                        alt="Nosso almoço na praça"
+                    >
+
+                    <h3>
+                        Você apareceu quando eu mais precisava.
+                    </h3>
+
+                    <p>
+                        Nesse dia eu estava passando mal e você
+                        simplesmente disse: "eu vou aí ficar com você".
+                        E foi. Você passou lá no meu serviço e ficou
+                        meu almoço inteiro comigo na praça.
+                        Talvez pra você tenha sido só ficar comigo
+                        um tempinho. Pra mim, meu dia mudou
+                        completamente. Até o mal foi embora. KKKK.
+                    </p>
+
+                </div>
+
+
+                <!-- 14 — FUTURO -->
+
+                <div class="timeline-item reveal">
+
+                    <img
+                        src="assets/momento-05.jpeg"
+                        alt="Nossa história"
+                    >
+
+                    <h3>
+                        E ainda tem muito pela frente.
+                    </h3>
+
+                    <p>
+                        Essa história ainda está só começando.
+                        E se depender de mim, essa vai ser só a
+                        primeira parte de muitas outras que ainda
+                        vamos viver juntos.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         4 — GALERIA DAS DEMONSTRAÇÕES
+    ========================= -->
+
+    <section class="proof-section">
+
+        <div class="container">
+
+            <div class="eyebrow reveal">
+                deixa eu te mostrar uma coisa
+            </div>
+
+            <h2 class="section-title reveal">
+
+                Você acha que não sabe
+                <span class="accent">
+                    demonstrar.
+                </span>
+
+            </h2>
+
+            <p class="section-text reveal">
+
+                Você me disse que acha que não sabe demonstrar
+                tudo que sente por mim.
+
+            </p>
+
+            <button
+                class="gallery-start reveal"
+                id="openProofGallery"
+            >
+                Deixa eu te mostrar ❤️
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         GALERIA ABERTA
+    ========================= -->
+
+    <div
+        id="proofGallery"
+        class="proof-gallery"
+    >
+
+        <button
+            id="closeProofGallery"
+            class="gallery-close"
+        >
+            ×
+        </button>
+
+        <div class="gallery-content">
+
+            <div class="gallery-counter">
+
+                <span id="galleryCurrent">
+                    1
+                </span>
+
+                /
+
+                <span id="galleryTotal">
+                    15
+                </span>
+
+            </div>
+
+            <div class="gallery-photo-container">
+
+                <img
+                    id="galleryPhoto"
+                    src="assets/prova-01.jpeg"
+                    alt="Uma lembrança"
+                >
+
+            </div>
+
+            <p
+                id="galleryCaption"
+                class="gallery-caption"
+            >
+            </p>
+
+            <div class="gallery-hint">
+                Deslize para continuar →
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FINAL DA GALERIA
+    ========================= -->
+
+    <div
+        id="galleryEnding"
+        class="gallery-ending"
+    >
+
+        <div class="gallery-ending-content">
+
+            <p id="ending1">
+                Você achava que não sabia demonstrar...
+            </p>
+
+            <p id="ending2">
+                Mas olha quantas vezes você me mostrou
+                o que sente sem nem perceber.
+            </p>
+
+            <p id="ending3">
+                Talvez você não demonstre exatamente do jeito
+                que imagina que deveria. Mas eu percebi cada
+                uma dessas vezes.
+            </p>
+
+            <p id="ending4">
+                E todas elas foram importantes pra mim.
+            </p>
+
+            <p
+                id="ending5"
+                class="final-line"
+            >
+                Você nunca precisou ser perfeita pra me
+                fazer sentir amado. ❤️
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         5 — PÔR DO SOL
+    ========================= -->
+
+    <section class="sunset-section">
+
+        <div class="container">
+
+            <div class="sunset-intro reveal">
+
+                <div class="eyebrow">
+                    aquele dia
+                </div>
+
+                <h2>
+                    O pôr do sol.
+                </h2>
+
+                <p class="section-text">
+
+                    Tem lugares que ficam especiais
+                    simplesmente porque alguma coisa
+                    importante aconteceu ali.
+
+                </p>
+
+            </div>
+
+
+            <div class="sunset-gallery reveal">
+
+                <img
+                    class="sunset-main"
+                    src="assets/por-do-sol-01.jpeg"
+                    alt="Pôr do sol"
+                >
+
+                <img
+                    src="assets/por-do-sol-02.jpeg"
+                    alt="Pôr do sol"
+                >
+
+                <img
+                    src="assets/por-do-sol-03.jpeg"
+                    alt="Pôr do sol"
+                >
+
+                <img
+                    src="assets/por-do-sol-04.jpeg"
+                    alt="Pôr do sol"
+                >
+
+            </div>
+
+
+            <p class="sunset-text reveal">
+
+                E talvez você ainda não saiba, mas eu escolhi
+                esse lugar por um motivo. Foi aqui que a gente
+                viveu um daqueles momentos que eu queria guardar
+                pra sempre.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         6 — CARTA
+    ========================= -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="eyebrow reveal">
+                algumas palavras
+            </div>
+
+            <h2 class="section-title reveal">
+                Pra você.
+            </h2>
+
+            <div class="letter reveal">
+
+                <p>
+                    Meu amor,
+                </p>
+
+                <p>
+                    Tem muita coisa que eu poderia escrever aqui,
+                    mas acho que nenhuma delas conseguiria explicar
+                    completamente o quanto você se tornou importante
+                    pra mim.
+                </p>
+
+                <p>
+                    Eu amo tudo que a gente viveu até aqui e,
+                    principalmente, amo pensar em tudo que ainda
+                    falta viver.
+                </p>
+
+                <p>
+                    Eu sei que talvez nem tudo tenha sido perfeito.
+                    A gente teve medo, dúvidas e momentos em que
+                    não sabíamos exatamente o que fazer.
+                    Mas mesmo assim, chegamos até aqui.
+                </p>
+
+                <p>
+                    E eu escolheria você de novo.
+                </p>
+
+                <p>
+                    Com amor,<br>
+                    Jader ❤️
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         7 — SEU VÍDEO
+    ========================= -->
+
+    <section class="video-section">
+
+        <div class="container reveal">
+
+            <div class="eyebrow">
+                antes de terminar
+            </div>
+
+            <h2 class="section-title">
+                Uma última coisa.
+            </h2>
+
+            <div class="video-frame">
+
+                <video
+                    id="myVideo"
+                    controls
+                    playsinline
+                    preload="metadata"
+                >
+                    <source
+                        src="assets/video-meu.mp4"
+                        type="video/mp4"
+                    >
+                </video>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         8 — AGORA OLHA PRA MIM
+    ========================= -->
+
+    <section
+        class="final-section"
+        id="final"
+    >
+
+        <h2>
+            Agora olha pra mim.
+        </h2>
+
+        <div class="final-heart">
+            ❤️
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         9 — PEDIDO
+    ========================= -->
+
+    <section id="question">
+
+        <div class="container">
+
+            <div class="eyebrow">
+                então...
+            </div>
+
+            <h2>
+                Você aceita? ❤️
+            </h2>
+
+            <div class="buttons">
+
+                <button
+                    id="yesBtn"
+                    class="answer-btn"
+                >
+                    SIM ❤️
+                </button>
+
+                <button
+                    id="noBtn"
+                    class="answer-btn"
+                >
+                    NÃO
+                </button>
+
+            </div>
+
+            <div id="noMessage"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         10 — DEPOIS DO SIM
+    ========================= -->
+
+    <section id="relationship">
+
+        <div class="relationship-content">
+
+            <div class="eyebrow">
+                oficialmente nós
+            </div>
+
+            <h2>
+
+                Assim começa
+                <span class="accent">
+                    a melhor fase
+                </span>
+                das nossas vidas.
+
+            </h2>
+
+            <p class="relationship-subtitle">
+
+                E que esse seja só o começo
+                de tudo que ainda vamos viver. ❤️
+
+            </p>
+
+
+            <div class="counter">
+
+                <div class="counter-box">
+
+                    <span
+                        id="days"
+                        class="counter-number"
+                    >
+                        0
+                    </span>
+
+                    <span class="counter-label">
+                        dias
+                    </span>
+
+                </div>
+
+                <div class="counter-box">
+
+                    <span
+                        id="hours"
+                        class="counter-number"
+                    >
+                        00
+                    </span>
+
+                    <span class="counter-label">
+                        horas
+                    </span>
+
+                </div>
+
+                <div class="counter-box">
+
+                    <span
+                        id="minutes"
+                        class="counter-number"
+                    >
+                        00
+                    </span>
+
+                    <span class="counter-label">
+                        minutos
+                    </span>
+
+                </div>
+
+                <div class="counter-box">
+
+                    <span
+                        id="seconds"
+                        class="counter-number"
+                    >
+                        00
+                    </span>
+
+                    <span class="counter-label">
+                        segundos
+                    </span>
+
+                </div>
+
+            </div>
+
+            <p class="counter-footer">
+                E contando... ❤️
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LIGHTBOX
+    ========================= -->
+
+    <div id="lightbox">
+
+        <button id="closeLightbox">
+            ×
+        </button>
+
+        <img
+            id="lightboxImage"
+            src=""
+            alt="Foto ampliada"
+        >
+
+    </div>
+
+
+    <script>
+
+
+        /* =========================
+           ELEMENTOS
+        ========================= */
+
+        const intro =
+            document.getElementById("intro");
+
+        const startBtn =
+            document.getElementById("startBtn");
+
+        const music =
+            document.getElementById("music");
+
+        const musicControl =
+            document.getElementById("musicControl");
+
+        const finalSection =
+            document.getElementById("final");
+
+        const question =
+            document.getElementById("question");
+
+        const relationship =
+            document.getElementById("relationship");
+
+        const yesBtn =
+            document.getElementById("yesBtn");
+
+        const noBtn =
+            document.getElementById("noBtn");
+
+        const noMessage =
+            document.getElementById("noMessage");
+
+
+        let musicPlaying = false;
+        let finalReached = false;
+        let noAttempts = 0;
+
+
+        /* =========================
+           COMEÇAR
+        ========================= */
+
+        startBtn.addEventListener(
+            "click",
+            () => {
+
+                intro.classList.add("hidden");
+
+                music.volume = 0.18;
+
+                music
+                    .play()
+                    .then(() => {
+
+                        musicPlaying = true;
+
+                        musicControl.textContent = "Ⅱ";
+
+                    })
+                    .catch(() => {});
+
+                createPetals(10);
+
+            }
+        );
+
+
+        /* =========================
+           MÚSICA
+        ========================= */
+
+        musicControl.addEventListener(
+            "click",
+            () => {
+
+                if (musicPlaying) {
+
+                    music.pause();
+
+                    musicPlaying = false;
+
+                    musicControl.textContent = "♪";
+
+                } else {
+
+                    music.play();
+
+                    musicPlaying = true;
+
+                    musicControl.textContent = "Ⅱ";
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           REVEAL
+        ========================= */
+
+        const observer =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target
+                                    .classList
+                                    .add("visible");
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: 0.15
+                }
+
+            );
+
+
+        document
+            .querySelectorAll(".reveal")
+            .forEach(
+                element => {
+
+                    observer.observe(element);
+
+                }
+            );
+
+
+        /* =========================
+           PÉTALAS
+        ========================= */
+
+        function createPetal() {
+
+            const petal =
+                document.createElement("div");
+
+            petal.className = "petal";
+
+            petal.style.left =
+                Math.random() * 100 + "vw";
+
+            petal.style.animationDuration =
+                5 + Math.random() * 5 + "s";
+
+            document.body.appendChild(petal);
+
+            setTimeout(
+                () => petal.remove(),
+                10000
+            );
+
+        }
+
+
+        function createPetals(amount) {
+
+            for (
+                let i = 0;
+                i < amount;
+                i++
+            ) {
+
+                setTimeout(
+                    createPetal,
+                    i * 200
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           GALERIA
+        ========================= */
+
+        const proofGallery =
+            document.getElementById("proofGallery");
+
+        const openProofGallery =
+            document.getElementById("openProofGallery");
+
+        const closeProofGallery =
+            document.getElementById("closeProofGallery");
+
+        const galleryPhoto =
+            document.getElementById("galleryPhoto");
+
+        const galleryCaption =
+            document.getElementById("galleryCaption");
+
+        const galleryCurrent =
+            document.getElementById("galleryCurrent");
+
+        const galleryTotal =
+            document.getElementById("galleryTotal");
+
+        const galleryEnding =
+            document.getElementById("galleryEnding");
+
+
+        const proofPhotos = [
+
+            "assets/prova-01.jpeg",
+            "assets/prova-02.jpeg",
+            "assets/prova-03.jpeg",
+            "assets/prova-04.jpeg",
+            "assets/prova-05.jpeg",
+            "assets/prova-06.jpeg",
+            "assets/prova-07.jpeg",
+            "assets/prova-08.jpeg",
+            "assets/prova-09.jpeg",
+            "assets/prova-10.jpeg",
+            "assets/prova-11.jpeg",
+            "assets/prova-12.jpeg",
+            "assets/prova-13.jpeg",
+            "assets/prova-14.jpeg",
+            "assets/prova-15.jpeg"
+
+        ];
+
+
+        const proofCaptions = [
+
+            "Você provavelmente nem lembra disso, mas eu lembro.",
+
+            "Talvez tenha parecido uma coisa pequena pra você. Pra mim não foi.",
+
+            "Foi um daqueles momentos que me fizeram perceber o quanto você se importa.",
+
+            "Você fez isso sem pensar muito. Eu guardei.",
+
+            "Mais uma coisa que talvez você nem tenha percebido que significou tanto pra mim.",
+
+            "Eu lembro do jeito que você falou comigo naquele dia.",
+
+            "Pode parecer simples, mas foi importante pra mim.",
+
+            "Foi assim que você me mostrou carinho sem precisar dizer muita coisa.",
+
+            "Você talvez nem tenha percebido, mas eu percebi.",
+
+            "Mais uma prova de que você demonstra muito mais do que acha.",
+
+            "Esses pequenos momentos ficaram comigo.",
+
+            "Você não precisa fazer algo enorme pra me fazer sentir amado.",
+
+            "Às vezes é justamente nas pequenas coisas que eu mais percebo você.",
+
+            "Eu poderia continuar colocando exemplos aqui por muito tempo. 😂",
+
+            "E é por isso que eu queria que você soubesse disso."
+
+        ];
+
+
+        let galleryIndex = 0;
+
+        galleryTotal.textContent =
+            proofPhotos.length;
+
+
+        function showGalleryPhoto() {
+
+            galleryPhoto.style.opacity = 0;
+
+            setTimeout(
+                () => {
+
+                    galleryPhoto.src =
+                        proofPhotos[galleryIndex];
+
+                    galleryCaption.textContent =
+                        proofCaptions[galleryIndex];
+
+                    galleryCurrent.textContent =
+                        galleryIndex + 1;
+
+                    galleryPhoto.style.opacity = 1;
+
+                },
+                180
+            );
+
+        }
+
+
+        openProofGallery.addEventListener(
+            "click",
+            () => {
+
+                galleryIndex = 0;
+
+                showGalleryPhoto();
+
+                proofGallery
+                    .classList
+                    .add("active");
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+        );
+
+
+        function closeGallery() {
+
+            proofGallery
+                .classList
+                .remove("active");
+
+            document.body.style.overflow = "";
+
+        }
+
+
+        closeProofGallery.addEventListener(
+            "click",
+            closeGallery
+        );
+
+
+        /* =========================
+           SWIPE
+        ========================= */
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+
+        proofGallery.addEventListener(
+            "touchstart",
+            event => {
+
+                touchStartX =
+                    event.changedTouches[0].screenX;
+
+            }
+        );
+
+
+        proofGallery.addEventListener(
+            "touchend",
+            event => {
+
+                touchEndX =
+                    event.changedTouches[0].screenX;
+
+                handleSwipe();
+
+            }
+        );
+
+
+        function handleSwipe() {
+
+            const distance =
+                touchEndX - touchStartX;
+
+            if (
+                Math.abs(distance) < 50
+            ) {
+                return;
+            }
+
+            if (distance < 0) {
+
+                nextProof();
+
+            } else {
+
+                previousProof();
+
+            }
+
+        }
+
+
+        function nextProof() {
+
+            if (
+                galleryIndex <
+                proofPhotos.length - 1
+            ) {
+
+                galleryIndex++;
+
+                showGalleryPhoto();
+
+            } else {
+
+                closeGallery();
+
+                showGalleryEnding();
+
+            }
+
+        }
+
+
+        function previousProof() {
+
+            if (
+                galleryIndex > 0
+            ) {
+
+                galleryIndex--;
+
+                showGalleryPhoto();
+
+            }
+
+        }
+
+
+        /* =========================
+           FINAL DA GALERIA
+        ========================= */
+
+        function showGalleryEnding() {
+
+            galleryEnding
+                .classList
+                .add("active");
+
+            document.body.style.overflow =
+                "hidden";
+
+
+            const endings = [
+
+                document.getElementById("ending1"),
+                document.getElementById("ending2"),
+                document.getElementById("ending3"),
+                document.getElementById("ending4"),
+                document.getElementById("ending5")
+
+            ];
+
+
+            endings.forEach(
+                element => {
+
+                    element.classList.remove("show");
+
+                }
+            );
+
+
+            endings.forEach(
+                (element, index) => {
+
+                    setTimeout(
+                        () => {
+
+                            element.classList.add("show");
+
+                        },
+                        900 + index * 1900
+                    );
+
+                }
+            );
+
+
+            setTimeout(
+                () => {
+
+                    galleryEnding
+                        .classList
+                        .remove("active");
+
+                    document.body.style.overflow = "";
+
+                },
+                12500
+            );
+
+        }
+
+
+        /* =========================
+           AGORA OLHA PRA MIM
+        ========================= */
+
+        const finalObserver =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting &&
+                                !finalReached
+                            ) {
+
+                                finalReached = true;
+
+                                finalSection
+                                    .classList
+                                    .add("active");
+
+                                fadeMusicOut();
+
+
+                                setTimeout(
+                                    () => {
+
+                                        question
+                                            .classList
+                                            .add("show");
+
+                                        question
+                                            .scrollIntoView({
+                                                behavior: "smooth"
+                                            });
+
+                                    },
+                                    30000
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: 0.7
+                }
+
+            );
+
+
+        finalObserver.observe(finalSection);
+
+
+        /* =========================
+           FADE OUT
+        ========================= */
+
+        function fadeMusicOut() {
+
+            const fade =
+                setInterval(
+                    () => {
+
+                        if (
+                            music.volume > 0.02
+                        ) {
+
+                            music.volume -= 0.02;
+
+                        } else {
+
+                            music.volume = 0;
+
+                            music.pause();
+
+                            clearInterval(fade);
+
+                            musicPlaying = false;
+
+                            musicControl.textContent = "♪";
+
+                        }
+
+                    },
+                    100
+                );
+
+        }
+
+
+        /* =========================
+           BOTÃO NÃO
+        ========================= */
+
+        function moveNoButton() {
+
+            const container =
+                document.querySelector(".buttons");
+
+            const rect =
+                container.getBoundingClientRect();
+
+            const button =
+                noBtn.getBoundingClientRect();
+
+            const maxX =
+                (rect.width - button.width) / 2;
+
+            const maxY =
+                (rect.height - button.height) / 2;
+
+            const x =
+                Math.random() * maxX * 2 - maxX;
+
+            const y =
+                Math.random() * maxY * 2 - maxY;
+
+            noBtn.style.transform =
+                `
+                translate(
+                    ${x}px,
+                    ${y}px
+                )
+                `;
+
+        }
+
+
+        noBtn.addEventListener(
+            "mouseenter",
+            () => {
+
+                noAttempts++;
+
+                moveNoButton();
+
+                if (noAttempts >= 3) {
+
+                    noMessage.textContent =
+                        "⚠️ Opção indisponível. 😂";
+
+                }
+
+            }
+        );
+
+
+        noBtn.addEventListener(
+            "touchstart",
+            event => {
+
+                event.preventDefault();
+
+                noAttempts++;
+
+                moveNoButton();
+
+                if (noAttempts >= 3) {
+
+                    noMessage.textContent =
+                        "⚠️ Opção indisponível. 😂";
+
+                }
+
+            }
+        );
+
+
+        noBtn.addEventListener(
+            "click",
+            () => {
+
+                noAttempts++;
+
+                moveNoButton();
+
+                noMessage.textContent =
+                    "Essa opção misteriosamente não funciona. 😂";
+
+            }
+        );
+
+
+        /* =========================
+           SIM
+        ========================= */
+
+        yesBtn.addEventListener(
+            "click",
+            () => {
+
+                let startDate =
+                    localStorage.getItem(
+                        "relationshipStart"
+                    );
+
+
+                if (!startDate) {
+
+                    startDate =
+                        new Date().toISOString();
+
+                    localStorage.setItem(
+                        "relationshipStart",
+                        startDate
+                    );
+
+                }
+
+
+                question.style.display =
+                    "none";
+
+
+                relationship
+                    .classList
+                    .add("show");
+
+
+                relationship
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+
+                music.volume = 0;
+
+                music
+                    .play()
+                    .then(() => {
+
+                        musicPlaying = true;
+
+                        musicControl.textContent = "Ⅱ";
+
+                        fadeMusicIn();
+
+                    })
+                    .catch(() => {});
+
+
+                createPetals(35);
+
+                startCounter();
+
+            }
+        );
+
+
+        /* =========================
+           FADE IN
+        ========================= */
+
+        function fadeMusicIn() {
+
+            const fade =
+                setInterval(
+                    () => {
+
+                        if (
+                            music.volume < 0.18
+                        ) {
+
+                            music.volume += 0.01;
+
+                        } else {
+
+                            music.volume = 0.18;
+
+                            clearInterval(fade);
+
+                        }
+
+                    },
+                    100
+                );
+
+        }
+
+
+        /* =========================
+           CONTADOR ETERNO
+        ========================= */
+
+        function startCounter() {
+
+            const start =
+                new Date(
+                    localStorage.getItem(
+                        "relationshipStart"
+                    )
+                );
+
+
+            function update() {
+
+                const now =
+                    new Date();
+
+                let difference =
+                    now - start;
+
+
+                if (difference < 0) {
+                    difference = 0;
+                }
+
+
+                const totalSeconds =
+                    Math.floor(
+                        difference / 1000
+                    );
+
+
+                const days =
+                    Math.floor(
+                        totalSeconds / 86400
+                    );
+
+
+                const hours =
+                    Math.floor(
+                        (totalSeconds % 86400) / 3600
+                    );
+
+
+                const minutes =
+                    Math.floor(
+                        (totalSeconds % 3600) / 60
+                    );
+
+
+                const seconds =
+                    totalSeconds % 60;
+
+
+                document.getElementById("days")
+                    .textContent = days;
+
+
+                document.getElementById("hours")
+                    .textContent =
+                    String(hours).padStart(2, "0");
+
+
+                document.getElementById("minutes")
+                    .textContent =
+                    String(minutes).padStart(2, "0");
+
+
+                document.getElementById("seconds")
+                    .textContent =
+                    String(seconds).padStart(2, "0");
+
+            }
+
+
+            update();
+
+            setInterval(
+                update,
+                1000
+            );
+
+        }
+
+
+        /* =========================
+           LIGHTBOX
+        ========================= */
+
+        const lightbox =
+            document.getElementById("lightbox");
+
+        const lightboxImage =
+            document.getElementById("lightboxImage");
+
+        const closeLightbox =
+            document.getElementById("closeLightbox");
+
+
+        document
+            .querySelectorAll(
+                ".timeline-item img, .sunset-gallery img"
+            )
+            .forEach(
+                photo => {
+
+                    photo.addEventListener(
+                        "click",
+                        () => {
+
+                            lightboxImage.src =
+                                photo.src;
+
+                            lightbox
+                                .classList
+                                .add("active");
+
+                        }
+                    );
+
+                }
+            );
+
+
+        closeLightbox.addEventListener(
+            "click",
+            () => {
+
+                lightbox
+                    .classList
+                    .remove("active");
+
+            }
+        );
+
+
+        lightbox.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target === lightbox
+                ) {
+
+                    lightbox
+                        .classList
+                        .remove("active");
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           ESC
+        ========================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    lightbox
+                        .classList
+                        .remove("active");
+
+                    proofGallery
+                        .classList
+                        .remove("active");
+
+                    galleryEnding
+                        .classList
+                        .remove("active");
+
+                    document.body.style.overflow =
+                        "";
+
+                }
+
+
+                if (
+                    proofGallery
+                        .classList
+                        .contains("active")
+                ) {
+
+                    if (
+                        event.key === "ArrowRight"
+                    ) {
+
+                        nextProof();
+
+                    }
+
+
+                    if (
+                        event.key === "ArrowLeft"
+                    ) {
+
+                        previousProof();
+
+                    }
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+</body>
+
+</html>
+```
