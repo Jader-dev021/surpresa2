@@ -1918,60 +1918,151 @@
 
 
     <!-- =========================
-         GALERIA ABERTA
-    ========================= -->
+     BIBLIOTECA DE PROVAS
+========================= -->
 
-    <div
-        id="proofGallery"
-        class="proof-gallery"
+<div id="proofGallery" class="proof-gallery">
+
+    <button
+        id="closeProofGallery"
+        class="gallery-close"
     >
+        ×
+    </button>
 
-        <button
-            id="closeProofGallery"
-            class="gallery-close"
-        >
-            ×
-        </button>
+    <div class="proof-library">
 
-        <div class="gallery-content">
+        <div class="library-header">
 
-            <div class="gallery-counter">
-
-                <span id="galleryCurrent">
-                    1
-                </span>
-
-                /
-
-                <span id="galleryTotal">
-                    15
-                </span>
-
+            <div class="eyebrow">
+                biblioteca de provas
             </div>
 
-            <div class="gallery-photo-container">
+            <h2>
+                Você disse que não sabe demonstrar...
+            </h2>
 
-                <img
-                    id="galleryPhoto"
-                    src="assets/prova-01.jpeg"
-                    alt="Uma lembrança"
-                >
-
-            </div>
-
-            <p
-                id="galleryCaption"
-                class="gallery-caption"
-            >
+            <p>
+                Então eu resolvi guardar algumas das vezes
+                em que você demonstrou sem perceber.
             </p>
 
-            <div class="gallery-hint">
-                Deslize para continuar →
-            </div>
+        </div>
+
+
+        <div
+            id="proofMosaic"
+            class="proof-mosaic"
+        >
+
+            <img
+                src="assets/prova-01.jpeg"
+                alt="Prova 1"
+                data-index="0"
+            >
+
+            <img
+                src="assets/prova-02.jpeg"
+                alt="Prova 2"
+                data-index="1"
+            >
+
+            <img
+                src="assets/prova-03.jpeg"
+                alt="Prova 3"
+                data-index="2"
+            >
+
+            <img
+                src="assets/prova-04.jpeg"
+                alt="Prova 4"
+                data-index="3"
+            >
+
+            <img
+                src="assets/prova-05.jpeg"
+                alt="Prova 5"
+                data-index="4"
+            >
+
+            <img
+                src="assets/prova-06.jpeg"
+                alt="Prova 6"
+                data-index="5"
+            >
+
+            <img
+                src="assets/prova-07.jpeg"
+                alt="Prova 7"
+                data-index="6"
+            >
+
+            <img
+                src="assets/prova-08.jpeg"
+                alt="Prova 8"
+                data-index="7"
+            >
+
+            <img
+                src="assets/prova-09.jpeg"
+                alt="Prova 9"
+                data-index="8"
+            >
+
+            <img
+                src="assets/prova-10.jpeg"
+                alt="Prova 10"
+                data-index="9"
+            >
+
+            <img
+                src="assets/prova-11.jpeg"
+                alt="Prova 11"
+                data-index="10"
+            >
+
+            <img
+                src="assets/prova-12.jpeg"
+                alt="Prova 12"
+                data-index="11"
+            >
+
+            <img
+                src="assets/prova-13.jpeg"
+                alt="Prova 13"
+                data-index="12"
+            >
+
+            <img
+                src="assets/prova-14.jpeg"
+                alt="Prova 14"
+                data-index="13"
+            >
+
+            <img
+                src="assets/prova-15.jpeg"
+                alt="Prova 15"
+                data-index="14"
+            >
+
+        </div>
+
+
+        <div class="library-footer">
+
+            <p>
+                Clique em qualquer uma delas.
+            </p>
+
+            <span>
+                Algumas coisas pequenas deixam marcas enormes. ❤️
+            </span>
 
         </div>
 
     </div>
+
+</div>
 
 
     <!-- =========================
@@ -2557,314 +2648,360 @@
 
 
         /* =========================
-           GALERIA
-        ========================= */
+   BIBLIOTECA DE PROVAS
+========================= */
 
-        const proofGallery =
-            document.getElementById("proofGallery");
+const proofGallery =
+    document.getElementById("proofGallery");
 
-        const openProofGallery =
-            document.getElementById("openProofGallery");
+const openProofGallery =
+    document.getElementById("openProofGallery");
 
-        const closeProofGallery =
-            document.getElementById("closeProofGallery");
+const closeProofGallery =
+    document.getElementById("closeProofGallery");
 
-        const galleryPhoto =
-            document.getElementById("galleryPhoto");
-
-        const galleryCaption =
-            document.getElementById("galleryCaption");
-
-        const galleryCurrent =
-            document.getElementById("galleryCurrent");
-
-        const galleryTotal =
-            document.getElementById("galleryTotal");
-
-        const galleryEnding =
-            document.getElementById("galleryEnding");
+const galleryEnding =
+    document.getElementById("galleryEnding");
 
 
-        const proofPhotos = [
+const proofPhotos = [
 
-            "assets/prova-01.jpeg",
-            "assets/prova-02.jpeg",
-            "assets/prova-03.jpeg",
-            "assets/prova-04.jpeg",
-            "assets/prova-05.jpeg",
-            "assets/prova-06.jpeg",
-            "assets/prova-07.jpeg",
-            "assets/prova-08.jpeg",
-            "assets/prova-09.jpeg",
-            "assets/prova-10.jpeg",
-            "assets/prova-11.jpeg",
-            "assets/prova-12.jpeg",
-            "assets/prova-13.jpeg",
-            "assets/prova-14.jpeg",
-            "assets/prova-15.jpeg"
+    "assets/prova-01.jpeg",
+    "assets/prova-02.jpeg",
+    "assets/prova-03.jpeg",
+    "assets/prova-04.jpeg",
+    "assets/prova-05.jpeg",
+    "assets/prova-06.jpeg",
+    "assets/prova-07.jpeg",
+    "assets/prova-08.jpeg",
+    "assets/prova-09.jpeg",
+    "assets/prova-10.jpeg",
+    "assets/prova-11.jpeg",
+    "assets/prova-12.jpeg",
+    "assets/prova-13.jpeg",
+    "assets/prova-14.jpeg",
+    "assets/prova-15.jpeg"
 
-        ];
-
-
-        const proofCaptions = [
-
-            "Você provavelmente nem lembra disso, mas eu lembro.",
-
-            "Talvez tenha parecido uma coisa pequena pra você. Pra mim não foi.",
-
-            "Foi um daqueles momentos que me fizeram perceber o quanto você se importa.",
-
-            "Você fez isso sem pensar muito. Eu guardei.",
-
-            "Mais uma coisa que talvez você nem tenha percebido que significou tanto pra mim.",
-
-            "Eu lembro do jeito que você falou comigo naquele dia.",
-
-            "Pode parecer simples, mas foi importante pra mim.",
-
-            "Foi assim que você me mostrou carinho sem precisar dizer muita coisa.",
-
-            "Você talvez nem tenha percebido, mas eu percebi.",
-
-            "Mais uma prova de que você demonstra muito mais do que acha.",
-
-            "Esses pequenos momentos ficaram comigo.",
-
-            "Você não precisa fazer algo enorme pra me fazer sentir amado.",
-
-            "Às vezes é justamente nas pequenas coisas que eu mais percebo você.",
-
-            "Eu poderia continuar colocando exemplos aqui por muito tempo. 😂",
-
-            "E é por isso que eu queria que você soubesse disso."
-
-        ];
+];
 
 
-        let galleryIndex = 0;
+/* =========================
+   ABRIR BIBLIOTECA
+========================= */
 
-        galleryTotal.textContent =
-            proofPhotos.length;
+openProofGallery.addEventListener(
+    "click",
+    () => {
+
+        createProofMosaic();
+
+        proofGallery.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+    }
+);
 
 
-        function showGalleryPhoto() {
+/* =========================
+   FECHAR
+========================= */
 
-            galleryPhoto.style.opacity = 0;
+function closeGallery() {
 
-            setTimeout(
+    proofGallery.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+}
+
+
+closeProofGallery.addEventListener(
+    "click",
+    closeGallery
+);
+
+
+/* =========================
+   CRIAR MOSAICO
+========================= */
+
+function createProofMosaic() {
+
+    const content =
+        proofGallery.querySelector(
+            ".gallery-content"
+        );
+
+
+    content.innerHTML = "";
+
+
+    const title =
+        document.createElement("div");
+
+    title.className =
+        "gallery-mosaic-title";
+
+    title.innerHTML = `
+        <div class="eyebrow">
+            biblioteca de provas
+        </div>
+
+        <h2>
+            Você demonstra
+            <span class="accent">
+                muito mais
+            </span>
+            do que imagina.
+        </h2>
+
+        <p>
+            Eu poderia explicar uma por uma...
+            mas acho que é melhor deixar as provas falarem.
+        </p>
+    `;
+
+
+    content.appendChild(title);
+
+
+    const mosaic =
+        document.createElement("div");
+
+    mosaic.className =
+        "proof-mosaic";
+
+
+    proofPhotos.forEach(
+        (photo, index) => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "proof-mosaic-item";
+
+
+            /*
+             * Alguns cards ficam maiores
+             * para deixar o mosaico irregular.
+             */
+
+            if (index === 0 || index === 7) {
+
+                item.classList.add("large");
+
+            }
+
+            if (index === 4 || index === 11) {
+
+                item.classList.add("tall");
+
+            }
+
+
+            const img =
+                document.createElement("img");
+
+            img.src = photo;
+
+            img.alt =
+                `Prova ${index + 1}`;
+
+
+            const number =
+                document.createElement("span");
+
+            number.className =
+                "proof-number";
+
+            number.textContent =
+                String(index + 1).padStart(2, "0");
+
+
+            item.appendChild(img);
+
+            item.appendChild(number);
+
+
+            /*
+             * Clique amplia a prova.
+             */
+
+            item.addEventListener(
+                "click",
                 () => {
 
-                    galleryPhoto.src =
-                        proofPhotos[galleryIndex];
-
-                    galleryCaption.textContent =
-                        proofCaptions[galleryIndex];
-
-                    galleryCurrent.textContent =
-                        galleryIndex + 1;
-
-                    galleryPhoto.style.opacity = 1;
-
-                },
-                180
-            );
-
-        }
-
-
-        openProofGallery.addEventListener(
-            "click",
-            () => {
-
-                galleryIndex = 0;
-
-                showGalleryPhoto();
-
-                proofGallery
-                    .classList
-                    .add("active");
-
-                document.body.style.overflow =
-                    "hidden";
-
-            }
-        );
-
-
-        function closeGallery() {
-
-            proofGallery
-                .classList
-                .remove("active");
-
-            document.body.style.overflow = "";
-
-        }
-
-
-        closeProofGallery.addEventListener(
-            "click",
-            closeGallery
-        );
-
-
-        /* =========================
-           SWIPE
-        ========================= */
-
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-
-        proofGallery.addEventListener(
-            "touchstart",
-            event => {
-
-                touchStartX =
-                    event.changedTouches[0].screenX;
-
-            }
-        );
-
-
-        proofGallery.addEventListener(
-            "touchend",
-            event => {
-
-                touchEndX =
-                    event.changedTouches[0].screenX;
-
-                handleSwipe();
-
-            }
-        );
-
-
-        function handleSwipe() {
-
-            const distance =
-                touchEndX - touchStartX;
-
-            if (
-                Math.abs(distance) < 50
-            ) {
-                return;
-            }
-
-            if (distance < 0) {
-
-                nextProof();
-
-            } else {
-
-                previousProof();
-
-            }
-
-        }
-
-
-        function nextProof() {
-
-            if (
-                galleryIndex <
-                proofPhotos.length - 1
-            ) {
-
-                galleryIndex++;
-
-                showGalleryPhoto();
-
-            } else {
-
-                closeGallery();
-
-                showGalleryEnding();
-
-            }
-
-        }
-
-
-        function previousProof() {
-
-            if (
-                galleryIndex > 0
-            ) {
-
-                galleryIndex--;
-
-                showGalleryPhoto();
-
-            }
-
-        }
-
-
-        /* =========================
-           FINAL DA GALERIA
-        ========================= */
-
-        function showGalleryEnding() {
-
-            galleryEnding
-                .classList
-                .add("active");
-
-            document.body.style.overflow =
-                "hidden";
-
-
-            const endings = [
-
-                document.getElementById("ending1"),
-                document.getElementById("ending2"),
-                document.getElementById("ending3"),
-                document.getElementById("ending4"),
-                document.getElementById("ending5")
-
-            ];
-
-
-            endings.forEach(
-                element => {
-
-                    element.classList.remove("show");
-
-                }
-            );
-
-
-            endings.forEach(
-                (element, index) => {
-
-                    setTimeout(
-                        () => {
-
-                            element.classList.add("show");
-
-                        },
-                        900 + index * 1900
+                    openProofImage(
+                        photo,
+                        index
                     );
 
                 }
             );
 
 
+            mosaic.appendChild(item);
+
+        }
+    );
+
+
+    content.appendChild(mosaic);
+
+
+    const hint =
+        document.createElement("div");
+
+    hint.className =
+        "gallery-hint";
+
+    hint.textContent =
+        "Clique em uma lembrança para ver melhor ❤️";
+
+
+    content.appendChild(hint);
+
+}
+
+
+/* =========================
+   AMPLIAR PROVA
+========================= */
+
+function openProofImage(
+    photo,
+    index
+) {
+
+    const viewer =
+        document.createElement("div");
+
+    viewer.className =
+        "proof-viewer";
+
+
+    viewer.innerHTML = `
+
+        <button class="proof-viewer-close">
+            ×
+        </button>
+
+        <div class="proof-viewer-content">
+
+            <div class="proof-viewer-number">
+                ${String(index + 1).padStart(2, "0")}
+                /
+                ${String(proofPhotos.length).padStart(2, "0")}
+            </div>
+
+            <img
+                src="${photo}"
+                alt="Prova ${index + 1}"
+            >
+
+            <p>
+                Você talvez nem tenha percebido,
+                mas eu percebi. ❤️
+            </p>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(viewer);
+
+
+    requestAnimationFrame(
+        () => {
+
+            viewer.classList.add("active");
+
+        }
+    );
+
+
+    const close =
+        viewer.querySelector(
+            ".proof-viewer-close"
+        );
+
+
+    close.addEventListener(
+        "click",
+        () => {
+
+            viewer.classList.remove("active");
+
             setTimeout(
-                () => {
-
-                    galleryEnding
-                        .classList
-                        .remove("active");
-
-                    document.body.style.overflow = "";
-
-                },
-                12500
+                () => viewer.remove(),
+                400
             );
 
         }
+    );
+
+
+    viewer.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target === viewer
+            ) {
+
+                viewer.classList.remove("active");
+
+                setTimeout(
+                    () => viewer.remove(),
+                    400
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================
+   ESC
+========================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            const viewer =
+                document.querySelector(
+                    ".proof-viewer"
+                );
+
+
+            if (viewer) {
+
+                viewer.classList.remove(
+                    "active"
+                );
+
+                setTimeout(
+                    () => viewer.remove(),
+                    400
+                );
+
+            }
+
+        }
+
+    }
+);
 
 
         /* =========================

@@ -488,164 +488,343 @@ button {
 
 
 /* =========================
-   GALERIA DAS DEMONSTRAÇÕES
+   BIBLIOTECA DE PROVAS
 ========================= */
-
-.proof-section {
-    min-height: 80vh;
-
-    display: flex;
-    align-items: center;
-
-    background:
-        linear-gradient(
-            180deg,
-            #0b0b0d,
-            #111013,
-            #0b0b0d
-        );
-}
-
-.gallery-start {
-    padding: 16px 28px;
-
-    border-radius: 999px;
-
-    font-size: 15px;
-}
 
 .proof-gallery {
     position: fixed;
 
     inset: 0;
 
-    z-index: 3000;
+    z-index: 9000;
 
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
+    padding: 70px 30px;
 
     background:
-        rgba(5,5,6,.97);
+        radial-gradient(
+            circle at center,
+            #180c10,
+            #050505 65%
+        );
+
+    overflow-y: auto;
 
     opacity: 0;
-
     visibility: hidden;
 
     transition:
-        opacity .5s ease,
-        visibility .5s ease;
+        opacity .6s ease,
+        visibility .6s ease;
 }
 
 .proof-gallery.active {
     opacity: 1;
-
     visibility: visible;
 }
 
-.gallery-content {
-    width: min(90%, 700px);
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.proof-library {
+    width: min(1150px, 100%);
+
+    margin: auto;
+}
+
+.library-header {
+    max-width: 750px;
+
+    margin: 0 auto 70px;
 
     text-align: center;
 }
 
+.library-header h2 {
+    margin: 15px 0 20px;
+
+    font-size:
+        clamp(2.5rem, 7vw, 5rem);
+
+    font-weight: normal;
+
+    line-height: 1.05;
+}
+
+.library-header p {
+    color: #aaa;
+
+    font-size: 1.05rem;
+
+    line-height: 1.8;
+}
+
+
+/* =========================
+   MOSAICO
+========================= */
+
+.proof-mosaic {
+    display: grid;
+
+    grid-template-columns:
+        repeat(12, 1fr);
+
+    grid-auto-rows: 90px;
+
+    gap: 18px;
+
+    align-items: stretch;
+}
+
+.proof-mosaic img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+
+    cursor: zoom-in;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, .55);
+
+    transition:
+        transform .5s ease,
+        filter .5s ease,
+        box-shadow .5s ease;
+}
+
+.proof-mosaic img:hover {
+    transform:
+        scale(1.035)
+        rotate(0deg);
+
+    filter: brightness(1.12);
+
+    box-shadow:
+        0 30px 70px
+        rgba(0, 0, 0, .75);
+
+    z-index: 3;
+}
+
+
+/* =========================
+   POSIÇÕES DO MOSAICO
+========================= */
+
+.proof-mosaic img:nth-child(1) {
+    grid-column: span 5;
+    grid-row: span 4;
+    transform: rotate(-1deg);
+}
+
+.proof-mosaic img:nth-child(2) {
+    grid-column: span 3;
+    grid-row: span 3;
+    transform: rotate(1.5deg);
+}
+
+.proof-mosaic img:nth-child(3) {
+    grid-column: span 4;
+    grid-row: span 5;
+    transform: rotate(-1.5deg);
+}
+
+.proof-mosaic img:nth-child(4) {
+    grid-column: span 3;
+    grid-row: span 4;
+    transform: rotate(1deg);
+}
+
+.proof-mosaic img:nth-child(5) {
+    grid-column: span 4;
+    grid-row: span 3;
+    transform: rotate(-1deg);
+}
+
+.proof-mosaic img:nth-child(6) {
+    grid-column: span 5;
+    grid-row: span 4;
+    transform: rotate(1.5deg);
+}
+
+.proof-mosaic img:nth-child(7) {
+    grid-column: span 4;
+    grid-row: span 4;
+    transform: rotate(-1.5deg);
+}
+
+.proof-mosaic img:nth-child(8) {
+    grid-column: span 3;
+    grid-row: span 5;
+    transform: rotate(1deg);
+}
+
+.proof-mosaic img:nth-child(9) {
+    grid-column: span 5;
+    grid-row: span 3;
+    transform: rotate(-1deg);
+}
+
+.proof-mosaic img:nth-child(10) {
+    grid-column: span 4;
+    grid-row: span 4;
+    transform: rotate(1.5deg);
+}
+
+.proof-mosaic img:nth-child(11) {
+    grid-column: span 3;
+    grid-row: span 3;
+    transform: rotate(-1deg);
+}
+
+.proof-mosaic img:nth-child(12) {
+    grid-column: span 5;
+    grid-row: span 4;
+    transform: rotate(1deg);
+}
+
+.proof-mosaic img:nth-child(13) {
+    grid-column: span 4;
+    grid-row: span 4;
+    transform: rotate(-1.5deg);
+}
+
+.proof-mosaic img:nth-child(14) {
+    grid-column: span 3;
+    grid-row: span 5;
+    transform: rotate(1deg);
+}
+
+.proof-mosaic img:nth-child(15) {
+    grid-column: span 5;
+    grid-row: span 4;
+    transform: rotate(-1deg);
+}
+
+
+/* =========================
+   RODAPÉ DA BIBLIOTECA
+========================= */
+
+.library-footer {
+    margin: 80px auto 30px;
+
+    text-align: center;
+}
+
+.library-footer p {
+    margin-bottom: 15px;
+
+    color: #aaa;
+}
+
+.library-footer span {
+    color: #f19caf;
+
+    font-size: 1.1rem;
+
+    font-style: italic;
+}
+
+
+/* =========================
+   FECHAR
+========================= */
+
 .gallery-close {
-    position: absolute;
+    position: fixed;
 
-    top: 25px;
-    right: 30px;
+    top: 20px;
+    right: 25px;
 
-    border: none;
+    z-index: 5;
 
-    background: transparent;
+    width: 50px;
+    height: 50px;
+
+    border: 1px solid
+        rgba(255, 255, 255, .2);
+
+    border-radius: 50%;
 
     color: white;
 
-    font-size: 42px;
+    background:
+        rgba(0, 0, 0, .5);
 
-    font-weight: 200;
+    font-size: 2rem;
 
     cursor: pointer;
 
-    opacity: .7;
+    transition: .3s ease;
 }
 
-.gallery-counter {
-    margin-bottom: 20px;
+.gallery-close:hover {
+    background: white;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    color: black;
 
-    font-size: 13px;
-
-    letter-spacing: 2px;
-
-    opacity: .5;
-}
-
-.gallery-photo-container {
-    width: 100%;
-
-    height: 65vh;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-}
-
-#galleryPhoto {
-    max-width: 100%;
-    max-height: 100%;
-
-    width: auto;
-    height: auto;
-
-    object-fit: contain;
-
-    border-radius: 8px;
-
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.6);
-
-    transition:
-        opacity .2s ease;
-}
-
-.gallery-caption {
-    min-height: 50px;
-
-    margin-top: 25px;
-
-    color: #d5d5d5;
-
-    font-size: 17px;
-
-    line-height: 1.6;
-}
-
-.gallery-hint {
-    margin-top: 20px;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    opacity: .35;
+    transform: rotate(90deg);
 }
 
 
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .proof-gallery {
+        padding: 70px 15px 40px;
+    }
+
+    .library-header {
+        margin-bottom: 45px;
+    }
+
+    .proof-mosaic {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        grid-auto-rows: 150px;
+
+        gap: 12px;
+    }
+
+    .proof-mosaic img {
+        transform: none !important;
+
+        border-radius: 15px;
+    }
+
+    .proof-mosaic img:nth-child(1),
+    .proof-mosaic img:nth-child(6),
+    .proof-mosaic img:nth-child(9),
+    .proof-mosaic img:nth-child(12),
+    .proof-mosaic img:nth-child(15) {
+        grid-column: span 2;
+    }
+
+    .proof-mosaic img:nth-child(2),
+    .proof-mosaic img:nth-child(3),
+    .proof-mosaic img:nth-child(4),
+    .proof-mosaic img:nth-child(5),
+    .proof-mosaic img:nth-child(7),
+    .proof-mosaic img:nth-child(8),
+    .proof-mosaic img:nth-child(10),
+    .proof-mosaic img:nth-child(11),
+    .proof-mosaic img:nth-child(13),
+    .proof-mosaic img:nth-child(14) {
+        grid-column: span 1;
+    }
+
+}
 /* =========================
    FINAL DA GALERIA
 ========================= */
