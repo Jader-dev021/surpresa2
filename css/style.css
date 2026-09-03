@@ -1193,7 +1193,9 @@ video {
 
     text-align: center;
 
-    background: #000;
+    border-radius: 10%;
+
+    background: transparent;
 }
 
 

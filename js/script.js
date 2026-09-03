@@ -214,21 +214,21 @@ const galleryEnding =
 
 const proofPhotos = [
 
-    "assets/prova-01.jpeg",
-    "assets/prova-02.jpeg",
-    "assets/prova-03.jpeg",
-    "assets/prova-04.jpeg",
-    "assets/prova-05.jpeg",
-    "assets/prova-06.jpeg",
-    "assets/prova-07.jpeg",
-    "assets/prova-08.jpeg",
-    "assets/prova-09.jpeg",
-    "assets/prova-10.jpeg",
-    "assets/prova-11.jpeg",
-    "assets/prova-12.jpeg",
-    "assets/prova-13.jpeg",
-    "assets/prova-14.jpeg",
-    "assets/prova-15.jpeg"
+    "assets/provas/prova-01.jpeg",
+    "assets/provas/prova-02.jpeg",
+    "assets/provas/prova-03.jpeg",
+    "assets/provas/prova-04.jpeg",
+    "assets/provas/prova-05.jpeg",
+    "assets/provas/prova-06.jpeg",
+    "assets/provas/prova-07.jpeg",
+    "assets/provas/prova-08.jpeg",
+    "assets/provas/prova-09.jpeg",
+    "assets/provas/prova-10.jpeg",
+    "assets/provas/prova-11.jpeg",
+    "assets/provas/prova-12.jpeg",
+    "assets/provas/prova-13.jpeg",
+    "assets/provas/prova-14.jpeg",
+    "assets/provas/prova-15.jpeg"
 
 ];
 
