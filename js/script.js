@@ -32,10 +32,10 @@ const noBtn =
 const noMessage =
     document.getElementById("noMessage");
 
-
 let musicPlaying = false;
 let finalReached = false;
 let noAttempts = 0;
+let counterStarted = false;
 
 
 /* =========================
@@ -62,7 +62,6 @@ startBtn.addEventListener(
             .catch(() => {});
 
         createPetals(10);
-
     }
 );
 
@@ -85,14 +84,17 @@ musicControl.addEventListener(
 
         } else {
 
-            music.play();
+            music
+                .play()
+                .then(() => {
 
-            musicPlaying = true;
+                    musicPlaying = true;
 
-            musicControl.textContent = "Ⅱ";
+                    musicControl.textContent = "Ⅱ";
 
+                })
+                .catch(() => {});
         }
-
     }
 );
 
@@ -103,34 +105,32 @@ musicControl.addEventListener(
 
 const observer =
     new IntersectionObserver(
-
-        entries => {
+        (entries) => {
 
             entries.forEach(
-                entry => {
+                (entry) => {
 
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                    } else {
-                        entry.target.classList.remove("visible");
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target
+                            .classList
+                            .add("visible");
                     }
-
                 }
             );
-
         },
-
         {
             threshold: 0.15
         }
-
     );
 
 
 document
     .querySelectorAll(".reveal")
     .forEach(
-        element => {
+        (element) => {
 
             observer.observe(element);
 
@@ -147,7 +147,8 @@ function createPetal() {
     const petal =
         document.createElement("div");
 
-    petal.className = "petal";
+    petal.className =
+        "petal";
 
     petal.style.left =
         Math.random() * 100 + "vw";
@@ -161,7 +162,6 @@ function createPetal() {
         () => petal.remove(),
         10000
     );
-
 }
 
 
@@ -177,9 +177,7 @@ function createPetals(amount) {
             createPetal,
             i * 200
         );
-
     }
-
 }
 
 
@@ -228,7 +226,8 @@ const proofPhotos = [
     "assets/provas/prova-12.jpeg",
     "assets/provas/prova-13.jpeg",
     "assets/provas/prova-14.jpeg",
-    "assets/provas/prova-15.jpeg"
+    "assets/provas/prova-15.jpeg",
+    "assets/provas/prova-16.jpeg"
 
 ];
 
@@ -263,16 +262,23 @@ const proofCaptions = [
 
     "Eu poderia continuar colocando exemplos aqui por muito tempo. 😂",
 
-    "E é por isso que eu queria que você soubesse disso."
+    "E é por isso que eu queria que você soubesse disso.",
+
+    "E talvez ainda existam muitas outras formas pelas quais você demonstra sem perceber. ❤️"
 
 ];
 
 
 let galleryIndex = 0;
 
+
 galleryTotal.textContent =
     proofPhotos.length;
 
+
+/* =========================
+   MOSTRAR FOTO
+========================= */
 
 function showGalleryPhoto() {
 
@@ -295,9 +301,12 @@ function showGalleryPhoto() {
         },
         180
     );
-
 }
 
+
+/* =========================
+   ABRIR GALERIA
+========================= */
 
 openProofGallery.addEventListener(
     "click",
@@ -313,10 +322,13 @@ openProofGallery.addEventListener(
 
         document.body.style.overflow =
             "hidden";
-
     }
 );
 
+
+/* =========================
+   FECHAR GALERIA
+========================= */
 
 function closeGallery() {
 
@@ -325,7 +337,6 @@ function closeGallery() {
         .remove("active");
 
     document.body.style.overflow = "";
-
 }
 
 
@@ -345,7 +356,7 @@ let touchEndX = 0;
 
 proofGallery.addEventListener(
     "touchstart",
-    event => {
+    (event) => {
 
         touchStartX =
             event.changedTouches[0].screenX;
@@ -356,7 +367,7 @@ proofGallery.addEventListener(
 
 proofGallery.addEventListener(
     "touchend",
-    event => {
+    (event) => {
 
         touchEndX =
             event.changedTouches[0].screenX;
@@ -378,7 +389,9 @@ function handleSwipe() {
         return;
     }
 
-    if (distance < 0) {
+    if (
+        distance < 0
+    ) {
 
         nextProof();
 
@@ -387,7 +400,6 @@ function handleSwipe() {
         previousProof();
 
     }
-
 }
 
 
@@ -409,7 +421,6 @@ function nextProof() {
         showGalleryEnding();
 
     }
-
 }
 
 
@@ -424,7 +435,6 @@ function previousProof() {
         showGalleryPhoto();
 
     }
-
 }
 
 
@@ -454,9 +464,11 @@ function showGalleryEnding() {
 
 
     endings.forEach(
-        element => {
+        (element) => {
 
-            element.classList.remove("show");
+            element
+                .classList
+                .remove("show");
 
         }
     );
@@ -468,7 +480,9 @@ function showGalleryEnding() {
             setTimeout(
                 () => {
 
-                    element.classList.add("show");
+                    element
+                        .classList
+                        .add("show");
 
                 },
                 900 + index * 1900
@@ -490,7 +504,6 @@ function showGalleryEnding() {
         },
         12500
     );
-
 }
 
 
@@ -500,11 +513,10 @@ function showGalleryEnding() {
 
 const finalObserver =
     new IntersectionObserver(
-
-        entries => {
+        (entries) => {
 
             entries.forEach(
-                entry => {
+                (entry) => {
 
                     if (
                         entry.isIntersecting &&
@@ -542,15 +554,15 @@ const finalObserver =
             );
 
         },
-
         {
             threshold: 0.7
         }
-
     );
 
 
-finalObserver.observe(finalSection);
+finalObserver.observe(
+    finalSection
+);
 
 
 /* =========================
@@ -579,14 +591,13 @@ function fadeMusicOut() {
 
                     musicPlaying = false;
 
-                    musicControl.textContent = "♪";
-
+                    musicControl.textContent =
+                        "♪";
                 }
 
             },
             100
         );
-
 }
 
 
@@ -605,17 +616,27 @@ function moveNoButton() {
     const button =
         noBtn.getBoundingClientRect();
 
+
     const maxX =
-        (rect.width - button.width) / 2;
+        Math.max(
+            0,
+            (rect.width - button.width) / 2
+        );
+
 
     const maxY =
-        (rect.height - button.height) / 2;
+        Math.max(
+            0,
+            (rect.height - button.height) / 2
+        );
+
 
     const x =
         Math.random() * maxX * 2 - maxX;
 
     const y =
         Math.random() * maxY * 2 - maxY;
+
 
     noBtn.style.transform =
         `
@@ -624,45 +645,38 @@ function moveNoButton() {
             ${y}px
         )
         `;
+}
 
+
+function registerNoAttempt() {
+
+    noAttempts++;
+
+    moveNoButton();
+
+    if (
+        noAttempts >= 3
+    ) {
+
+        noMessage.textContent =
+            "⚠️ Opção indisponível. 😂";
+    }
 }
 
 
 noBtn.addEventListener(
     "mouseenter",
-    () => {
-
-        noAttempts++;
-
-        moveNoButton();
-
-        if (noAttempts >= 3) {
-
-            noMessage.textContent =
-                "⚠️ Opção indisponível. 😂";
-
-        }
-
-    }
+    registerNoAttempt
 );
 
 
 noBtn.addEventListener(
     "touchstart",
-    event => {
+    (event) => {
 
         event.preventDefault();
 
-        noAttempts++;
-
-        moveNoButton();
-
-        if (noAttempts >= 3) {
-
-            noMessage.textContent =
-                "⚠️ Opção indisponível. 😂";
-
-        }
+        registerNoAttempt();
 
     }
 );
@@ -706,7 +720,6 @@ yesBtn.addEventListener(
                 "relationshipStart",
                 startDate
             );
-
         }
 
 
@@ -727,13 +740,15 @@ yesBtn.addEventListener(
 
         music.volume = 0;
 
+
         music
             .play()
             .then(() => {
 
                 musicPlaying = true;
 
-                musicControl.textContent = "Ⅱ";
+                musicControl.textContent =
+                    "Ⅱ";
 
                 fadeMusicIn();
 
@@ -743,7 +758,13 @@ yesBtn.addEventListener(
 
         createPetals(35);
 
-        startCounter();
+
+        if (!counterStarted) {
+
+            startCounter();
+
+            counterStarted = true;
+        }
 
     }
 );
@@ -776,7 +797,6 @@ function fadeMusicIn() {
             },
             100
         );
-
 }
 
 
@@ -799,12 +819,17 @@ function startCounter() {
         const now =
             new Date();
 
+
         let difference =
             now - start;
 
 
-        if (difference < 0) {
+        if (
+            difference < 0
+        ) {
+
             difference = 0;
+
         }
 
 
@@ -842,28 +867,31 @@ function startCounter() {
 
         document.getElementById("hours")
             .textContent =
-            String(hours).padStart(2, "0");
+            String(hours)
+                .padStart(2, "0");
 
 
         document.getElementById("minutes")
             .textContent =
-            String(minutes).padStart(2, "0");
+            String(minutes)
+                .padStart(2, "0");
 
 
         document.getElementById("seconds")
             .textContent =
-            String(seconds).padStart(2, "0");
+            String(seconds)
+                .padStart(2, "0");
 
     }
 
 
     update();
 
+
     setInterval(
         update,
         1000
     );
-
 }
 
 
@@ -886,7 +914,7 @@ document
         ".timeline-item img, .sunset-gallery img, .moment img"
     )
     .forEach(
-        photo => {
+        (photo) => {
 
             photo.addEventListener(
                 "click",
@@ -920,7 +948,7 @@ closeLightbox.addEventListener(
 
 lightbox.addEventListener(
     "click",
-    event => {
+    (event) => {
 
         if (
             event.target === lightbox
@@ -942,7 +970,7 @@ lightbox.addEventListener(
 
 document.addEventListener(
     "keydown",
-    event => {
+    (event) => {
 
         if (
             event.key === "Escape"
