@@ -1945,3 +1945,82 @@ section > .container {
     object-fit: cover !important;
     object-position: center 85% !important;
 }
+
+
+/* =========================
+   OBSERVAÇÃO DA TIMELINE
+========================= */
+
+.timeline-note {
+    position: absolute;
+    right: 3%;
+    width: 180px;
+
+    padding: 12px 14px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+
+    opacity: 0.65;
+    z-index: 2;
+}
+
+.timeline-note p {
+    margin: 0;
+    font-size: 0.68rem;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.timeline-note p + p {
+    margin-top: 7px;
+    font-size: 0.7rem;
+    opacity: 0.9;
+}
+
+/* =========================
+   TELAS MENORES
+========================= */
+
+@media (max-width: 1000px) {
+    .timeline-note {
+        right: 2%;
+        width: 150px;
+        padding: 10px 12px;
+    }
+
+    .timeline-note p {
+        font-size: 0.62rem;
+    }
+
+    .timeline-note p + p {
+        font-size: 0.64rem;
+    }
+}
+
+/* =========================
+   CELULARES
+========================= */
+
+@media (max-width: 700px) {
+    .timeline-note {
+        position: relative;
+        right: auto;
+
+        width: min(80%, 300px);
+        margin: 10px auto 25px;
+
+        opacity: 0.7;
+    }
+
+    .timeline-note p {
+        font-size: 0.72rem;
+    }
+
+    .timeline-note p + p {
+        font-size: 0.74rem;
+    }
+}
