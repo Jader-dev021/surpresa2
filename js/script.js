@@ -1,189 +1,315 @@
-/* =========================
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("beforeunload", () => {
+  window.scrollTo(0, 0);
+});
+
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+});
+
+
+
+
+
+
+/* =========================================================
    ELEMENTOS
-========================= */
+========================================================= */
 
-const intro =
-    document.getElementById("intro");
+const intro = document.getElementById("intro");
+const startBtn = document.getElementById("startBtn");
 
-const startBtn =
-    document.getElementById("startBtn");
+const music = document.getElementById("music");
+const musicControl = document.getElementById("musicControl");
 
-const music =
-    document.getElementById("music");
+const finalSection = document.getElementById("final");
+const question = document.getElementById("question");
+const relationship = document.getElementById("relationship");
 
-const musicControl =
-    document.getElementById("musicControl");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const noMessage = document.getElementById("noMessage");
+const acceptedMessage = document.getElementById("acceptedMessage");
+const questionTitle = document.getElementById("questionTitle");
 
-const finalSection =
-    document.getElementById("final");
+const daysElement = document.getElementById("days");
+const hoursElement = document.getElementById("hours");
+const minutesElement = document.getElementById("minutes");
+const secondsElement = document.getElementById("seconds");
 
-const question =
-    document.getElementById("question");
+const acceptanceCelebration =
+    document.getElementById("acceptanceCelebration");
 
-const relationship =
-    document.getElementById("relationship");
+const celebrationCanvas =
+    document.getElementById("celebrationCanvas");
 
-const yesBtn =
-    document.getElementById("yesBtn");
+const celebrationEmojis =
+    document.getElementById("celebrationEmojis");
 
-const noBtn =
-    document.getElementById("noBtn");
 
-const noMessage =
-    document.getElementById("noMessage");
+/* =========================================================
+   ESTADO
+========================================================= */
 
 let musicPlaying = false;
 let finalReached = false;
+
 let noAttempts = 0;
-let counterStarted = false;
+let counterInterval = null;
+
+let relationshipAccepted =
+    localStorage.getItem("relationshipAccepted") === "true";
+
+const RELATIONSHIP_KEY = "relationshipStart";
+const ACCEPTED_KEY = "relationshipAccepted";
 
 
-/* =========================
-   COMEÇAR
-========================= */
+/*
+    Depois do pedido, se você quiser colocar o horário
+    diretamente no código, basta preencher esta variável.
 
-startBtn.addEventListener(
-    "click",
-    () => {
+    Exemplo:
 
-        intro.classList.add("hidden");
+    const FIXED_RELATIONSHIP_START =
+        "2026-09-19T18:42:31.000-03:00";
 
-        music.volume = 0.18;
+    Enquanto estiver vazia, o site usa o horário salvo
+    no localStorage.
+*/
 
-        music
-            .play()
-            .then(() => {
+const FIXED_RELATIONSHIP_START = "";
 
-                musicPlaying = true;
 
-                musicControl.textContent = "Ⅱ";
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
 
-            })
-            .catch(() => {});
+document.addEventListener("DOMContentLoaded", () => {
 
-        createPetals(10);
+    if (relationshipAccepted) {
+
+        showQuestion(false, true);
+        showRelationship(false);
+        startCounter();
+
+        /*
+            Toda vez que o site for aberto depois do SIM,
+            a pequena transição de "Você aceitou!" volta a aparecer.
+        */
+        setTimeout(() => {
+            playAcceptanceCelebration(false);
+        }, 700);
+
+    } else {
+
+        showQuestion(false, false);
+
     }
-);
+
+    createPetals(8);
+
+});
 
 
-/* =========================
-   MÚSICA
-========================= */
+/* =========================================================
+   INTRO / MÚSICA
+========================================================= */
 
-musicControl.addEventListener(
-    "click",
-    () => {
+startBtn.addEventListener("click", async () => {
 
-        if (musicPlaying) {
+    intro.classList.add("hidden");
+
+    music.volume = 0.18;
+
+    try {
+
+        await music.play();
+
+        musicPlaying = true;
+        musicControl.textContent = "Ⅱ";
+
+    } catch {
+
+        musicPlaying = false;
+        musicControl.textContent = "♪";
+
+    }
+
+    createPetals(10);
+
+    setTimeout(() => {
+        document.body.classList.add("site-started");
+    }, 500);
+
+});
+
+
+musicControl.addEventListener("click", async () => {
+
+    if (musicPlaying) {
+
+        music.pause();
+
+        musicPlaying = false;
+        musicControl.textContent = "♪";
+
+        return;
+    }
+
+    try {
+
+        await music.play();
+
+        musicPlaying = true;
+        musicControl.textContent = "Ⅱ";
+
+    } catch {
+
+        console.warn(
+            "Não foi possível iniciar a música."
+        );
+
+    }
+
+});
+
+
+/* =========================================================
+   FADE DA MÚSICA
+========================================================= */
+
+function fadeMusicOut() {
+
+    const fade = setInterval(() => {
+
+        music.volume = Math.max(
+            0,
+            music.volume - .02
+        );
+
+        if (music.volume <= 0) {
+
+            clearInterval(fade);
 
             music.pause();
 
             musicPlaying = false;
 
-            musicControl.textContent = "♪";
-
-        } else {
-
-            music
-                .play()
-                .then(() => {
-
-                    musicPlaying = true;
-
-                    musicControl.textContent = "Ⅱ";
-
-                })
-                .catch(() => {});
         }
-    }
-);
+
+    }, 100);
+
+}
 
 
-/* =========================
-   REVEAL
-========================= */
+function fadeMusicIn() {
 
-const observer =
+    clearInterval(window.musicFadeIn);
+
+    music.volume = 0;
+
+    window.musicFadeIn = setInterval(() => {
+
+        music.volume = Math.min(
+            .18,
+            music.volume + .01
+        );
+
+        if (music.volume >= .18) {
+            clearInterval(window.musicFadeIn);
+        }
+
+    }, 100);
+
+}
+
+
+/* =========================================================
+   REVEALS
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+const revealObserver =
     new IntersectionObserver(
         (entries) => {
 
-            entries.forEach(
-                (entry) => {
+            entries.forEach(entry => {
 
-                    if (
-                        entry.isIntersecting
-                    ) {
+                if (entry.isIntersecting) {
 
-                        entry.target
-                            .classList
-                            .add("visible");
-                    }
+                    entry.target.classList.add("visible");
+
                 }
-            );
+
+            });
+
         },
         {
-            threshold: 0.15
+            threshold: .15,
+            rootMargin: "0px 0px -5% 0px"
         }
     );
 
 
-document
-    .querySelectorAll(".reveal")
-    .forEach(
-        (element) => {
-
-            observer.observe(element);
-
-        }
-    );
+revealElements.forEach(element => {
+    revealObserver.observe(element);
+});
 
 
-/* =========================
+/* =========================================================
    PÉTALAS
-========================= */
+========================================================= */
 
 function createPetal() {
 
     const petal =
         document.createElement("div");
 
-    petal.className =
-        "petal";
+    petal.className = "petal";
 
     petal.style.left =
-        Math.random() * 100 + "vw";
+        `${Math.random() * 100}vw`;
 
     petal.style.animationDuration =
-        5 + Math.random() * 5 + "s";
+        `${5 + Math.random() * 5}s`;
+
+    petal.style.animationDelay =
+        `${Math.random() * 1.5}s`;
+
+    petal.style.transform =
+        `rotate(${Math.random() * 360}deg)`;
 
     document.body.appendChild(petal);
 
-    setTimeout(
-        () => petal.remove(),
-        10000
-    );
+    setTimeout(() => {
+        petal.remove();
+    }, 11000);
+
 }
 
 
-function createPetals(amount) {
+function createPetals(amount = 10) {
 
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
+    for (let i = 0; i < amount; i++) {
 
         setTimeout(
             createPetal,
             i * 200
         );
+
     }
+
 }
 
 
-/* =========================
-   GALERIA
-========================= */
+/* =========================================================
+   GALERIA DE PROVAS
+========================================================= */
 
 const proofGallery =
     document.getElementById("proofGallery");
@@ -210,61 +336,47 @@ const galleryEnding =
     document.getElementById("galleryEnding");
 
 
-const proofPhotos = [
-
-    "assets/provas/prova-01.jpeg",
-    "assets/provas/prova-02.jpeg",
-    "assets/provas/prova-03.jpeg",
-    "assets/provas/prova-04.jpeg",
-    "assets/provas/prova-05.jpeg",
-    "assets/provas/prova-06.jpeg",
-    "assets/provas/prova-07.jpeg",
-    "assets/provas/prova-08.jpeg",
-    "assets/provas/prova-09.jpeg",
-    "assets/provas/prova-10.jpeg",
-    "assets/provas/prova-11.jpeg",
-    "assets/provas/prova-12.jpeg",
-    "assets/provas/prova-13.jpeg",
-    "assets/provas/prova-14.jpeg",
-    "assets/provas/prova-15.jpeg",
-    "assets/provas/prova-16.jpeg"
-
-];
+const proofPhotos =
+    Array.from(
+        { length: 16 },
+        (_, index) =>
+            `assets/provas/prova-${String(index + 1).padStart(2, "0")}.jpeg`
+    );
 
 
 const proofCaptions = [
 
-    "Você provavelmente nem lembra disso, mas eu lembro.",
+    "Você lembra disso? ❤️",
 
-    "Talvez tenha parecido uma coisa pequena pra você. Pra mim não foi.",
+    "Às vezes você nem percebe o quanto esses pequenos detalhes significam pra mim.",
 
-    "Foi um daqueles momentos que me fizeram perceber o quanto você se importa.",
+    "Um jeito seu de demonstrar carinho.",
 
-    "Você fez isso sem pensar muito. Eu guardei.",
+    "Mais uma vez em que você cuidou de mim sem perceber.",
 
-    "Mais uma coisa que talvez você nem tenha percebido que significou tanto pra mim.",
+    "Essas coisas ficam guardadas.",
 
-    "Eu lembro do jeito que você falou comigo naquele dia.",
+    "Porque carinho também aparece nos detalhes.",
 
-    "Pode parecer simples, mas foi importante pra mim.",
+    "Você talvez nem tenha pensado muito nisso na hora.",
 
-    "Foi assim que você me mostrou carinho sem precisar dizer muita coisa.",
+    "Mas eu pensei.",
 
-    "Você talvez nem tenha percebido, mas eu percebi.",
+    "Eu percebi.",
 
-    "Mais uma prova de que você demonstra muito mais do que acha.",
+    "Eu guardei.",
 
-    "Esses pequenos momentos ficaram comigo.",
+    "E foi importante pra mim.",
 
-    "Você não precisa fazer algo enorme pra me fazer sentir amado.",
+    "Cada pequeno gesto conta.",
 
-    "Às vezes é justamente nas pequenas coisas que eu mais percebo você.",
+    "Cada conversa conta.",
 
-    "Eu poderia continuar colocando exemplos aqui por muito tempo. 😂",
+    "Cada cuidado conta.",
 
-    "E é por isso que eu queria que você soubesse disso.",
+    "Você demonstra mais do que imagina.",
 
-    "E talvez ainda existam muitas outras formas pelas quais você demonstra sem perceber. ❤️"
+    "E ainda existem muitas outras que eu poderia mostrar. ❤️"
 
 ];
 
@@ -272,72 +384,71 @@ const proofCaptions = [
 let galleryIndex = 0;
 
 
-galleryTotal.textContent =
-    proofPhotos.length;
+function showGalleryPhoto(index) {
 
+    galleryPhoto.classList.add("changing");
 
-/* =========================
-   MOSTRAR FOTO
-========================= */
+    setTimeout(() => {
 
-function showGalleryPhoto() {
+        galleryPhoto.src =
+            proofPhotos[index];
 
-    galleryPhoto.style.opacity = 0;
+        galleryCaption.textContent =
+            proofCaptions[index];
 
-    setTimeout(
-        () => {
+        galleryCurrent.textContent =
+            index + 1;
 
-            galleryPhoto.src =
-                proofPhotos[galleryIndex];
+        galleryTotal.textContent =
+            proofPhotos.length;
 
-            galleryCaption.textContent =
-                proofCaptions[galleryIndex];
+        galleryPhoto.classList.remove("changing");
 
-            galleryCurrent.textContent =
-                galleryIndex + 1;
+    }, 180);
 
-            galleryPhoto.style.opacity = 1;
-
-        },
-        180
-    );
 }
 
 
-/* =========================
-   ABRIR GALERIA
-========================= */
+function openGallery() {
 
-openProofGallery.addEventListener(
-    "click",
-    () => {
+    galleryIndex = 0;
 
-        galleryIndex = 0;
+    showGalleryPhoto(galleryIndex);
 
-        showGalleryPhoto();
+    proofGallery.classList.add("active");
 
-        proofGallery
-            .classList
-            .add("active");
+    proofGallery.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 
-        document.body.style.overflow =
-            "hidden";
-    }
-);
+    document.body.classList.add(
+        "gallery-open"
+    );
 
+}
 
-/* =========================
-   FECHAR GALERIA
-========================= */
 
 function closeGallery() {
 
-    proofGallery
-        .classList
-        .remove("active");
+    proofGallery.classList.remove("active");
 
-    document.body.style.overflow = "";
+    proofGallery.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.classList.remove(
+        "gallery-open"
+    );
+
 }
+
+
+openProofGallery.addEventListener(
+    "click",
+    openGallery
+);
 
 
 closeProofGallery.addEventListener(
@@ -346,558 +457,1355 @@ closeProofGallery.addEventListener(
 );
 
 
-/* =========================
-   SWIPE
-========================= */
-
-let touchStartX = 0;
-let touchEndX = 0;
-
-
-proofGallery.addEventListener(
-    "touchstart",
-    (event) => {
-
-        touchStartX =
-            event.changedTouches[0].screenX;
-
-    }
-);
-
-
-proofGallery.addEventListener(
-    "touchend",
-    (event) => {
-
-        touchEndX =
-            event.changedTouches[0].screenX;
-
-        handleSwipe();
-
-    }
-);
-
-
-function handleSwipe() {
-
-    const distance =
-        touchEndX - touchStartX;
-
-    if (
-        Math.abs(distance) < 50
-    ) {
-        return;
-    }
-
-    if (
-        distance < 0
-    ) {
-
-        nextProof();
-
-    } else {
-
-        previousProof();
-
-    }
-}
-
-
 function nextProof() {
 
-    if (
-        galleryIndex <
-        proofPhotos.length - 1
-    ) {
+    if (galleryIndex < proofPhotos.length - 1) {
 
         galleryIndex++;
 
-        showGalleryPhoto();
+        showGalleryPhoto(
+            galleryIndex
+        );
 
-    } else {
-
-        closeGallery();
-
-        showGalleryEnding();
-
+        return;
     }
+
+    closeGallery();
+
+    showGalleryEnding();
+
 }
 
 
 function previousProof() {
 
-    if (
-        galleryIndex > 0
-    ) {
-
-        galleryIndex--;
-
-        showGalleryPhoto();
-
+    if (galleryIndex <= 0) {
+        return;
     }
+
+    galleryIndex--;
+
+    showGalleryPhoto(
+        galleryIndex
+    );
+
 }
 
 
-/* =========================
+let galleryStartX = 0;
+let galleryEndX = 0;
+
+
+galleryPhoto.addEventListener(
+    "touchstart",
+    event => {
+
+        galleryStartX =
+            event.changedTouches[0].screenX;
+
+    },
+    { passive: true }
+);
+
+
+galleryPhoto.addEventListener(
+    "touchend",
+    event => {
+
+        galleryEndX =
+            event.changedTouches[0].screenX;
+
+        const difference =
+            galleryStartX - galleryEndX;
+
+        if (Math.abs(difference) < 50) {
+            return;
+        }
+
+        if (difference > 0) {
+            nextProof();
+        } else {
+            previousProof();
+        }
+
+    },
+    { passive: true }
+);
+
+
+/* =========================================================
    FINAL DA GALERIA
-========================= */
+========================================================= */
 
 function showGalleryEnding() {
 
-    galleryEnding
-        .classList
-        .add("active");
+    galleryEnding.classList.add("active");
 
-    document.body.style.overflow =
-        "hidden";
+    galleryEnding.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 
+    document.body.classList.add(
+        "gallery-open"
+    );
 
-    const endings = [
+    const paragraphs =
+        galleryEnding.querySelectorAll("p");
 
-        document.getElementById("ending1"),
-        document.getElementById("ending2"),
-        document.getElementById("ending3"),
-        document.getElementById("ending4"),
-        document.getElementById("ending5")
+    paragraphs.forEach(
+        paragraph =>
+            paragraph.classList.remove("show")
+    );
 
-    ];
+    paragraphs.forEach(
+        (paragraph, index) => {
 
+            setTimeout(() => {
 
-    endings.forEach(
-        (element) => {
+                paragraph.classList.add(
+                    "show"
+                );
 
-            element
-                .classList
-                .remove("show");
+            }, 900 + index * 1900);
 
         }
     );
 
-
-    endings.forEach(
-        (element, index) => {
-
-            setTimeout(
-                () => {
-
-                    element
-                        .classList
-                        .add("show");
-
-                },
-                900 + index * 1900
-            );
-
-        }
-    );
-
-
-    setTimeout(
-        () => {
-
-            galleryEnding
-                .classList
-                .remove("active");
-
-            document.body.style.overflow = "";
-
-        },
-        12500
-    );
 }
 
 
-/* =========================
-   AGORA OLHA PRA MIM
-========================= */
+function closeGalleryEnding() {
+
+    galleryEnding.classList.remove("active");
+
+    galleryEnding.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.classList.remove(
+        "gallery-open"
+    );
+
+}
+
+
+/* =========================================================
+   "AGORA OLHA PRA MIM"
+========================================================= */
 
 const finalObserver =
     new IntersectionObserver(
-        (entries) => {
+        entries => {
 
-            entries.forEach(
-                (entry) => {
+            entries.forEach(entry => {
+
+                if (
+                    !entry.isIntersecting ||
+                    finalReached
+                ) {
+                    return;
+                }
+
+                finalReached = true;
+
+                finalSection.classList.add(
+                    "active"
+                );
+
+                fadeMusicOut();
+
+                setTimeout(() => {
 
                     if (
-                        entry.isIntersecting &&
-                        !finalReached
+                        localStorage.getItem(
+                            ACCEPTED_KEY
+                        ) !== "true"
                     ) {
 
-                        finalReached = true;
-
-                        finalSection
-                            .classList
-                            .add("active");
-
-                        fadeMusicOut();
-
-
-                        setTimeout(
-                            () => {
-
-                                question
-                                    .classList
-                                    .add("show");
-
-                                question
-                                    .scrollIntoView({
-                                        behavior: "smooth"
-                                    });
-
-                            },
-                            30000
+                        showQuestion(
+                            true,
+                            false
                         );
 
                     }
 
-                }
-            );
+                }, 1000);
+
+            });
 
         },
         {
-            threshold: 0.7
+            threshold: .65
         }
     );
 
 
-finalObserver.observe(
-    finalSection
-);
+finalObserver.observe(finalSection);
 
 
-/* =========================
-   FADE OUT
-========================= */
+/* =========================================================
+   PERGUNTA
+========================================================= */
 
-function fadeMusicOut() {
+function showQuestion(
+    scroll = false,
+    accepted = false
+) {
 
-    const fade =
-        setInterval(
-            () => {
+    question.classList.add("show");
 
-                if (
-                    music.volume > 0.02
-                ) {
+    if (accepted) {
 
-                    music.volume -= 0.02;
-
-                } else {
-
-                    music.volume = 0;
-
-                    music.pause();
-
-                    clearInterval(fade);
-
-                    musicPlaying = false;
-
-                    musicControl.textContent =
-                        "♪";
-                }
-
-            },
-            100
+        question.classList.add(
+            "accepted"
         );
+
+        yesBtn.classList.add(
+            "accepted"
+        );
+
+        noBtn.classList.add(
+            "accepted"
+        );
+
+        questionTitle.textContent =
+            "Você aceita? ❤️";
+
+    }
+
+    if (scroll) {
+
+        setTimeout(() => {
+
+            question.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }, 150);
+
+    }
+
 }
 
 
-/* =========================
+/* =========================================================
    BOTÃO NÃO
-========================= */
+========================================================= */
 
 function moveNoButton() {
 
-    const container =
+    const buttons =
         document.querySelector(".buttons");
 
-    const rect =
-        container.getBoundingClientRect();
+    if (!buttons) {
+        return;
+    }
 
-    const button =
+    const buttonRect =
         noBtn.getBoundingClientRect();
 
+    const areaRect =
+        buttons.getBoundingClientRect();
 
     const maxX =
         Math.max(
-            0,
-            (rect.width - button.width) / 2
+            30,
+            (areaRect.width - buttonRect.width) / 2 - 10
         );
-
 
     const maxY =
         Math.max(
-            0,
-            (rect.height - button.height) / 2
+            50,
+            (areaRect.height - buttonRect.height) / 2 - 10
         );
 
+    let x =
+        (Math.random() * 2 - 1) *
+        maxX;
 
-    const x =
-        Math.random() * maxX * 2 - maxX;
+    let y =
+        (Math.random() * 2 - 1) *
+        maxY;
 
-    const y =
-        Math.random() * maxY * 2 - maxY;
+    /*
+        Evita que o NÃO fique praticamente
+        em cima do SIM.
+    */
 
+    if (Math.abs(x) < 80) {
 
-    noBtn.style.transform =
-        `
-        translate(
-            ${x}px,
-            ${y}px
-        )
-        `;
+        x +=
+            x < 0
+                ? -90
+                : 90;
+
+    }
+
+    const rotation =
+        (Math.random() * 16) - 8;
+
+    noBtn.style.setProperty(
+        "--no-x",
+        `${x}px`
+    );
+
+    noBtn.style.setProperty(
+        "--no-y",
+        `${y}px`
+    );
+
+    noBtn.style.setProperty(
+        "--no-rotation",
+        `${rotation}deg`
+    );
+
+    noBtn.classList.add(
+        "dodging"
+    );
+
 }
 
 
 function registerNoAttempt() {
 
+    if (relationshipAccepted) {
+        return;
+    }
+
     noAttempts++;
 
     moveNoButton();
 
-    if (
-        noAttempts >= 3
-    ) {
+    let message = "";
 
-        noMessage.textContent =
-            "⚠️ Opção indisponível. 😂";
+    if (noAttempts === 1) {
+
+        message =
+            "Tem certeza? 👀";
+
+    } else if (noAttempts === 2) {
+
+        message =
+            "Pensa com carinho... ❤️";
+
+    } else {
+
+        message =
+            "Opção indisponível 😂";
+
     }
+
+    noMessage.textContent =
+        message;
+
+    noMessage.classList.add(
+        "message-visible"
+    );
+
 }
 
 
 noBtn.addEventListener(
-    "mouseenter",
-    registerNoAttempt
+    "pointerenter",
+    event => {
+
+        if (
+            event.pointerType === "mouse"
+        ) {
+
+            registerNoAttempt();
+
+        }
+
+    }
 );
 
 
 noBtn.addEventListener(
-    "touchstart",
-    (event) => {
+    "pointerdown",
+    event => {
+
+        if (
+            event.pointerType === "touch" ||
+            event.pointerType === "pen"
+        ) {
+
+            event.preventDefault();
+
+            registerNoAttempt();
+
+        }
+
+    }
+);
+
+
+noBtn.addEventListener(
+    "click",
+    event => {
 
         event.preventDefault();
 
-        registerNoAttempt();
+        /*
+            No mouse, o pointerenter já fez o movimento.
+            O clique ainda conta caso ela consiga clicar.
+        */
+
+        if (noAttempts === 0) {
+            registerNoAttempt();
+        }
 
     }
 );
 
 
-noBtn.addEventListener(
-    "click",
-    () => {
-
-        noAttempts++;
-
-        moveNoButton();
-
-        noMessage.textContent =
-            "Essa opção misteriosamente não funciona. 😂";
-
-    }
-);
-
-
-/* =========================
+/* =========================================================
    SIM
-========================= */
+========================================================= */
 
 yesBtn.addEventListener(
     "click",
-    () => {
+    async () => {
 
-        let startDate =
+        /*
+            O horário é registrado PRIMEIRO.
+            Esse instante é o início oficial do contador.
+        */
+
+        const now =
+            new Date().toISOString();
+
+        let start =
             localStorage.getItem(
-                "relationshipStart"
+                RELATIONSHIP_KEY
             );
 
+        if (!start) {
 
-        if (!startDate) {
-
-            startDate =
-                new Date().toISOString();
+            start = now;
 
             localStorage.setItem(
-                "relationshipStart",
-                startDate
+                RELATIONSHIP_KEY,
+                start
             );
+
         }
 
+        localStorage.setItem(
+            ACCEPTED_KEY,
+            "true"
+        );
 
-        question.style.display =
-            "none";
-
-
-        relationship
-            .classList
-            .add("show");
+        relationshipAccepted = true;
 
 
-        relationship
-            .scrollIntoView({
-                behavior: "smooth"
-            });
+        /* Estado visual */
+
+        question.classList.add(
+            "accepted"
+        );
+
+        yesBtn.classList.add(
+            "accepted"
+        );
+
+        noBtn.classList.add(
+            "accepted"
+        );
 
 
+        noMessage.classList.remove(
+            "message-visible"
+        );
+
+
+        /*
+            Mostra o resultado imediatamente,
+            sem exigir outro clique.
+        */
+
+        showRelationship(true);
+
+        startCounter();
+
+
+        /*
+            Comemoração cinematográfica.
+        */
+
+        playAcceptanceCelebration(
+            true
+        );
+
+
+        /*
+            Música volta suavemente.
+        */
+
+        music.currentTime = 0;
         music.volume = 0;
 
+        try {
 
-        music
-            .play()
-            .then(() => {
+            await music.play();
 
-                musicPlaying = true;
+            musicPlaying = true;
 
-                musicControl.textContent =
-                    "Ⅱ";
+            musicControl.textContent =
+                "Ⅱ";
 
-                fadeMusicIn();
+            fadeMusicIn();
 
-            })
-            .catch(() => {});
+        } catch {
 
+            musicPlaying = false;
 
-        createPetals(35);
+            musicControl.textContent =
+                "♪";
 
-
-        if (!counterStarted) {
-
-            startCounter();
-
-            counterStarted = true;
         }
 
     }
 );
 
 
-/* =========================
-   FADE IN
-========================= */
+/* =========================================================
+   RELACIONAMENTO
+========================================================= */
 
-function fadeMusicIn() {
+function showRelationship(
+    scroll = false
+) {
 
-    const fade =
-        setInterval(
-            () => {
+    relationship.classList.add(
+        "show"
+    );
 
-                if (
-                    music.volume < 0.18
-                ) {
+    if (scroll) {
 
-                    music.volume += 0.01;
+        setTimeout(() => {
 
-                } else {
+            relationship.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
 
-                    music.volume = 0.18;
+        }, 300);
 
-                    clearInterval(fade);
+    }
 
-                }
-
-            },
-            100
-        );
 }
 
 
-/* =========================
-   CONTADOR ETERNO
-========================= */
+/* =========================================================
+   CONTADOR
+========================================================= */
+
+function getRelationshipStart() {
+
+    if (FIXED_RELATIONSHIP_START) {
+
+        return FIXED_RELATIONSHIP_START;
+
+    }
+
+    return localStorage.getItem(
+        RELATIONSHIP_KEY
+    );
+
+}
+
 
 function startCounter() {
 
+    if (counterInterval) {
+
+        clearInterval(
+            counterInterval
+        );
+
+    }
+
+    updateCounter();
+
+    counterInterval =
+        setInterval(
+            updateCounter,
+            1000
+        );
+
+}
+
+
+function updateCounter() {
+
     const start =
-        new Date(
-            localStorage.getItem(
-                "relationshipStart"
-            )
+        getRelationshipStart();
+
+    if (!start) {
+        return;
+    }
+
+    const startDate =
+        new Date(start);
+
+    const now =
+        new Date();
+
+    let elapsed =
+        Math.max(
+            0,
+            now - startDate
         );
 
 
-    function update() {
-
-        const now =
-            new Date();
-
-
-        let difference =
-            now - start;
+    const totalSeconds =
+        Math.floor(
+            elapsed / 1000
+        );
 
 
-        if (
-            difference < 0
-        ) {
+    const days =
+        Math.floor(
+            totalSeconds / 86400
+        );
 
-            difference = 0;
+    const hours =
+        Math.floor(
+            (totalSeconds % 86400) /
+            3600
+        );
 
-        }
+    const minutes =
+        Math.floor(
+            (totalSeconds % 3600) /
+            60
+        );
+
+    const seconds =
+        totalSeconds % 60;
 
 
-        const totalSeconds =
-            Math.floor(
-                difference / 1000
+    daysElement.textContent =
+        days;
+
+    hoursElement.textContent =
+        String(hours).padStart(2, "0");
+
+    minutesElement.textContent =
+        String(minutes).padStart(2, "0");
+
+    secondsElement.textContent =
+        String(seconds).padStart(2, "0");
+
+}
+
+
+/* =========================================================
+   COMEMORAÇÃO CINEMATOGRÁFICA
+========================================================= */
+
+let celebrationAnimationFrame = null;
+
+
+function playAcceptanceCelebration(
+    firstAcceptance = true
+) {
+
+    if (
+        !acceptanceCelebration ||
+        !celebrationCanvas
+    ) {
+        return;
+    }
+
+
+    acceptanceCelebration.classList.remove(
+        "fade-out"
+    );
+
+    acceptanceCelebration.classList.add(
+        "active"
+    );
+
+    acceptanceCelebration.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    createCelebrationEmojis();
+
+    runFireworks();
+
+
+    /*
+        A comemoração é um momento cinematográfico,
+        mas depois devolve o controle para a página.
+    */
+
+    setTimeout(() => {
+
+        acceptanceCelebration.classList.add(
+            "fade-out"
+        );
+
+    }, firstAcceptance ? 5000 : 4300);
+
+
+    setTimeout(() => {
+
+        acceptanceCelebration.classList.remove(
+            "active",
+            "fade-out"
+        );
+
+        acceptanceCelebration.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }, firstAcceptance ? 6100 : 5400);
+
+}
+
+
+/* =========================================================
+   EMOJIS
+========================================================= */
+
+function createCelebrationEmojis() {
+
+    celebrationEmojis.innerHTML = "";
+
+    const emojis = [
+        "❤️",
+        "💖",
+        "💕",
+        "💗",
+        "💘",
+        "🥰",
+        "😍"
+    ];
+
+
+    const amount =
+        window.innerWidth < 600
+            ? 28
+            : 42;
+
+
+    for (let i = 0; i < amount; i++) {
+
+        const emoji =
+            document.createElement("span");
+
+        emoji.className =
+            "celebration-emoji";
+
+        emoji.textContent =
+            emojis[
+                Math.floor(
+                    Math.random() *
+                    emojis.length
+                )
+            ];
+
+
+        const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+        const distance =
+            180 +
+            Math.random() *
+            Math.max(
+                220,
+                window.innerWidth * .65
             );
 
 
-        const days =
-            Math.floor(
-                totalSeconds / 86400
-            );
+        const x =
+            Math.cos(angle) *
+            distance;
+
+        const y =
+            Math.sin(angle) *
+            distance;
 
 
-        const hours =
-            Math.floor(
-                (totalSeconds % 86400) / 3600
-            );
+        emoji.style.setProperty(
+            "--emoji-x",
+            `${x}px`
+        );
+
+        emoji.style.setProperty(
+            "--emoji-y",
+            `${y}px`
+        );
+
+        emoji.style.setProperty(
+            "--emoji-scale",
+            `${.7 + Math.random() * .8}`
+        );
+
+        emoji.style.setProperty(
+            "--emoji-rotation",
+            `${-180 + Math.random() * 360}deg`
+        );
+
+        emoji.style.setProperty(
+            "--emoji-duration",
+            `${2.5 + Math.random() * 2.2}s`
+        );
 
 
-        const minutes =
-            Math.floor(
-                (totalSeconds % 3600) / 60
-            );
+        emoji.style.left =
+            `${20 + Math.random() * 60}%`;
+
+        emoji.style.top =
+            `${25 + Math.random() * 50}%`;
 
 
-        const seconds =
-            totalSeconds % 60;
+        celebrationEmojis.appendChild(
+            emoji
+        );
+
+    }
+
+}
 
 
-        document.getElementById("days")
-            .textContent = days;
+/* =========================================================
+   FOGOS + PARTÍCULAS
+========================================================= */
+
+function runFireworks() {
+
+    const canvas =
+        celebrationCanvas;
+
+    const ctx =
+        canvas.getContext("2d");
+
+    if (!ctx) {
+        return;
+    }
 
 
-        document.getElementById("hours")
-            .textContent =
-            String(hours)
-                .padStart(2, "0");
+    const dpr =
+        Math.min(
+            window.devicePixelRatio || 1,
+            2
+        );
 
 
-        document.getElementById("minutes")
-            .textContent =
-            String(minutes)
-                .padStart(2, "0");
+    const width =
+        window.innerWidth;
+
+    const height =
+        window.innerHeight;
 
 
-        document.getElementById("seconds")
-            .textContent =
-            String(seconds)
-                .padStart(2, "0");
+    canvas.width =
+        width * dpr;
+
+    canvas.height =
+        height * dpr;
+
+    canvas.style.width =
+        `${width}px`;
+
+    canvas.style.height =
+        `${height}px`;
+
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
+
+
+    const particles = [];
+    const rockets = [];
+
+    const colors = [
+        "#f19caf",
+        "#ff4f7b",
+        "#ff7898",
+        "#ffffff",
+        "#ffd6df"
+    ];
+
+
+    function createRocket() {
+
+        rockets.push({
+
+            x:
+                width *
+                (.15 +
+                Math.random() * .7),
+
+            y:
+                height + 20,
+
+            targetY:
+                height *
+                (.15 +
+                Math.random() * .38),
+
+            speed:
+                8 +
+                Math.random() * 4,
+
+            color:
+                colors[
+                    Math.floor(
+                        Math.random() *
+                        colors.length
+                    )
+                ],
+
+            trail: []
+
+        });
 
     }
 
 
-    update();
+    function explode(
+        x,
+        y,
+        color
+    ) {
+
+        const amount =
+            55 +
+            Math.floor(
+                Math.random() * 35
+            );
 
 
-    setInterval(
-        update,
-        1000
+        for (
+            let i = 0;
+            i < amount;
+            i++
+        ) {
+
+            const angle =
+                Math.random() *
+                Math.PI *
+                2;
+
+            const speed =
+                2 +
+                Math.random() *
+                5.5;
+
+
+            particles.push({
+
+                x,
+                y,
+
+                vx:
+                    Math.cos(angle) *
+                    speed,
+
+                vy:
+                    Math.sin(angle) *
+                    speed,
+
+                gravity:
+                    .035 +
+                    Math.random() * .025,
+
+                friction:
+                    .985,
+
+                life:
+                    55 +
+                    Math.random() * 45,
+
+                maxLife:
+                    100,
+
+                size:
+                    1 +
+                    Math.random() * 2.2,
+
+                color
+
+            });
+
+        }
+
+
+        /*
+            Pequena segunda explosão
+            para deixar o fogo mais cheio.
+        */
+
+        for (
+            let i = 0;
+            i < 18;
+            i++
+        ) {
+
+            const angle =
+                Math.random() *
+                Math.PI *
+                2;
+
+            const speed =
+                1 +
+                Math.random() * 2.5;
+
+
+            particles.push({
+
+                x,
+                y,
+
+                vx:
+                    Math.cos(angle) *
+                    speed,
+
+                vy:
+                    Math.sin(angle) *
+                    speed,
+
+                gravity: .02,
+
+                friction: .99,
+
+                life: 35 +
+                    Math.random() * 30,
+
+                maxLife: 65,
+
+                size:
+                    .7 +
+                    Math.random() * 1.4,
+
+                color: "#fff"
+
+            });
+
+        }
+
+    }
+
+
+    let elapsed = 0;
+    let lastTime = performance.now();
+
+
+    function animate(
+        currentTime
+    ) {
+
+        const delta =
+            Math.min(
+                32,
+                currentTime -
+                lastTime
+            );
+
+        lastTime =
+            currentTime;
+
+        elapsed += delta;
+
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        /*
+            Lança foguetes durante
+            a primeira parte da animação.
+        */
+
+        if (
+            elapsed < 3900 &&
+            Math.random() < .045
+        ) {
+
+            createRocket();
+
+        }
+
+
+        /*
+            Foguetes
+        */
+
+        for (
+            let i = rockets.length - 1;
+            i >= 0;
+            i--
+        ) {
+
+            const rocket =
+                rockets[i];
+
+
+            rocket.y -=
+                rocket.speed *
+                (delta / 16);
+
+
+            rocket.trail.push({
+                x: rocket.x,
+                y: rocket.y
+            });
+
+
+            if (
+                rocket.trail.length > 8
+            ) {
+
+                rocket.trail.shift();
+
+            }
+
+
+            ctx.beginPath();
+
+            for (
+                let t = 0;
+                t < rocket.trail.length;
+                t++
+            ) {
+
+                const point =
+                    rocket.trail[t];
+
+                if (t === 0) {
+
+                    ctx.moveTo(
+                        point.x,
+                        point.y
+                    );
+
+                } else {
+
+                    ctx.lineTo(
+                        point.x,
+                        point.y
+                    );
+
+                }
+
+            }
+
+
+            ctx.strokeStyle =
+                rocket.color;
+
+            ctx.globalAlpha = .55;
+
+            ctx.lineWidth = 1.5;
+
+            ctx.stroke();
+
+            ctx.globalAlpha = 1;
+
+
+            if (
+                rocket.y <=
+                rocket.targetY
+            ) {
+
+                explode(
+                    rocket.x,
+                    rocket.y,
+                    rocket.color
+                );
+
+                rockets.splice(i, 1);
+
+            }
+
+        }
+
+
+        /*
+            Partículas
+        */
+
+        for (
+            let i = particles.length - 1;
+            i >= 0;
+            i--
+        ) {
+
+            const particle =
+                particles[i];
+
+
+            particle.x +=
+                particle.vx *
+                (delta / 16);
+
+            particle.y +=
+                particle.vy *
+                (delta / 16);
+
+
+            particle.vx *=
+                particle.friction;
+
+            particle.vy *=
+                particle.friction;
+
+
+            particle.vy +=
+                particle.gravity *
+                (delta / 16);
+
+
+            particle.life -=
+                delta / 16;
+
+
+            if (
+                particle.life <= 0
+            ) {
+
+                particles.splice(i, 1);
+
+                continue;
+
+            }
+
+
+            const alpha =
+                Math.max(
+                    0,
+                    particle.life /
+                    particle.maxLife
+                );
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                particle.x,
+                particle.y,
+                particle.size,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                particle.color;
+
+            ctx.globalAlpha =
+                alpha;
+
+            ctx.fill();
+
+        }
+
+
+        ctx.globalAlpha = 1;
+
+
+        if (
+            elapsed < 5700 ||
+            particles.length > 0 ||
+            rockets.length > 0
+        ) {
+
+            celebrationAnimationFrame =
+                requestAnimationFrame(
+                    animate
+                );
+
+        } else {
+
+            cancelAnimationFrame(
+                celebrationAnimationFrame
+            );
+
+        }
+
+    }
+
+
+    /*
+        Primeiros fogos imediatos.
+    */
+
+    setTimeout(() => {
+
+        explode(
+            width * .25,
+            height * .35,
+            colors[0]
+        );
+
+    }, 250);
+
+
+    setTimeout(() => {
+
+        explode(
+            width * .72,
+            height * .28,
+            colors[3]
+        );
+
+    }, 550);
+
+
+    setTimeout(() => {
+
+        explode(
+            width * .5,
+            height * .2,
+            colors[1]
+        );
+
+    }, 950);
+
+
+    setTimeout(() => {
+
+        explode(
+            width * .32,
+            height * .48,
+            colors[4]
+        );
+
+    }, 1500);
+
+
+    requestAnimationFrame(
+        animate
     );
+
 }
 
 
-/* =========================
+/* =========================================================
    LIGHTBOX
-========================= */
+========================================================= */
 
 const lightbox =
     document.getElementById("lightbox");
@@ -909,54 +1817,58 @@ const closeLightbox =
     document.getElementById("closeLightbox");
 
 
-document
-    .querySelectorAll(
+const zoomableImages =
+    document.querySelectorAll(
         ".timeline-item img, .sunset-gallery img, .moment img"
-    )
-    .forEach(
-        (photo) => {
+    );
 
-            photo.addEventListener(
-                "click",
-                () => {
 
-                    lightboxImage.src =
-                        photo.src;
+zoomableImages.forEach(image => {
 
-                    lightbox
-                        .classList
-                        .add("active");
+    image.addEventListener(
+        "click",
+        () => {
 
-                }
+            lightboxImage.src =
+                image.src;
+
+            lightboxImage.alt =
+                image.alt || "Foto ampliada";
+
+            lightbox.classList.add(
+                "active"
             );
 
         }
     );
 
+});
+
+
+function closeImageLightbox() {
+
+    lightbox.classList.remove(
+        "active"
+    );
+
+}
+
 
 closeLightbox.addEventListener(
     "click",
-    () => {
-
-        lightbox
-            .classList
-            .remove("active");
-
-    }
+    closeImageLightbox
 );
 
 
 lightbox.addEventListener(
     "click",
-    (event) => {
+    event => {
 
         if (
             event.target === lightbox
         ) {
 
-            lightbox
-                .classList
-                .remove("active");
+            closeImageLightbox();
 
         }
 
@@ -964,59 +1876,64 @@ lightbox.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
    ESC
-========================= */
+========================================================= */
 
 document.addEventListener(
     "keydown",
-    (event) => {
+    event => {
 
         if (
-            event.key === "Escape"
+            event.key !== "Escape"
         ) {
-
-            lightbox
-                .classList
-                .remove("active");
-
-            proofGallery
-                .classList
-                .remove("active");
-
-            galleryEnding
-                .classList
-                .remove("active");
-
-            document.body.style.overflow = "";
-
+            return;
         }
 
+        closeGallery();
+
+        closeGalleryEnding();
+
+        closeImageLightbox();
+
+    }
+);
+
+
+/* =========================================================
+   PREVENÇÃO DO DUPLO CLIQUE NO SIM
+========================================================= */
+
+yesBtn.addEventListener(
+    "dblclick",
+    event => {
+
+        event.preventDefault();
+
+    }
+);
+
+
+/* =========================================================
+   RESIZE DO CANVAS
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
 
         if (
-            proofGallery
-                .classList
-                .contains("active")
+            !acceptanceCelebration.classList.contains(
+                "active"
+            )
         ) {
-
-            if (
-                event.key === "ArrowRight"
-            ) {
-
-                nextProof();
-
-            }
-
-
-            if (
-                event.key === "ArrowLeft"
-            ) {
-
-                previousProof();
-
-            }
-
+            return;
         }
+
+        /*
+            O próximo disparo da comemoração
+            recriará o canvas com o tamanho correto.
+        */
 
     }
 );

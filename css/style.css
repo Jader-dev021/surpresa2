@@ -19,11 +19,26 @@ body::-webkit-scrollbar {
 }
 
 body {
-    background: #050505;
+    background:
+        radial-gradient(
+            ellipse 45% 100% at 0% 50%,
+            rgba(229, 9, 20, 0.045) 0%,
+            rgba(229, 9, 20, 0.025) 30%,
+            rgba(229, 9, 20, 0.01) 55%,
+            transparent 100%
+        ),
+        radial-gradient(
+            ellipse 45% 100% at 100% 50%,
+            rgba(229, 9, 20, 0.045) 0%,
+            rgba(229, 9, 20, 0.025) 30%,
+            rgba(229, 9, 20, 0.01) 55%,
+            transparent 100%
+        ),
+        #080808;
+
     color: #fff;
-    font-family: Georgia, "Times New Roman", serif;
-    overflow-x: hidden;
 }
+
 
 img {
     display: block;
@@ -41,7 +56,7 @@ video {
     max-width: 100%;
 }
 
-body.intro-active {
+body.gallery-open {
     overflow: hidden;
 }
 
@@ -54,7 +69,6 @@ body.intro-active {
     position: fixed;
     inset: 0;
     z-index: 9999;
-
     width: 100%;
     height: 100dvh;
     min-height: 100svh;
@@ -94,9 +108,7 @@ body.intro-active {
 
 .eyebrow {
     margin-bottom: clamp(15px, 3vw, 20px);
-
     color: #f19caf;
-
     font-size: clamp(.65rem, 1.5vw, .75rem);
     letter-spacing: clamp(2px, .6vw, 4px);
     text-transform: uppercase;
@@ -104,7 +116,6 @@ body.intro-active {
 
 .intro-content h1 {
     margin-bottom: clamp(15px, 3vw, 20px);
-
     font-size: clamp(2.7rem, 10vw, 6rem);
     font-weight: normal;
     line-height: .95;
@@ -113,21 +124,16 @@ body.intro-active {
 .intro-content p {
     max-width: 550px;
     margin: 0 auto clamp(25px, 6vw, 35px);
-
     color: #ccc;
-
     font-size: clamp(.95rem, 2vw, 1rem);
     line-height: 1.8;
 }
 
 #startBtn {
     min-height: 48px;
-
-    padding:
-        14px clamp(24px, 5vw, 32px);
+    padding: 14px clamp(24px, 5vw, 32px);
 
     color: #fff;
-
     background: rgba(255, 255, 255, .05);
 
     border: 1px solid rgba(255, 255, 255, .3);
@@ -142,6 +148,7 @@ body.intro-active {
 }
 
 @media (hover: hover) {
+
     #startBtn:hover {
         background: #fff;
         color: #000;
@@ -218,7 +225,6 @@ section > .container {
     margin-inline: auto;
 
     color: #ccc;
-
     font-size: clamp(.95rem, 2vw, 1.05rem);
     line-height: 1.9;
 }
@@ -266,7 +272,6 @@ section > .container {
 
     position: absolute;
     inset: 0;
-
     z-index: 1;
 
     background:
@@ -305,7 +310,6 @@ section > .container {
     z-index: 2;
 
     width: min(900px, 100%);
-
     margin-top: 55svh;
 }
 
@@ -319,7 +323,6 @@ section > .container {
     margin-top: clamp(15px, 3vw, 20px);
 
     color: #ddd;
-
     font-size: clamp(.95rem, 2vw, 1.05rem);
     font-style: italic;
 }
@@ -335,7 +338,6 @@ section > .container {
 
 .video-frame {
     width: min(400px, 100%);
-
     margin: clamp(35px, 6vw, 50px) auto 0;
 
     overflow: hidden;
@@ -352,7 +354,6 @@ section > .container {
     width: 100%;
     height: auto;
     max-height: 75svh;
-
     object-fit: contain;
 }
 
@@ -363,9 +364,7 @@ section > .container {
 
 .timeline {
     position: relative;
-
     width: 100%;
-
     margin-top: clamp(50px, 8vw, 80px);
 }
 
@@ -373,7 +372,6 @@ section > .container {
     content: "";
 
     position: absolute;
-
     top: 0;
     bottom: 0;
     left: 50%;
@@ -409,7 +407,6 @@ section > .container {
     content: "";
 
     position: absolute;
-
     top: 65px;
 
     width: 12px;
@@ -434,7 +431,6 @@ section > .container {
 
 .timeline-item > img {
     width: min(100%, 240px);
-
     height: auto;
 
     border-radius: 18px;
@@ -458,6 +454,7 @@ section > .container {
 }
 
 @media (hover: hover) {
+
     .timeline-item > img:hover {
         transform: scale(1.04);
         filter: brightness(1.08);
@@ -488,7 +485,7 @@ section > .container {
 
 
 /* =========================================================
-   PRINTS DA TIMELINE
+   PRINTS
 ========================================================= */
 
 .conversation-prints,
@@ -496,6 +493,7 @@ section > .container {
 .route-prints {
     display: flex;
     align-items: flex-start;
+
     gap: clamp(8px, 1.5vw, 15px);
 }
 
@@ -509,7 +507,6 @@ section > .container {
 .love-messages img,
 .route-prints img {
     width: min(48%, 240px);
-
     height: auto;
 
     border-radius: 18px;
@@ -525,36 +522,13 @@ section > .container {
 }
 
 @media (hover: hover) {
+
     .conversation-prints img:hover,
     .love-messages img:hover,
     .route-prints img:hover {
         transform: scale(1.04);
         filter: brightness(1.08);
     }
-}
-
-
-/* =========================================================
-   FUTURE PLACEHOLDER
-========================================================= */
-
-.future-placeholder {
-    min-height: 260px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 25px;
-
-    border: 1px dashed rgba(241, 156, 175, .25);
-    border-radius: 22px;
-
-    color: #555;
-
-    font-style: italic;
-
-    text-align: center;
 }
 
 
@@ -569,9 +543,11 @@ section > .container {
 .moments-grid {
     display: grid;
 
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
 
-    grid-auto-rows: clamp(180px, 16vw, 220px);
+    grid-auto-rows:
+        clamp(180px, 16vw, 220px);
 
     gap: clamp(10px, 1.5vw, 15px);
 
@@ -585,7 +561,8 @@ section > .container {
 
     overflow: hidden;
 
-    border-radius: clamp(16px, 2.5vw, 22px);
+    border-radius:
+        clamp(16px, 2.5vw, 22px);
 
     background: #111;
 }
@@ -604,6 +581,7 @@ section > .container {
 }
 
 @media (hover: hover) {
+
     .moment:hover img {
         transform: scale(1.05);
         filter: brightness(1.08);
@@ -632,7 +610,6 @@ section > .container {
     font-style: italic;
 }
 
-.ajustar 
 
 /* =========================================================
    GALERIA DE PROVAS
@@ -640,7 +617,6 @@ section > .container {
 
 .proof-section {
     min-height: 75vh;
-
     text-align: center;
 }
 
@@ -668,6 +644,7 @@ section > .container {
 }
 
 @media (hover: hover) {
+
     .gallery-start:hover {
         background: #fff;
         color: #000;
@@ -750,11 +727,17 @@ section > .container {
     object-fit: contain;
 
     border-radius: 22px;
+
     user-select: none;
 
     transition:
-        opacity .3s ease,
-        transform .3s ease;
+        opacity .35s ease,
+        transform .35s ease;
+}
+
+#galleryPhoto.changing {
+    opacity: 0;
+    transform: scale(.985);
 }
 
 .gallery-caption {
@@ -848,11 +831,11 @@ section > .container {
     line-height: 1.7;
 
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(18px);
 
     transition:
-        opacity 1s ease,
-        transform 1s ease;
+        opacity 1.2s ease,
+        transform 1.2s cubic-bezier(.22, 1, .36, 1);
 }
 
 .gallery-ending p.show {
@@ -870,15 +853,13 @@ section > .container {
 
 
 /* =========================================================
-   SÁBADO — GALERIA COMPACTA
-========================================================= */
-/* =========================================================
-   TÍTULO DO SÁBADO
+   FINS DE SEMANA
 ========================================================= */
 
 .sunset-intro {
     width: min(700px, 100%);
     margin: 0 auto 50px;
+
     text-align: left;
 }
 
@@ -889,7 +870,7 @@ section > .container {
     font-weight: 400;
 
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -.02em;
 
     color: #fff;
 }
@@ -903,13 +884,14 @@ section > .container {
     color: #aaa;
 }
 
-
 .sunset-gallery {
     width: min(900px, 100%);
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
 
     gap: 14px;
 }
@@ -926,70 +908,29 @@ section > .container {
 
     cursor: zoom-in;
 
-    box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, .45);
 
     transition:
         transform .3s ease,
         filter .3s ease;
 }
 
-/* Foto principal */
 .sunset-gallery .sunset-main {
     grid-column: span 2;
     height: 420px;
 }
 
-/* Efeito discreto ao passar o mouse */
 @media (hover: hover) {
+
     .sunset-gallery img:hover {
         transform: scale(1.015);
         filter: brightness(1.08);
     }
 }
 
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 900px) and (min-width: 701px) {
-
-    .sunset-gallery {
-        width: 100%;
-        gap: 12px;
-    }
-
-    .sunset-gallery img {
-        height: 250px;
-    }
-
-    .sunset-gallery .sunset-main {
-        height: 360px;
-    }
-}
-
-
-/* =========================================================
-   CELULAR
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .sunset-gallery {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .sunset-gallery img {
-        width: 100%;
-        height: 260px;
-        border-radius: 16px;
-    }
-
-    .sunset-gallery .sunset-main {
-        grid-column: auto;
-        height: 330px;
-    }
+.sunset-text {
+    margin-top: 40px;
 }
 
 
@@ -1000,14 +941,21 @@ section > .container {
 .letter {
     width: min(750px, 100%);
 
-    margin: clamp(35px, 6vw, 50px) auto 0;
+    margin:
+        clamp(35px, 6vw, 50px)
+        auto 0;
 
-    padding: clamp(25px, 5vw, 50px);
+    padding:
+        clamp(25px, 5vw, 50px);
 
-    border: 1px solid rgba(255, 255, 255, .1);
-    border-radius: clamp(18px, 3vw, 25px);
+    border:
+        1px solid rgba(255, 255, 255, .1);
 
-    background: rgba(255, 255, 255, .03);
+    border-radius:
+        clamp(18px, 3vw, 25px);
+
+    background:
+        rgba(255, 255, 255, .03);
 
     box-shadow:
         0 30px 80px rgba(0, 0, 0, .4);
@@ -1035,19 +983,34 @@ section > .container {
     text-align: center;
 
     background: #000;
+
+    opacity: .55;
+
+    transform: scale(.97);
+
+    transition:
+        opacity 1.8s ease,
+        transform 2.2s cubic-bezier(.22, 1, .36, 1);
+}
+
+.final-section.active {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .final-section h2 {
     font-size: clamp(3rem, 10vw, 7rem);
+
     font-weight: normal;
+
     line-height: .95;
 
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(18px);
 
     transition:
-        opacity 2s ease,
-        transform 2s ease;
+        opacity 1.4s ease,
+        transform 1.4s cubic-bezier(.22, 1, .36, 1);
 }
 
 .final-section.active h2 {
@@ -1064,11 +1027,16 @@ section > .container {
 
     opacity: 0;
 
-    transition: opacity 2s ease 1s;
+    transform: scale(.65);
+
+    transition:
+        opacity 1.4s ease .45s,
+        transform 1.6s cubic-bezier(.22, 1, .36, 1) .45s;
 }
 
 .final-section.active .final-heart {
     opacity: 1;
+    transform: scale(1);
 }
 
 
@@ -1091,17 +1059,57 @@ section > .container {
             #260f17,
             #000 65%
         );
+
+    opacity: 0;
+    transform: translateY(35px);
+
+    transition:
+        opacity 1.4s ease,
+        transform 1.5s cubic-bezier(.22, 1, .36, 1);
 }
 
 #question.show {
     display: flex;
+
+    opacity: 1;
+    transform: translateY(0);
+
+    animation:
+        questionAppear
+        1.5s cubic-bezier(.22, 1, .36, 1);
+}
+
+@keyframes questionAppear {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(45px)
+            scale(.97);
+    }
+
+    60% {
+        opacity: 1;
+        transform:
+            translateY(-4px)
+            scale(1.005);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
 }
 
 #question h2 {
     margin-bottom: clamp(35px, 7vw, 50px);
 
     font-size: clamp(2.5rem, 8vw, 5rem);
+
     font-weight: normal;
+
     line-height: 1;
 }
 
@@ -1109,7 +1117,6 @@ section > .container {
     position: relative;
 
     width: min(600px, 100%);
-
     height: 170px;
 
     display: flex;
@@ -1130,41 +1137,119 @@ section > .container {
 
     cursor: pointer;
 
-    transition: transform .35s ease;
+    transition:
+        transform .35s cubic-bezier(.22, 1, .36, 1),
+        opacity .3s ease,
+        box-shadow .35s ease;
 }
 
 #yesBtn {
+    position: relative;
+    z-index: 2;
+
     color: #fff;
 
     background: #b94b64;
 
-    border: 1px solid #d66a83;
+    border:
+        1px solid #d66a83;
+
+    box-shadow:
+        0 8px 30px rgba(185, 75, 100, .15);
 }
 
 #yesBtn:hover {
-    transform: scale(1.08);
+    transform:
+        translateY(-3px)
+        scale(1.03);
+}
+
+#yesBtn:active {
+    transform: scale(.96);
+}
+
+#yesBtn.accepted {
+    pointer-events: none;
+    opacity: .55;
 }
 
 #noBtn {
-    position: absolute;
+    position: relative;
+    z-index: 3;
 
     color: #ddd;
 
     background: #111;
 
-    border: 1px solid rgba(255, 255, 255, .15);
+    border:
+        1px solid rgba(255, 255, 255, .15);
+}
 
-    transition: transform .3s ease;
+#noBtn.dodging {
+    transform:
+        translate3d(
+            var(--no-x, 0px),
+            var(--no-y, 0px),
+            0
+        )
+        rotate(
+            var(--no-rotation, 0deg)
+        );
+
+    transition:
+        transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+
+#noBtn.accepted {
+    pointer-events: none;
+    opacity: .35;
+    transform: none !important;
 }
 
 #noMessage {
-    min-height: 30px;
+    min-height: 28px;
 
-    margin-top: 15px;
+    margin-top: 18px;
 
     color: #f19caf;
 
-    font-size: clamp(.9rem, 2vw, 1rem);
+    opacity: 0;
+    transform: translateY(8px);
+
+    transition:
+        opacity .45s ease,
+        transform .45s ease;
+}
+
+#noMessage.message-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.accepted-message {
+    margin-top: 28px;
+
+    color: #f19caf;
+
+    font-size: clamp(1rem, 3vw, 1.35rem);
+
+    opacity: 0;
+    transform: translateY(15px) scale(.96);
+
+    pointer-events: none;
+
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.22, 1, .36, 1);
+}
+
+#question.accepted .accepted-message {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+#question.accepted #noMessage {
+    opacity: 0;
 }
 
 
@@ -1185,21 +1270,99 @@ section > .container {
             #260f17,
             #050505 65%
         );
+
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 #relationship.show {
     display: flex;
+
+    opacity: 1;
+    transform: translateY(0);
+
+    animation:
+        relationshipAppear
+        1.8s cubic-bezier(.22, 1, .36, 1);
+}
+
+@keyframes relationshipAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(45px)
+            scale(.98);
+    }
+
+    65% {
+        opacity: 1;
+
+        transform:
+            translateY(-5px)
+            scale(1.005);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
 }
 
 .relationship-content {
     width: min(1000px, 100%);
 }
 
+#relationship.show .relationship-content > * {
+    opacity: 0;
+    transform: translateY(18px);
+
+    animation:
+        relationshipChildAppear
+        1s
+        cubic-bezier(.22, 1, .36, 1)
+        forwards;
+}
+
+#relationship.show .relationship-content > *:nth-child(1) {
+    animation-delay: .15s;
+}
+
+#relationship.show .relationship-content > *:nth-child(2) {
+    animation-delay: .3s;
+}
+
+#relationship.show .relationship-content > *:nth-child(3) {
+    animation-delay: .45s;
+}
+
+#relationship.show .relationship-content > *:nth-child(4) {
+    animation-delay: .65s;
+}
+
+#relationship.show .relationship-content > *:nth-child(5) {
+    animation-delay: .8s;
+}
+
+@keyframes relationshipChildAppear {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .relationship-content h2 {
     margin-bottom: 20px;
 
     font-size: clamp(2.4rem, 7vw, 5rem);
+
     font-weight: normal;
+
     line-height: 1.1;
 }
 
@@ -1209,13 +1372,15 @@ section > .container {
     color: #aaa;
 
     font-size: clamp(.9rem, 2vw, 1rem);
+
     font-style: italic;
 }
 
 .counter {
     display: grid;
 
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
 
     gap: clamp(10px, 2vw, 15px);
 }
@@ -1227,10 +1392,13 @@ section > .container {
         clamp(18px, 3vw, 25px)
         10px;
 
-    border: 1px solid rgba(255, 255, 255, .1);
+    border:
+        1px solid rgba(255, 255, 255, .1);
+
     border-radius: 20px;
 
-    background: rgba(255, 255, 255, .025);
+    background:
+        rgba(255, 255, 255, .025);
 }
 
 .counter-number {
@@ -1239,7 +1407,12 @@ section > .container {
     color: #f19caf;
 
     font-size: clamp(2rem, 6vw, 4rem);
+
     line-height: 1;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
 }
 
 .counter-label {
@@ -1250,6 +1423,7 @@ section > .container {
     color: #aaa;
 
     font-size: clamp(.65rem, 1.5vw, .75rem);
+
     letter-spacing: 2px;
 
     text-transform: uppercase;
@@ -1278,7 +1452,8 @@ section > .container {
     width: 12px;
     height: 18px;
 
-    border-radius: 100% 0 100% 0;
+    border-radius:
+        100% 0 100% 0;
 
     background: #f19caf;
 
@@ -1288,10 +1463,12 @@ section > .container {
 
     z-index: 100;
 
-    animation: fall linear forwards;
+    animation:
+        fall linear forwards;
 }
 
 @keyframes fall {
+
     to {
         transform:
             translateY(110vh)
@@ -1300,6 +1477,194 @@ section > .container {
 
         opacity: 0;
     }
+}
+
+
+/* =========================================================
+   COMEMORAÇÃO DO SIM
+========================================================= */
+
+.acceptance-celebration {
+    position: fixed;
+    inset: 0;
+
+    z-index: 12000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(70, 10, 25, .96),
+            rgba(0, 0, 0, .98) 70%
+        );
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+.acceptance-celebration.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.acceptance-celebration.fade-out {
+    opacity: 0;
+}
+
+#celebrationCanvas {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+}
+
+.celebration-emojis {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.celebration-emoji {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    font-size:
+        clamp(1.3rem, 4vw, 2.4rem);
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(255, 105, 145, .35)
+        );
+
+    opacity: 0;
+
+    animation:
+        emojiFly
+        var(--emoji-duration)
+        cubic-bezier(.12, .7, .22, 1)
+        forwards;
+}
+
+@keyframes emojiFly {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.2)
+            rotate(0deg);
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(-50% + var(--emoji-x)),
+                calc(-50% + var(--emoji-y))
+            )
+            scale(var(--emoji-scale))
+            rotate(var(--emoji-rotation));
+    }
+}
+
+.celebration-content {
+    position: relative;
+    z-index: 4;
+
+    width: min(800px, 90%);
+
+    text-align: center;
+
+    pointer-events: none;
+
+    transform:
+        translateY(25px)
+        scale(.94);
+
+    opacity: 0;
+
+    transition:
+        opacity 1.2s ease .25s,
+        transform 1.4s cubic-bezier(.22, 1, .36, 1) .25s;
+}
+
+.acceptance-celebration.active .celebration-content {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.celebration-eyebrow {
+    margin-bottom: 18px;
+
+    color: #f19caf;
+
+    font-size: .75rem;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+}
+
+.celebration-small {
+    color: #ddd;
+
+    font-size:
+        clamp(1rem, 3vw, 1.5rem);
+}
+
+.celebration-content h2 {
+    margin-top: 8px;
+
+    font-size:
+        clamp(4rem, 15vw, 9rem);
+
+    font-weight: normal;
+
+    line-height: .9;
+
+    text-shadow:
+        0 0 35px
+        rgba(241, 156, 175, .35);
+}
+
+.celebration-content p {
+    margin-top: 25px;
+
+    color: #f19caf;
+
+    font-size:
+        clamp(1.2rem, 4vw, 2rem);
+
+    font-style: italic;
 }
 
 
@@ -1369,13 +1734,82 @@ section > .container {
 
 
 /* =========================================================
+   TIMELINE NOTE
+========================================================= */
+
+.timeline-note {
+    position: absolute;
+
+    right: 3%;
+
+    width: 180px;
+
+    padding: 12px 14px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 255, 255, .025);
+
+    border:
+        1px solid rgba(255, 255, 255, .08);
+
+    border-radius: 12px;
+
+    opacity: .65;
+
+    z-index: 2;
+}
+
+.timeline-note p {
+    margin: 0;
+
+    font-size: .68rem;
+
+    line-height: 1.5;
+
+    font-style: italic;
+}
+
+.timeline-note p + p {
+    margin-top: 7px;
+
+    font-size: .7rem;
+
+    opacity: .9;
+}
+
+
+/* =========================================================
+   FOTOS ESPECÍFICAS
+========================================================= */
+
+.sábado-foto-2 {
+    object-position: center 28%;
+}
+
+.espelho {
+    object-position: 20%;
+}
+
+.careta img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover !important;
+    object-position: center 85% !important;
+}
+
+
+/* =========================================================
    TABLET
 ========================================================= */
 
 @media (max-width: 950px) {
 
     section {
-        padding-inline: clamp(20px, 4vw, 35px);
+        padding-inline:
+            clamp(20px, 4vw, 35px);
     }
 
     .hero-image {
@@ -1388,12 +1822,50 @@ section > .container {
     }
 
     .timeline-item {
-        padding-inline: clamp(25px, 4vw, 40px);
+        padding-inline:
+            clamp(25px, 4vw, 40px);
     }
 
     .moments-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
         grid-auto-rows: 190px;
+    }
+
+    .timeline-note {
+        right: 2%;
+        width: 150px;
+        padding: 10px 12px;
+    }
+
+    .timeline-note p {
+        font-size: .62rem;
+    }
+
+    .timeline-note p + p {
+        font-size: .64rem;
+    }
+}
+
+
+/* =========================================================
+   SÁBADO TABLET
+========================================================= */
+
+@media (max-width: 900px) and (min-width: 701px) {
+
+    .sunset-gallery {
+        width: 100%;
+        gap: 12px;
+    }
+
+    .sunset-gallery img {
+        height: 250px;
+    }
+
+    .sunset-gallery .sunset-main {
+        height: 360px;
     }
 }
 
@@ -1449,14 +1921,8 @@ section > .container {
     }
 
     .hero h1 {
-        font-size: clamp(3rem, 15vw, 5rem);
-    }
-
-
-    /* VIDEO */
-
-    .video-frame {
-        width: min(400px, 100%);
+        font-size:
+            clamp(3rem, 15vw, 5rem);
     }
 
 
@@ -1473,6 +1939,7 @@ section > .container {
     .timeline-item,
     .timeline-item:nth-child(odd),
     .timeline-item:nth-child(even) {
+
         width: 100%;
 
         margin: 0;
@@ -1489,6 +1956,7 @@ section > .container {
     .timeline-item::after,
     .timeline-item:nth-child(odd)::after,
     .timeline-item:nth-child(even)::after {
+
         left: 8px;
         right: auto;
 
@@ -1498,6 +1966,7 @@ section > .container {
     .timeline-item > img,
     .timeline-item:nth-child(odd) > img,
     .timeline-item:nth-child(even) > img {
+
         width: 100%;
         max-width: none;
 
@@ -1505,11 +1974,13 @@ section > .container {
     }
 
     .timeline-item h3 {
-        font-size: clamp(1.35rem, 6vw, 1.7rem);
+        font-size:
+            clamp(1.35rem, 6vw, 1.7rem);
     }
 
     .timeline-item p,
     .timeline-item:nth-child(odd) p {
+
         width: 100%;
         max-width: none;
 
@@ -1522,17 +1993,23 @@ section > .container {
     .conversation-prints,
     .love-messages,
     .route-prints {
+
         width: 100%;
 
-        justify-content: flex-start !important;
+        justify-content:
+            flex-start !important;
 
-        gap: clamp(8px, 2vw, 12px);
+        gap:
+            clamp(8px, 2vw, 12px);
     }
 
     .conversation-prints img,
     .love-messages img,
     .route-prints img {
-        width: calc(50% - 6px);
+
+        width:
+            calc(50% - 6px);
+
         max-width: none;
 
         border-radius: 14px;
@@ -1542,9 +2019,12 @@ section > .container {
     /* MOMENTOS */
 
     .moments-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
 
-        grid-auto-rows: clamp(150px, 42vw, 180px);
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        grid-auto-rows:
+            clamp(150px, 42vw, 180px);
 
         gap: 10px;
 
@@ -1580,24 +2060,29 @@ section > .container {
     }
 
     .sunset-intro h2 {
-        font-size: clamp(3rem, 15vw, 5rem);
+        font-size:
+            clamp(3rem, 15vw, 5rem);
     }
 
     .sunset-gallery {
         grid-template-columns: 1fr;
-
         grid-template-rows: none;
 
         gap: 12px;
     }
 
     .sunset-gallery .sunset-main {
+        grid-column: auto;
         grid-row: auto;
+
+        aspect-ratio: 4 / 5;
+        height: auto;
     }
 
     .sunset-gallery img {
         width: 100%;
         height: auto;
+
         min-height: 0;
 
         aspect-ratio: 4 / 3;
@@ -1605,14 +2090,6 @@ section > .container {
         object-fit: cover;
 
         border-radius: 16px;
-    }
-
-    /*
-       A foto principal recebe um espaço maior,
-       mas continua limitada à proporção.
-    */
-    .sunset-gallery .sunset-main {
-        aspect-ratio: 4 / 5;
     }
 
     .sunset-text {
@@ -1645,7 +2122,8 @@ section > .container {
     }
 
     #question h2 {
-        font-size: clamp(2.5rem, 12vw, 4rem);
+        font-size:
+            clamp(2.5rem, 12vw, 4rem);
     }
 
     .buttons {
@@ -1657,7 +2135,6 @@ section > .container {
 
     .answer-btn {
         min-width: 110px;
-
         padding-inline: 22px;
     }
 
@@ -1671,7 +2148,8 @@ section > .container {
     }
 
     .counter {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
 
         gap: 10px;
     }
@@ -1683,13 +2161,15 @@ section > .container {
     }
 
     .counter-number {
-        font-size: clamp(2rem, 12vw, 3.5rem);
+        font-size:
+            clamp(2rem, 12vw, 3.5rem);
     }
 
 
     /* GALERIA */
 
     .proof-gallery {
+
         padding:
             55px
             16px
@@ -1697,7 +2177,8 @@ section > .container {
     }
 
     .gallery-content {
-        max-height: calc(100dvh - 75px);
+        max-height:
+            calc(100dvh - 75px);
     }
 
     .gallery-photo-container {
@@ -1722,14 +2203,14 @@ section > .container {
 
     .gallery-hint {
         margin-top: 16px;
-
         font-size: .72rem;
     }
 
 
-    /* FINAL DA GALERIA */
+    /* FINAL GALERIA */
 
     .gallery-ending {
+
         align-items: flex-start;
 
         padding-top: 80px;
@@ -1741,20 +2222,36 @@ section > .container {
     }
 
     .gallery-ending p {
-        font-size: clamp(1.05rem, 5vw, 1.4rem);
+        font-size:
+            clamp(1.05rem, 5vw, 1.4rem);
+
         line-height: 1.6;
     }
 
     .gallery-ending .final-line {
         margin-top: 40px;
 
-        font-size: clamp(1.4rem, 7vw, 2rem);
+        font-size:
+            clamp(1.4rem, 7vw, 2rem);
+    }
+
+
+    /* COMEMORAÇÃO */
+
+    .celebration-content {
+        width: 92%;
+    }
+
+    .celebration-content h2 {
+        font-size:
+            clamp(4rem, 22vw, 7rem);
     }
 
 
     /* LIGHTBOX */
 
     #lightbox {
+
         padding:
             50px
             15px
@@ -1766,6 +2263,31 @@ section > .container {
         max-height: 85dvh;
 
         border-radius: 16px;
+    }
+
+
+    /* TIMELINE NOTE */
+
+    .timeline-note {
+
+        position: relative;
+
+        right: auto;
+
+        width: min(80%, 300px);
+
+        margin:
+            10px auto 25px;
+
+        opacity: .7;
+    }
+
+    .timeline-note p {
+        font-size: .72rem;
+    }
+
+    .timeline-note p + p {
+        font-size: .74rem;
     }
 }
 
@@ -1794,7 +2316,8 @@ section > .container {
     }
 
     .hero h1 {
-        font-size: clamp(2.7rem, 15vw, 3.7rem);
+        font-size:
+            clamp(2.7rem, 15vw, 3.7rem);
     }
 
     .timeline-item,
@@ -1830,7 +2353,8 @@ section > .container {
     .conversation-prints img,
     .love-messages img,
     .route-prints img {
-        width: calc(50% - 3.5px);
+        width:
+            calc(50% - 3.5px);
 
         border-radius: 11px;
     }
@@ -1850,7 +2374,6 @@ section > .container {
 
     .sunset-gallery img {
         aspect-ratio: 4 / 3;
-
         border-radius: 13px;
     }
 
@@ -1915,8 +2438,10 @@ section > .container {
     *,
     *::before,
     *::after {
+
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
+
         transition-duration: .01ms !important;
     }
 
@@ -1924,103 +2449,8 @@ section > .container {
         opacity: 1;
         transform: none;
     }
-}
 
-
-/* =========================================================
-   POSICIONAMENTO ESPECÍFICO DAS FOTOS
-========================================================= */
-
-.sábado-foto-2 {
-    object-position: center 28%;
-}
-
-.espelho {
-    object-position: 20%;
-}
-
-.careta img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover !important;
-    object-position: center 85% !important;
-}
-
-
-/* =========================
-   OBSERVAÇÃO DA TIMELINE
-========================= */
-
-.timeline-note {
-    position: absolute;
-    right: 3%;
-    width: 180px;
-
-    padding: 12px 14px;
-
-    text-align: center;
-
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-
-    opacity: 0.65;
-    z-index: 2;
-}
-
-.timeline-note p {
-    margin: 0;
-    font-size: 0.68rem;
-    line-height: 1.5;
-    font-style: italic;
-}
-
-.timeline-note p + p {
-    margin-top: 7px;
-    font-size: 0.7rem;
-    opacity: 0.9;
-}
-
-/* =========================
-   TELAS MENORES
-========================= */
-
-@media (max-width: 1000px) {
-    .timeline-note {
-        right: 2%;
-        width: 150px;
-        padding: 10px 12px;
-    }
-
-    .timeline-note p {
-        font-size: 0.62rem;
-    }
-
-    .timeline-note p + p {
-        font-size: 0.64rem;
-    }
-}
-
-/* =========================
-   CELULARES
-========================= */
-
-@media (max-width: 700px) {
-    .timeline-note {
-        position: relative;
-        right: auto;
-
-        width: min(80%, 300px);
-        margin: 10px auto 25px;
-
-        opacity: 0.7;
-    }
-
-    .timeline-note p {
-        font-size: 0.72rem;
-    }
-
-    .timeline-note p + p {
-        font-size: 0.74rem;
+    .acceptance-celebration {
+        display: none !important;
     }
 }

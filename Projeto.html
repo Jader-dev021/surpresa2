@@ -1,72 +1,51 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Eu e Você ❤️</title>
-
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- =========================
+    <!-- =====================================================
          INTRO
-    ========================= -->
+    ====================================================== -->
 
     <div id="intro">
-
         <div class="intro-content">
+            <div class="eyebrow">uma história nossa</div>
 
-            <div class="eyebrow">
-                uma história nossa
-            </div>
-
-            <h1>
-                Antes de começar...
-            </h1>
+            <h1>Antes de começar...</h1>
 
             <p>
-                Coloque o volume,
-                respire fundo
-                e vem comigo.
+                Coloque o volume, respire fundo e vem comigo.
             </p>
 
             <button id="startBtn">
                 Começar ❤️
             </button>
-
         </div>
-
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          MÚSICA
-    ========================= -->
+    ====================================================== -->
 
-    <audio
-        id="music"
-        loop
-        preload="auto"
-    >
-        <source
-            src="assets/best-part.mp3"
-            type="audio/mpeg"
-        >
+    <audio id="music" loop preload="auto">
+        <source src="assets/best-part.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="musicControl">
+    <button id="musicControl" aria-label="Controlar música">
         ♪
     </button>
 
 
-    <!-- =========================
-         1 — CAPA
-    ========================= -->
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
     <section class="hero">
 
@@ -77,28 +56,21 @@
         >
 
         <div class="hero-content reveal">
+            <div class="eyebrow">para você</div>
 
-            <div class="eyebrow">
-                para você
-            </div>
-
-            <h1>
-                Nossa história
-            </h1>
+            <h1>Nossa história</h1>
 
             <p>
-                E tudo que aconteceu
-                até chegarmos aqui
+                E tudo que aconteceu até chegarmos aqui
             </p>
-
         </div>
 
     </section>
 
 
-    <!-- =========================
-         2 — VÍDEO
-    ========================= -->
+    <!-- =====================================================
+         VÍDEO 1
+    ====================================================== -->
 
     <section class="video-section">
 
@@ -113,10 +85,9 @@
             </h2>
 
             <p class="section-text">
-                Antes de continuar nossa história,
-                quero que você veja o que diria
-                para você mesma se soubesse
-                que esse momento estava chegando.
+                Antes de continuar nossa história, quero que você veja
+                o que diria para você mesma se soubesse que esse momento
+                estava chegando.
             </p>
 
             <div class="video-frame">
@@ -139,9 +110,9 @@
     </section>
 
 
-    <!-- =========================
-         3 — TIMELINE
-    ========================= -->
+    <!-- =====================================================
+         TIMELINE
+    ====================================================== -->
 
     <section>
 
@@ -152,48 +123,38 @@
             </div>
 
             <h2 class="section-title reveal">
-
-                Antes de chegar
-
-                <span class="accent">
-                    aqui.
-                </span>
-
+                Antes de chegar <span class="accent">aqui.</span>
             </h2>
-
 
             <div class="timeline">
 
-
                 <!-- 01 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/timeline/primeiro-story.jpeg"
                         alt="O começo"
                     >
 
-                    <h3>
-                        O começo.
-                    </h3>
+                    <h3>O começo.</h3>
 
                     <p>
-                        O story. Aquele story kkk. <br>
-                        Eu já estava interessado em você há algum tempo, e aquele story acabou me colocando diante de uma decisão:<br>
-                        ou eu criava coragem e começava uma conversa com você, ou continuava só olhando de longe.
+                        Tudo começou de um jeito simples.
+                        Eu vi aquele story, pensei um pouco...
+                        e decidi mandar mensagem.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 02 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/timeline/primeira-conversa.jpeg"
-                        alt="Primeiras conversas"
+                        alt="Nossa primeira conversa"
                     >
 
                     <h3>
@@ -201,54 +162,52 @@
                     </h3>
 
                     <p>
-                        E, apesar do medo, eu decidi tentar. <br>
-                        Mandei uma cantadinha descontraída kkk, sem saber muito bem onde aquilo ia dar.<br>
-                        Só que eu descobri que você também estava esperando uma atitude minha.<br>
-                        E foi assim, de um jeito simples e inesperado, que nós começamos a nos corresponder.
+                        Uma conversa que parecia ser só mais uma
+                        acabou virando o começo de algo que eu
+                        nem imaginava.
                     </p>
-                </div>
+
+                </article>
 
 
                 <!-- 03 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <div class="love-messages">
 
                         <img
                             src="assets/timeline/eu-te-amo-1.jpeg"
-                            alt="Meu primeiro eu te amo"
+                            alt="Mensagem"
                         >
 
                         <img
                             src="assets/timeline/eu-te-amo-2.jpeg"
-                            alt="Primeiro eu te amo dela"
+                            alt="Mensagem"
                         >
 
                     </div>
 
                     <h3>
-                        O primeiro "eu te amo". ❤️
+                        O primeiro “eu te amo”.
                     </h3>
 
                     <p>
-                        E pensar que você vivia dizendo q ia se segurar kkk
-                        <br>
-                        Mas tem momentos e coisas na vida em que não conseguimos segurar o coração, e o nosso amor é um deles.
-                        <br>
-                        Acho que foi aí que ficou ainda mais claro que o "nós" não era só uma brincadeira.
+                        E, de alguma forma, antes mesmo de tudo
+                        acontecer pessoalmente, algumas coisas
+                        já estavam claras.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 04 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/timeline/primeiro-encontro.jpeg"
-                        alt="Primeiro encontro"
+                        alt="Nosso primeiro encontro"
                     >
 
                     <h3>
@@ -256,23 +215,20 @@
                     </h3>
 
                     <p>
-                        Depois de tanta conversa, finalmente chegou o momento de estar ali com você de verdade.
-                        <br>
-                        E não vou negar, eu me apaixonei novamente por você no instante em que te vi.
-                        <br>
-                        E estar juntos pessoalmente foi muito melhor do que eu tinha imaginado.
+                        Depois de tanta conversa, finalmente
+                        chegou o momento de te encontrar de verdade.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 05 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/timeline/primeiro-beijo.jpeg"
-                        alt="Primeiro beijo"
+                        alt="Nosso primeiro beijo"
                     >
 
                     <h3>
@@ -280,33 +236,26 @@
                     </h3>
 
                     <p>
-                        E então aconteceu.
-                        <br>
-                        Depois de tanta espera (e vontade kkk), rolou nosso primeiro beijo.
-                        <br>
-                        Eu não tenho uma foto dele em específico, mas acho que nem precisava.
-                        <br>
-                        Aquele momento ficou marcado pra gente, porque de certa forma,
-                        foi o que “consumou” o amor que a gente já sentia.
+                        E aí deixou de ser só conversa.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 06 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <div class="conversation-prints">
 
                         <img
                             src="assets/timeline/desistir1.jpeg"
-                            alt="Ela dizendo que não estava pronta"
+                            alt="Conversa"
                         >
 
                         <img
                             src="assets/timeline/desistir.jpeg"
-                            alt="Minha resposta"
+                            alt="Conversa"
                         >
 
                     </div>
@@ -316,27 +265,20 @@
                     </h3>
 
                     <p>
-                        Com tudo dando tão certo, eu acabei me empolgando demais e estava te pressionando muito.
-                        <br>
-                        Você me pediu um tempo pra pensar melhor e, apesar de não ter citado diretamente, 
-                        eu entendi seu lado e percebi meu erro. Busquei melhorar essa minha falha porque,
-                        acima de tudo, eu tinha certeza de que queria você.
-                        <br>
-                        E quer saber? Esse tempinho fez muito bem pra nós dois, porque aprendemos a lidar melhor um com o outro.
-                        <br>
-                        E ainda bem que insistimos, apesar das nossas diferenças.
+                        Por um momento, parecia que nossa história
+                        poderia acabar antes mesmo de começar.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 07 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/timeline/maos.jpeg"
-                        alt="Pequenos detalhes"
+                        alt="Nossas mãos"
                     >
 
                     <h3>
@@ -344,31 +286,27 @@
                     </h3>
 
                     <p>
-                        Depois de tudo isso, nós voltamos e, desde então, tem dado muito certo entre nós.
-                        <br>
-                        Passamos por vários momentos juntos, alguns simples, outros nem tanto, mas todos muito importantes pra mim.
-                        <br>
-                        E acho que é justamente isso que eu mais gosto na nossa história: perceber que, mesmo nas coisas mais simples,
-                        a gente consegue criar momentos que eu quero guardar pra sempre.
+                        Porque, no fim, são justamente essas pequenas
+                        coisas que fazem tudo valer a pena.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 08 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <div class="route-prints">
 
                         <img
                             src="assets/timeline/caminho1.jpeg"
-                            alt="Percurso que eu fazia para ver ela"
+                            alt="Caminho"
                         >
 
                         <img
                             src="assets/timeline/caminho2.jpeg"
-                            alt="Outro percurso que eu fazia para ver ela"
+                            alt="Caminho"
                         >
 
                     </div>
@@ -378,25 +316,20 @@
                     </h3>
 
                     <p>
-                        Talvez olhando assim pareça só um caminho no mapa.
-
-                        Mas eu lembro de cada vez que fiz esse caminho só porque queria te ver.
-
-                        E, por mais longe que fosse, eu ia feliz, porque sabia que no final dele estaria você.
-
-                        E, sinceramente? Eu faria tudo de novo.
+                        E olha que nem eram caminhadas juntos.
+                        Eu literalmente fazia o caminho só pra te ver.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 09 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/timeline/presente.jpeg"
-                        alt="Meu primeiro presente para ela"
+                        alt="Primeiro presente"
                     >
 
                     <h3>
@@ -404,27 +337,20 @@
                     </h3>
 
                     <p>
-                        Talvez tenha sido uma coisa simples, mas fiz tudo com muito carinho.
-                        <br>
-                        Lembro do seu sorriso e da alegria que você ficou quando recebeu.
-                        <br>
-                        E também da tristeza quando você perdeu a cartinha, mesmo não tendo sido culpa sua. KKKK
-                        <br>
-                        Eu faria tudo de novo, e ainda vou fazer, só pra ver aquele sorriso mais uma vez.
-                        <br>
-                        Afinal, você merece sempre o melhor. ❤️
+                        Uma pequena lembrança de algo que já
+                        significava muito pra mim.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 10 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/momentos/olhos.jpeg"
-                        alt="Um pôr do sol com você"
+                        alt="Pôr do sol"
                     >
 
                     <h3>
@@ -432,27 +358,19 @@
                     </h3>
 
                     <p>
-                        Acho que eu já gostava de pôr do sol antes de você.
-                        <br>
-                        Mas depois daquele dia, ele ganhou um significado diferente, pois agora sempre penso em você quando o vejo.
-                        <br>
-                        Estar ali com você, vendo o céu mudar de cor enquanto a gente conversava e aproveitava aquele momento juntos, foi simplesmente especial.
-                        <br>
-                        Talvez fosse só mais um pôr do sol.
-                        <br>
-                        Mas estar com você deixa tudo melhor.
+                        Alguns momentos simplesmente ficam.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 11 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/timeline/familia.jpeg"
-                        alt="Sua familia"
+                        alt="Família"
                     >
 
                     <h3>
@@ -460,42 +378,33 @@
                     </h3>
 
                     <p>
-                        Acho que esse foi um daqueles momentos que mostraram que a gente estava ficando cada vez mais sério.
-                        <br>
-                        Conhecer e ser aceito por sua família foi importante pra mim, porque eu sabia que estava conhecendo não só você,
-                        mas também um pouco mais do mundo que faz parte da sua vida.
-                        <br>
-                        E, confesso, eu estava nervoso pra caramba kkkk
+                        Um daqueles momentos que fizeram tudo
+                        parecer ainda mais sério.
                     </p>
 
-                </div>
+                    
 
+                </article>
+                
+                    <div class="timeline-note">
+                        <p>
+                        Antes de continuar...
 
-                <!-- TRANSIÇÃO -->
+                        Eu não vou ficar mencionando nossos pegas por aqui, tanto por respeito a quem estiver lendo quanto pra manter o clima romântico desse site. KKKKK
 
-                <div class="timeline-note">
+                        Mas nós dois nos lembramos muito bem deles... não é, meu bem? 👀❤️
 
-                    <p>
-                        Eu não vou ficar mencionando nossos pegas por aqui,
-                        tanto por respeito a quem estiver lendo quanto pra manter
-                        o clima romântico desse site. KKKKK
-                    </p>
+                        </p>
 
-                    <p>
-                        Mas nós dois nos lembramos muito bem deles...
-                        não é, meu bem? 👀❤️
-                    </p>
-
-                </div>
-
+                    </div>
 
                 <!-- 12 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/timeline/sabado.jpeg"
-                        alt="Sábados"
+                        alt="Nossos sábados"
                     >
 
                     <h3>
@@ -503,26 +412,20 @@
                     </h3>
 
                     <p>
-                        Se tem uma coisa que eu comecei a gostar ainda mais depois que te conheci, foram os nossos sábados.
-                        <br>
-                        Cada um teve sua própria história, suas conversas, risadas e momentos que talvez parecessem simples, 
-                        mas que significaram muito pra mim.
-                        <br>
-                        Além dos pegas, claro kkk.
-                        <br>
-                        E pensar que já tivemos mais de um... e espero que ainda venham muitos outros.
+                        Porque alguns dos nossos melhores momentos
+                        simplesmente acontecem quando estamos juntos.
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 13 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/fins-de-semana/biz.jpeg"
-                        alt="Acidente"
+                        alt="O susto da Biz"
                     >
 
                     <h3>
@@ -530,49 +433,41 @@
                     </h3>
 
                     <p>
-                        Esse definitivamente não foi um dos momentos que eu planejei guardar. KKKK
-                        <br>
-                        Mas foi um daqueles momentos que mostraram muito sobre nós.
-                        <br>
-                        Mesmo com todo o susto, o medo e tudo que aconteceu, ter você ali comigo, realmente me apoiando, e ver que estava tudo bem com você foi o que realmente importou.
-                        <br>
-                        No fim, essa situação me deu ainda mais certeza de que era você que eu queria pra sempre na minha vida.
-                        <br>
-                        Afinal, na primeira vez que você andou de moto comigo, depois de tudo aquilo, você ainda continuou do meu lado e disse que andaria comigo de novo.
-                        <br>
-                        E acho que isso já diz muita coisa.
+                        
+                        Acho que eu já gostava de pôr do sol antes de você.
+
+                        Mas depois daquele dia, ele ganhou um significado diferente.
+
+                        Estar ali com você, vendo o céu mudar de cor enquanto a gente conversava e aproveitava aquele momento juntos, foi simplesmente especial.
+
+                        Talvez fosse só mais um pôr do sol.
+
+                        Mas estar com você deixa tudo melhor. ❤️
+
                     </p>
 
-                </div>
+                </article>
 
 
                 <!-- 14 -->
 
-                <div class="timeline-item reveal">
+                <article class="timeline-item">
 
                     <img
                         src="assets/timeline/roça.jpeg"
-                        alt="roça"
+                        alt="Um dia especial"
                     >
 
                     <h3>
-                        Outro dia especial. 
+                        Outro dia especial.
                     </h3>
 
                     <p>
-                        E como esquecer daquele dia na roça dos seus pais?
-                        <br>
-                        Estar ali com você, conhecer um pouco mais da sua família e viver aquele dia juntos foi muito especial.
-                        <br>
-                        E pensar que eu tinha preparado todo um discurso kkk, que no fim foi totalmente desnecessário, porque eu já tinha a permissão dos seus pais, graças a Deus.
-                        <br>
-                        Eu só precisava ter essa certeza antes de dar o próximo passo,
-                        <br>
-                        E, naquele dia, eu tive.
+                        E mais uma memória que agora faz parte
+                        da nossa história.
                     </p>
 
-                </div>
-
+                </article>
 
             </div>
 
@@ -581,9 +476,9 @@
     </section>
 
 
-    <!-- =========================
-         4 — MOSAICO
-    ========================= -->
+    <!-- =====================================================
+         MOMENTOS
+    ====================================================== -->
 
     <section class="moments-section">
 
@@ -594,247 +489,99 @@
             </div>
 
             <h2 class="section-title reveal">
-
-                Alguns momentos
-
-                <span class="accent">
-                    aleatórios.
-                </span>
-
+                Alguns momentos aleatórios.
             </h2>
 
             <p class="section-text reveal">
-                Nem tudo precisa ter uma história enorme.
-                Algumas lembranças simplesmente aconteceram.
-                E eu gosto delas justamente por isso.
+                Porque nossa história também é feita das coisas
+                mais aleatórias possíveis.
             </p>
-
 
             <div class="moments-grid reveal">
 
-                <!-- 01 -->
                 <div class="moment moment-large">
-
-                    <img
-                        src="assets/momentos/bj_black.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/bj_black.jpeg" alt="">
                 </div>
 
-
-                <!-- 02 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/timeline/lingua.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/timeline/lingua.jpeg" alt="">
                 </div>
 
-
-                <!-- 03 -->
-                <div class="moment moment-tall">
-
-                    <img class="espelho"
-                        src="assets/momentos/espelho.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                <div class="moment moment-tall espelho">
+                    <img src="assets/momentos/espelho.jpeg" alt="">
                 </div>
 
-
-                <!-- 04 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/momentos/mendigo.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/mendigo.jpeg" alt="">
                 </div>
 
-
-                <!-- 05 -->
                 <div class="moment moment-wide">
-
-                    <img
-                        src="assets/momentos/momento-01.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/momento-01.jpeg" alt="">
                 </div>
 
-
-                <!-- 06 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/momentos/noite.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/noite.jpeg" alt="">
                 </div>
 
-
-                <!-- 07 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/momentos/ontem.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/ontem.jpeg" alt="">
                 </div>
 
-
-                <!-- 08 -->
                 <div class="moment moment-large">
-
-                    <img
-                        src="assets/momentos/dormindo1.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/dormindo1.jpeg" alt="">
                 </div>
 
-
-                <!-- 09 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/momentos/praca2.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/praca2.jpeg" alt="">
                 </div>
 
-
-                <!-- 10 -->
                 <div class="moment moment-tall">
-
-                    <img
-                        src="assets/momentos/sol.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/sol.jpeg" alt="">
                 </div>
 
-
-                <!-- 11 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/momentos/praca4.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/praca4.jpeg" alt="">
                 </div>
 
-
-                <!-- 12 -->
                 <div class="moment moment-wide">
-
-                    <img
-                        src="assets/momentos/praca3.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/praca3.jpeg" alt="">
                 </div>
 
-
-                <!-- 13 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/timeline/capa.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/timeline/capa.jpeg" alt="">
                 </div>
 
-
-                <!-- 14 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/timeline/presente.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/timeline/presente.jpeg" alt="">
                 </div>
 
-
-                <!-- 15 -->
                 <div class="moment moment-large">
-
-                    <img
-                        src="assets/timeline/ft-sorrindo.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/timeline/ft-sorrindo.jpeg" alt="">
                 </div>
 
-
-                <!-- 16 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/momentos/dormindo2.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/dormindo2.jpeg" alt="">
                 </div>
 
-
-                <!-- 17 -->
                 <div class="moment moment-tall">
-
-                    <img
-                        src="assets/momentos/fofo.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/fofo.jpeg" alt="">
                 </div>
 
-
-                <!-- 18 -->
                 <div class="moment">
-
-                    <img
-                        src="assets/momentos/olhos.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/olhos.jpeg" alt="">
                 </div>
 
-
-                <!-- 19 -->
                 <div class="moment moment-wide">
-
-                    <img
-                        src="assets/momentos/careta3.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                    <img src="assets/momentos/careta3.jpeg" alt="">
                 </div>
 
-
-                <!-- 20 -->
-                <div class="moment moment-wide" class="careta">
-
-                    <img
-                        src="assets/momentos/careta.jpeg"
-                        alt="Um momento nosso"
-                    >
-
+                <div class="moment moment-wide careta">
+                    <img src="assets/momentos/careta.jpeg" alt="">
                 </div>
 
             </div>
 
-
-            <p class="moments-footer reveal">
+            <p class="moments-footer">
                 E ainda tem muita memória que nem cabe aqui. ❤️
             </p>
 
@@ -843,15 +590,15 @@
     </section>
 
 
-    <!-- =========================
-         6 — NOSSOS FINS DE SEMANA
-    ========================= -->
+    <!-- =====================================================
+         FINS DE SEMANA
+    ====================================================== -->
 
     <section class="sunset-section">
 
         <div class="container">
 
-            <div class="sunset-intro reveal">
+            <div class="sunset-intro">
 
                 <div class="eyebrow">
                     alguns dos nossos fins de semana
@@ -861,74 +608,57 @@
                     Nossos fins de semana. ❤️
                 </h2>
 
-                <br>
-
-                <p class="section-text">
-                    Depois de tudo que você viu até aqui, ainda tem alguns
-                    dos nossos fins de semana que eu quero guardar.
-
-                    Cada um teve seus próprios momentos, conversas, risadas
-                    e, claro, algumas coisas que não vão aparecer por aqui. KKKK
-
-                    Mas, no fim, todos eles têm uma coisa em comum:
-
-                    eu estava com você. ❤️
+                <p>
+                    Porque estar com você sempre consegue transformar
+                    um dia comum em alguma coisa especial.
                 </p>
-
-                <br>
 
             </div>
 
-
-            <div class="sunset-gallery reveal">
+            <div class="sunset-gallery">
 
                 <img
                     class="sunset-main"
                     src="assets/timeline/sabado.jpeg"
-                    alt="Nós dois juntos"
+                    alt="Sábado"
                 >
 
                 <img
                     src="assets/fins-de-semana/igreja.jpeg"
-                    alt="Um momento nosso"
+                    alt="Igreja"
                 >
 
                 <img
                     src="assets/fins-de-semana/rio.jpeg"
-                    alt="Nós dois juntos"
+                    alt="Rio"
                 >
 
                 <img
                     src="assets/fins-de-semana/sbd.jpeg"
-                    alt="Um momento nosso"
+                    alt="Sábado"
                 >
 
                 <img
                     src="assets/fins-de-semana/sbd2.jpeg"
-                    alt="Nós dois juntos"
+                    alt="Sábado"
                 >
 
                 <img
                     src="assets/fins-de-semana/biz.jpeg"
-                    alt="Nós dois juntos"
+                    alt="Biz"
                 >
 
                 <img
                     src="assets/timeline/roça.jpeg"
-                    alt="Nós dois juntos"
+                    alt="Roça"
                 >
+
             </div>
 
-            <br>
-
-            <p class="sunset-text reveal" style="text-align: left;">
-                Amor, passar meu tempo com você é uma das melhores coisas que eu tenho, 
-                e eu valorizo muito isso.
-                <br>
-                Eu amo cada momento que a gente passa juntos, mesmo que a gente não faça nada de especial,
-                <br>
-                Pois basta estar com você, conversar, rir e aproveitar o momento  juntos pra transformar um dia simples
-                 em uma lembrança que eu quero guardar pra sempre. ❤️
+            <p class="section-text sunset-text">
+                Eu amo poder viver essas coisas com você.
+                Até os momentos mais simples acabam virando
+                lembranças que eu quero guardar.
             </p>
 
         </div>
@@ -936,36 +666,31 @@
     </section>
 
 
-    <!-- =========================
-         5 — GALERIA DAS DEMONSTRAÇÕES
-    ========================= -->
+    <!-- =====================================================
+         GALERIA DE PROVAS
+    ====================================================== -->
 
     <section class="proof-section">
 
         <div class="container">
 
-            <div class="eyebrow reveal">
+            <div class="eyebrow">
                 deixa eu te mostrar uma coisa
             </div>
 
-            <h2 class="section-title reveal">
-
+            <h2 class="section-title">
                 Você acha que não sabe
-
-                <span class="accent">
-                    demonstrar.
-                </span>
-
+                <span class="accent">demonstrar.</span>
             </h2>
 
-            <p class="section-text reveal">
-                Você me disse que acha que não sabe demonstrar
-                tudo que sente por mim.
+            <p class="section-text">
+                Mas talvez você simplesmente não perceba
+                todas as vezes que demonstra.
             </p>
 
             <button
-                class="gallery-start reveal"
                 id="openProofGallery"
+                class="gallery-start"
             >
                 Deixa eu te mostrar ❤️
             </button>
@@ -975,39 +700,31 @@
     </section>
 
 
-    <!-- =========================
-         GALERIA ABERTA
-    ========================= -->
+    <!-- =====================================================
+         GALERIA
+    ====================================================== -->
 
     <div
         id="proofGallery"
         class="proof-gallery"
+        aria-hidden="true"
     >
 
         <button
             id="closeProofGallery"
             class="gallery-close"
+            aria-label="Fechar"
         >
             ×
         </button>
 
-
         <div class="gallery-content">
 
             <div class="gallery-counter">
-
-                <span id="galleryCurrent">
-                    1
-                </span>
-
+                <span id="galleryCurrent">1</span>
                 /
-
-                <span id="galleryTotal">
-                    16
-                </span>
-
+                <span id="galleryTotal">16</span>
             </div>
-
 
             <div class="gallery-photo-container">
 
@@ -1019,12 +736,10 @@
 
             </div>
 
-
             <p
                 id="galleryCaption"
                 class="gallery-caption"
             ></p>
-
 
             <div class="gallery-hint">
                 Deslize para continuar →
@@ -1035,13 +750,14 @@
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          FINAL DA GALERIA
-    ========================= -->
+    ====================================================== -->
 
     <div
         id="galleryEnding"
         class="gallery-ending"
+        aria-hidden="true"
     >
 
         <div class="gallery-ending-content">
@@ -1051,26 +767,21 @@
             </p>
 
             <p id="ending2">
-                Mas olha quantas vezes você me mostrou
-                o que sente sem nem perceber.
+                Mas olha quantas vezes você me mostrou o que sente
+                sem nem perceber.
             </p>
 
             <p id="ending3">
-                Talvez você não demonstre exatamente do jeito
-                que imagina que deveria. Mas eu percebi cada
-                uma dessas vezes.
+                Talvez você não demonstre exatamente do jeito que
+                imagina que deveria. Mas eu percebi cada uma dessas vezes.
             </p>
 
             <p id="ending4">
                 E todas elas foram importantes pra mim.
             </p>
 
-            <p
-                id="ending5"
-                class="final-line"
-            >
-                Você nunca precisou ser perfeita pra me
-                fazer sentir amado. ❤️
+            <p id="ending5" class="final-line">
+                Você nunca precisou ser perfeita pra me fazer sentir amado. ❤️
             </p>
 
         </div>
@@ -1078,9 +789,9 @@
     </div>
 
 
-    <!-- =========================
-         7 — CARTA
-    ========================= -->
+    <!-- =====================================================
+         CARTA
+    ====================================================== -->
 
     <section>
 
@@ -1094,35 +805,33 @@
                 Pra você.
             </h2>
 
-
             <div class="letter reveal">
 
+                <p>Meu amor,</p>
+
                 <p>
-                    Meu amor,
+                    Eu poderia escrever um texto enorme contando
+                    tudo que sinto por você.
                 </p>
 
                 <p>
-                    Tem muita coisa que eu poderia escrever aqui,
-                    mas acho que nenhuma delas conseguiria explicar
-                    completamente o quanto você se tornou importante
-                    pra mim.
+                    Poderia falar de cada conversa, cada encontro,
+                    cada risada, cada olhar e cada pequeno momento.
                 </p>
 
                 <p>
-                    Eu amo tudo que a gente viveu até aqui e,
-                    principalmente, amo pensar em tudo que ainda
-                    falta viver.
+                    Mas acho que, no fim, existe uma coisa muito
+                    simples que resume tudo isso:
+                    eu amo viver a vida com você.
                 </p>
 
                 <p>
-                    Eu sei que talvez nem tudo tenha sido perfeito.
-                    A gente teve medo, dúvidas e momentos em que
-                    não sabíamos exatamente o que fazer.
-                    Mas mesmo assim, chegamos até aqui.
+                    E espero que tudo que estamos construindo agora
+                    seja só o começo de uma história muito maior.
                 </p>
 
                 <p>
-                    E eu escolheria você de novo.
+                    Eu te amo.
                 </p>
 
                 <p>
@@ -1137,9 +846,9 @@
     </section>
 
 
-    <!-- =========================
-         8 — SEU VÍDEO
-    ========================= -->
+    <!-- =====================================================
+         VÍDEO FINAL
+    ====================================================== -->
 
     <section class="video-section">
 
@@ -1161,12 +870,10 @@
                     playsinline
                     preload="metadata"
                 >
-
                     <source
                         src="assets/video-meu.mp4"
                         type="video/mp4"
                     >
-
                 </video>
 
             </div>
@@ -1176,9 +883,9 @@
     </section>
 
 
-    <!-- =========================
-         9 — AGORA OLHA PRA MIM
-    ========================= -->
+    <!-- =====================================================
+         AGORA OLHA PRA MIM
+    ====================================================== -->
 
     <section
         class="final-section"
@@ -1196,9 +903,9 @@
     </section>
 
 
-    <!-- =========================
-         10 — PEDIDO
-    ========================= -->
+    <!-- =====================================================
+         PERGUNTA
+    ====================================================== -->
 
     <section id="question">
 
@@ -1208,10 +915,9 @@
                 então...
             </div>
 
-            <h2>
+            <h2 id="questionTitle">
                 Você aceita? ❤️
             </h2>
-
 
             <div class="buttons">
 
@@ -1231,17 +937,24 @@
 
             </div>
 
-
             <div id="noMessage"></div>
+
+            <div
+                id="acceptedMessage"
+                class="accepted-message"
+                aria-live="polite"
+            >
+                Você aceitou! ❤️
+            </div>
 
         </div>
 
     </section>
 
 
-    <!-- =========================
-         11 — DEPOIS DO SIM
-    ========================= -->
+    <!-- =====================================================
+         RELACIONAMENTO
+    ====================================================== -->
 
     <section id="relationship">
 
@@ -1252,22 +965,16 @@
             </div>
 
             <h2>
-
                 Assim começa
-
                 <span class="accent">
                     a melhor fase
                 </span>
-
                 das nossas vidas.
-
             </h2>
 
             <p class="relationship-subtitle">
-                E que esse seja só o começo
-                de tudo que ainda vamos viver. ❤️
+                E que esse seja só o começo de tudo que ainda vamos viver. ❤️
             </p>
-
 
             <div class="counter">
 
@@ -1286,14 +993,13 @@
 
                 </div>
 
-
                 <div class="counter-box">
 
                     <span
                         id="hours"
                         class="counter-number"
                     >
-                        00
+                        0
                     </span>
 
                     <span class="counter-label">
@@ -1302,14 +1008,13 @@
 
                 </div>
 
-
                 <div class="counter-box">
 
                     <span
                         id="minutes"
                         class="counter-number"
                     >
-                        00
+                        0
                     </span>
 
                     <span class="counter-label">
@@ -1318,14 +1023,13 @@
 
                 </div>
 
-
                 <div class="counter-box">
 
                     <span
                         id="seconds"
                         class="counter-number"
                     >
-                        00
+                        0
                     </span>
 
                     <span class="counter-label">
@@ -1336,7 +1040,6 @@
 
             </div>
 
-
             <p class="counter-footer">
                 E contando... ❤️
             </p>
@@ -1346,13 +1049,56 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================================
+         COMEMORAÇÃO DO SIM
+    ====================================================== -->
+
+    <div
+        id="acceptanceCelebration"
+        class="acceptance-celebration"
+        aria-hidden="true"
+    >
+
+        <canvas id="celebrationCanvas"></canvas>
+
+        <div
+            id="celebrationEmojis"
+            class="celebration-emojis"
+        ></div>
+
+        <div class="celebration-content">
+
+            <div class="celebration-eyebrow">
+                oficialmente nós
+            </div>
+
+            <div class="celebration-small">
+                Você disse...
+            </div>
+
+            <h2>
+                SIM. ❤️
+            </h2>
+
+            <p>
+                Você aceitou! 🥰
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
          LIGHTBOX
-    ========================= -->
+    ====================================================== -->
 
     <div id="lightbox">
 
-        <button id="closeLightbox">
+        <button
+            id="closeLightbox"
+            aria-label="Fechar imagem"
+        >
             ×
         </button>
 
@@ -1368,5 +1114,4 @@
     <script src="js/script.js"></script>
 
 </body>
-
 </html>
