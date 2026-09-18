@@ -1,18 +1,14 @@
 if ("scrollRestoration" in history) {
-  history.scrollRestoration = "manual";
+    history.scrollRestoration = "manual";
 }
 
 window.addEventListener("beforeunload", () => {
-  window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 });
 
 window.addEventListener("load", () => {
-  window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 });
-
-
-
-
 
 
 /* =========================================================
@@ -21,7 +17,6 @@ window.addEventListener("load", () => {
 
 const intro = document.getElementById("intro");
 const startBtn = document.getElementById("startBtn");
-
 const music = document.getElementById("music");
 const musicControl = document.getElementById("musicControl");
 
@@ -56,7 +51,6 @@ const celebrationEmojis =
 
 let musicPlaying = false;
 let finalReached = false;
-
 let noAttempts = 0;
 let counterInterval = null;
 
@@ -72,7 +66,6 @@ const ACCEPTED_KEY = "relationshipAccepted";
     diretamente no código, basta preencher esta variável.
 
     Exemplo:
-
     const FIXED_RELATIONSHIP_START =
         "2026-09-19T18:42:31.000-03:00";
 
@@ -89,7 +82,22 @@ const FIXED_RELATIONSHIP_START = "";
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    /*
+        IMPORTANTE:
+
+        Se ainda não houve o SIM, a pergunta NÃO é exibida
+        aqui.
+
+        Ela permanece escondida pelo CSS e só será exibida
+        pelo finalObserver depois dos 30 segundos.
+    */
+
     if (relationshipAccepted) {
+
+        /*
+            Se ela já aceitou em uma visita anterior,
+            a pergunta continua aparecendo normalmente.
+        */
 
         showQuestion(false, true);
         showRelationship(false);
@@ -99,18 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
             Toda vez que o site for aberto depois do SIM,
             a pequena transição de "Você aceitou!" volta a aparecer.
         */
+
         setTimeout(() => {
             playAcceptanceCelebration(false);
         }, 700);
-
-    } else {
-
-        showQuestion(false, false);
-
     }
 
     createPetals(8);
-
 });
 
 
@@ -135,7 +138,6 @@ startBtn.addEventListener("click", async () => {
 
         musicPlaying = false;
         musicControl.textContent = "♪";
-
     }
 
     createPetals(10);
@@ -143,7 +145,6 @@ startBtn.addEventListener("click", async () => {
     setTimeout(() => {
         document.body.classList.add("site-started");
     }, 500);
-
 });
 
 
@@ -171,9 +172,7 @@ musicControl.addEventListener("click", async () => {
         console.warn(
             "Não foi possível iniciar a música."
         );
-
     }
-
 });
 
 
@@ -187,7 +186,7 @@ function fadeMusicOut() {
 
         music.volume = Math.max(
             0,
-            music.volume - .02
+            music.volume - 0.02
         );
 
         if (music.volume <= 0) {
@@ -195,13 +194,10 @@ function fadeMusicOut() {
             clearInterval(fade);
 
             music.pause();
-
             musicPlaying = false;
-
         }
 
     }, 100);
-
 }
 
 
@@ -214,16 +210,16 @@ function fadeMusicIn() {
     window.musicFadeIn = setInterval(() => {
 
         music.volume = Math.min(
-            .18,
-            music.volume + .01
+            0.18,
+            music.volume + 0.01
         );
 
-        if (music.volume >= .18) {
+        if (music.volume >= 0.18) {
+
             clearInterval(window.musicFadeIn);
         }
 
     }, 100);
-
 }
 
 
@@ -242,21 +238,21 @@ const revealObserver =
 
                 if (entry.isIntersecting) {
 
-                    entry.target.classList.add("visible");
-
+                    entry.target.classList.add(
+                        "visible"
+                    );
                 }
-
             });
-
         },
         {
-            threshold: .15,
+            threshold: 0.15,
             rootMargin: "0px 0px -5% 0px"
         }
     );
 
 
 revealElements.forEach(element => {
+
     revealObserver.observe(element);
 });
 
@@ -287,9 +283,10 @@ function createPetal() {
     document.body.appendChild(petal);
 
     setTimeout(() => {
-        petal.remove();
-    }, 11000);
 
+        petal.remove();
+
+    }, 11000);
 }
 
 
@@ -301,9 +298,7 @@ function createPetals(amount = 10) {
             createPetal,
             i * 200
         );
-
     }
-
 }
 
 
@@ -405,7 +400,6 @@ function showGalleryPhoto(index) {
         galleryPhoto.classList.remove("changing");
 
     }, 180);
-
 }
 
 
@@ -425,7 +419,6 @@ function openGallery() {
     document.body.classList.add(
         "gallery-open"
     );
-
 }
 
 
@@ -441,7 +434,6 @@ function closeGallery() {
     document.body.classList.remove(
         "gallery-open"
     );
-
 }
 
 
@@ -473,7 +465,6 @@ function nextProof() {
     closeGallery();
 
     showGalleryEnding();
-
 }
 
 
@@ -488,7 +479,6 @@ function previousProof() {
     showGalleryPhoto(
         galleryIndex
     );
-
 }
 
 
@@ -523,8 +513,11 @@ galleryPhoto.addEventListener(
         }
 
         if (difference > 0) {
+
             nextProof();
+
         } else {
+
             previousProof();
         }
 
@@ -550,13 +543,16 @@ function showGalleryEnding() {
         "gallery-open"
     );
 
+
     const paragraphs =
         galleryEnding.querySelectorAll("p");
+
 
     paragraphs.forEach(
         paragraph =>
             paragraph.classList.remove("show")
     );
+
 
     paragraphs.forEach(
         (paragraph, index) => {
@@ -568,10 +564,8 @@ function showGalleryEnding() {
                 );
 
             }, 900 + index * 1900);
-
         }
     );
-
 }
 
 
@@ -587,57 +581,65 @@ function closeGalleryEnding() {
     document.body.classList.remove(
         "gallery-open"
     );
-
 }
 
 
 /* =========================================================
-   "AGORA OLHA PRA MIM"
+   AGORA OLHA PRA MIM — MOMENTO FINAL
 ========================================================= */
+
+/*
+    Tempo que o "Agora olha pra mim."
+    permanece sozinho antes da pergunta.
+
+    30 segundos = 30000ms
+*/
+
+const FINAL_HOLD_TIME = 30000;
+
 
 const finalObserver =
     new IntersectionObserver(
-        entries => {
+        (entries) => {
 
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
 
                 if (
-                    !entry.isIntersecting ||
-                    finalReached
+                    entry.isIntersecting &&
+                    !finalReached
                 ) {
-                    return;
-                }
 
-                finalReached = true;
+                    finalReached = true;
 
-                finalSection.classList.add(
-                    "active"
-                );
+                    /*
+                        Ativa apenas a animação do
+                        "Agora olha pra mim."
+                    */
 
-                fadeMusicOut();
+                    finalSection.classList.add(
+                        "active"
+                    );
 
-                setTimeout(() => {
 
-                    if (
-                        localStorage.getItem(
-                            ACCEPTED_KEY
-                        ) !== "true"
-                    ) {
+                    /*
+                        A pergunta permanece escondida.
 
-                        showQuestion(
-                            true,
-                            false
+                        Só depois de 30 segundos ela
+                        recebe a classe "show".
+                    */
+
+                    setTimeout(() => {
+
+                        question.classList.add(
+                            "show"
                         );
 
-                    }
-
-                }, 1000);
-
+                    }, FINAL_HOLD_TIME);
+                }
             });
-
         },
         {
-            threshold: .65
+            threshold: 0.7
         }
     );
 
@@ -656,6 +658,7 @@ function showQuestion(
 
     question.classList.add("show");
 
+
     if (accepted) {
 
         question.classList.add(
@@ -672,8 +675,14 @@ function showQuestion(
 
         questionTitle.textContent =
             "Você aceita? ❤️";
-
     }
+
+
+    /*
+        Este parâmetro continua existindo para
+        preservar o comportamento original,
+        mas o fluxo dos 30 segundos NÃO usa scroll.
+    */
 
     if (scroll) {
 
@@ -685,9 +694,7 @@ function showQuestion(
             });
 
         }, 150);
-
     }
-
 }
 
 
@@ -704,11 +711,13 @@ function moveNoButton() {
         return;
     }
 
+
     const buttonRect =
         noBtn.getBoundingClientRect();
 
     const areaRect =
         buttons.getBoundingClientRect();
+
 
     const maxX =
         Math.max(
@@ -716,11 +725,13 @@ function moveNoButton() {
             (areaRect.width - buttonRect.width) / 2 - 10
         );
 
+
     const maxY =
         Math.max(
             50,
             (areaRect.height - buttonRect.height) / 2 - 10
         );
+
 
     let x =
         (Math.random() * 2 - 1) *
@@ -729,6 +740,7 @@ function moveNoButton() {
     let y =
         (Math.random() * 2 - 1) *
         maxY;
+
 
     /*
         Evita que o NÃO fique praticamente
@@ -741,11 +753,12 @@ function moveNoButton() {
             x < 0
                 ? -90
                 : 90;
-
     }
+
 
     const rotation =
         (Math.random() * 16) - 8;
+
 
     noBtn.style.setProperty(
         "--no-x",
@@ -762,10 +775,10 @@ function moveNoButton() {
         `${rotation}deg`
     );
 
+
     noBtn.classList.add(
         "dodging"
     );
-
 }
 
 
@@ -775,11 +788,14 @@ function registerNoAttempt() {
         return;
     }
 
+
     noAttempts++;
 
     moveNoButton();
 
+
     let message = "";
+
 
     if (noAttempts === 1) {
 
@@ -795,8 +811,8 @@ function registerNoAttempt() {
 
         message =
             "Opção indisponível 😂";
-
     }
+
 
     noMessage.textContent =
         message;
@@ -804,7 +820,6 @@ function registerNoAttempt() {
     noMessage.classList.add(
         "message-visible"
     );
-
 }
 
 
@@ -817,9 +832,7 @@ noBtn.addEventListener(
         ) {
 
             registerNoAttempt();
-
         }
-
     }
 );
 
@@ -836,9 +849,7 @@ noBtn.addEventListener(
             event.preventDefault();
 
             registerNoAttempt();
-
         }
-
     }
 );
 
@@ -855,9 +866,9 @@ noBtn.addEventListener(
         */
 
         if (noAttempts === 0) {
+
             registerNoAttempt();
         }
-
     }
 );
 
@@ -872,16 +883,19 @@ yesBtn.addEventListener(
 
         /*
             O horário é registrado PRIMEIRO.
+
             Esse instante é o início oficial do contador.
         */
 
         const now =
             new Date().toISOString();
 
+
         let start =
             localStorage.getItem(
                 RELATIONSHIP_KEY
             );
+
 
         if (!start) {
 
@@ -891,18 +905,21 @@ yesBtn.addEventListener(
                 RELATIONSHIP_KEY,
                 start
             );
-
         }
+
 
         localStorage.setItem(
             ACCEPTED_KEY,
             "true"
         );
 
+
         relationshipAccepted = true;
 
 
-        /* Estado visual */
+        /*
+            Estado visual
+        */
 
         question.classList.add(
             "accepted"
@@ -946,7 +963,9 @@ yesBtn.addEventListener(
         */
 
         music.currentTime = 0;
+
         music.volume = 0;
+
 
         try {
 
@@ -965,9 +984,7 @@ yesBtn.addEventListener(
 
             musicControl.textContent =
                 "♪";
-
         }
-
     }
 );
 
@@ -984,6 +1001,7 @@ function showRelationship(
         "show"
     );
 
+
     if (scroll) {
 
         setTimeout(() => {
@@ -994,9 +1012,7 @@ function showRelationship(
             });
 
         }, 300);
-
     }
-
 }
 
 
@@ -1009,13 +1025,12 @@ function getRelationshipStart() {
     if (FIXED_RELATIONSHIP_START) {
 
         return FIXED_RELATIONSHIP_START;
-
     }
+
 
     return localStorage.getItem(
         RELATIONSHIP_KEY
     );
-
 }
 
 
@@ -1026,17 +1041,17 @@ function startCounter() {
         clearInterval(
             counterInterval
         );
-
     }
 
+
     updateCounter();
+
 
     counterInterval =
         setInterval(
             updateCounter,
             1000
         );
-
 }
 
 
@@ -1045,15 +1060,18 @@ function updateCounter() {
     const start =
         getRelationshipStart();
 
+
     if (!start) {
         return;
     }
+
 
     const startDate =
         new Date(start);
 
     const now =
         new Date();
+
 
     let elapsed =
         Math.max(
@@ -1073,17 +1091,20 @@ function updateCounter() {
             totalSeconds / 86400
         );
 
+
     const hours =
         Math.floor(
             (totalSeconds % 86400) /
             3600
         );
 
+
     const minutes =
         Math.floor(
             (totalSeconds % 3600) /
             60
         );
+
 
     const seconds =
         totalSeconds % 60;
@@ -1100,7 +1121,6 @@ function updateCounter() {
 
     secondsElement.textContent =
         String(seconds).padStart(2, "0");
-
 }
 
 
@@ -1119,6 +1139,7 @@ function playAcceptanceCelebration(
         !acceptanceCelebration ||
         !celebrationCanvas
     ) {
+
         return;
     }
 
@@ -1130,6 +1151,7 @@ function playAcceptanceCelebration(
     acceptanceCelebration.classList.add(
         "active"
     );
+
 
     acceptanceCelebration.setAttribute(
         "aria-hidden",
@@ -1169,7 +1191,6 @@ function playAcceptanceCelebration(
         );
 
     }, firstAcceptance ? 6100 : 5400);
-
 }
 
 
@@ -1180,6 +1201,7 @@ function playAcceptanceCelebration(
 function createCelebrationEmojis() {
 
     celebrationEmojis.innerHTML = "";
+
 
     const emojis = [
         "❤️",
@@ -1203,8 +1225,10 @@ function createCelebrationEmojis() {
         const emoji =
             document.createElement("span");
 
+
         emoji.className =
             "celebration-emoji";
+
 
         emoji.textContent =
             emojis[
@@ -1220,18 +1244,20 @@ function createCelebrationEmojis() {
             Math.PI *
             2;
 
+
         const distance =
             180 +
             Math.random() *
             Math.max(
                 220,
-                window.innerWidth * .65
+                window.innerWidth * 0.65
             );
 
 
         const x =
             Math.cos(angle) *
             distance;
+
 
         const y =
             Math.sin(angle) *
@@ -1243,20 +1269,24 @@ function createCelebrationEmojis() {
             `${x}px`
         );
 
+
         emoji.style.setProperty(
             "--emoji-y",
             `${y}px`
         );
 
+
         emoji.style.setProperty(
             "--emoji-scale",
-            `${.7 + Math.random() * .8}`
+            `${0.7 + Math.random() * 0.8}`
         );
+
 
         emoji.style.setProperty(
             "--emoji-rotation",
             `${-180 + Math.random() * 360}deg`
         );
+
 
         emoji.style.setProperty(
             "--emoji-duration",
@@ -1267,6 +1297,7 @@ function createCelebrationEmojis() {
         emoji.style.left =
             `${20 + Math.random() * 60}%`;
 
+
         emoji.style.top =
             `${25 + Math.random() * 50}%`;
 
@@ -1274,9 +1305,7 @@ function createCelebrationEmojis() {
         celebrationEmojis.appendChild(
             emoji
         );
-
     }
-
 }
 
 
@@ -1291,6 +1320,7 @@ function runFireworks() {
 
     const ctx =
         canvas.getContext("2d");
+
 
     if (!ctx) {
         return;
@@ -1317,6 +1347,7 @@ function runFireworks() {
     canvas.height =
         height * dpr;
 
+
     canvas.style.width =
         `${width}px`;
 
@@ -1337,6 +1368,7 @@ function runFireworks() {
     const particles = [];
     const rockets = [];
 
+
     const colors = [
         "#f19caf",
         "#ff4f7b",
@@ -1352,16 +1384,16 @@ function runFireworks() {
 
             x:
                 width *
-                (.15 +
-                Math.random() * .7),
+                (0.15 +
+                Math.random() * 0.7),
 
             y:
                 height + 20,
 
             targetY:
                 height *
-                (.15 +
-                Math.random() * .38),
+                (0.15 +
+                Math.random() * 0.38),
 
             speed:
                 8 +
@@ -1376,9 +1408,7 @@ function runFireworks() {
                 ],
 
             trail: []
-
         });
-
     }
 
 
@@ -1406,6 +1436,7 @@ function runFireworks() {
                 Math.PI *
                 2;
 
+
             const speed =
                 2 +
                 Math.random() *
@@ -1426,11 +1457,11 @@ function runFireworks() {
                     speed,
 
                 gravity:
-                    .035 +
-                    Math.random() * .025,
+                    0.035 +
+                    Math.random() * 0.025,
 
                 friction:
-                    .985,
+                    0.985,
 
                 life:
                     55 +
@@ -1444,9 +1475,7 @@ function runFireworks() {
                     Math.random() * 2.2,
 
                 color
-
             });
-
         }
 
 
@@ -1466,9 +1495,11 @@ function runFireworks() {
                 Math.PI *
                 2;
 
+
             const speed =
                 1 +
-                Math.random() * 2.5;
+                Math.random() *
+                2.5;
 
 
             particles.push({
@@ -1484,30 +1515,30 @@ function runFireworks() {
                     Math.sin(angle) *
                     speed,
 
-                gravity: .02,
+                gravity: 0.02,
 
-                friction: .99,
+                friction: 0.99,
 
-                life: 35 +
+                life:
+                    35 +
                     Math.random() * 30,
 
                 maxLife: 65,
 
                 size:
-                    .7 +
+                    0.7 +
                     Math.random() * 1.4,
 
                 color: "#fff"
-
             });
-
         }
-
     }
 
 
     let elapsed = 0;
-    let lastTime = performance.now();
+
+    let lastTime =
+        performance.now();
 
 
     function animate(
@@ -1521,8 +1552,10 @@ function runFireworks() {
                 lastTime
             );
 
+
         lastTime =
             currentTime;
+
 
         elapsed += delta;
 
@@ -1542,11 +1575,10 @@ function runFireworks() {
 
         if (
             elapsed < 3900 &&
-            Math.random() < .045
+            Math.random() < 0.045
         ) {
 
             createRocket();
-
         }
 
 
@@ -1570,6 +1602,7 @@ function runFireworks() {
 
 
             rocket.trail.push({
+
                 x: rocket.x,
                 y: rocket.y
             });
@@ -1580,11 +1613,11 @@ function runFireworks() {
             ) {
 
                 rocket.trail.shift();
-
             }
 
 
             ctx.beginPath();
+
 
             for (
                 let t = 0;
@@ -1594,6 +1627,7 @@ function runFireworks() {
 
                 const point =
                     rocket.trail[t];
+
 
                 if (t === 0) {
 
@@ -1608,16 +1642,14 @@ function runFireworks() {
                         point.x,
                         point.y
                     );
-
                 }
-
             }
 
 
             ctx.strokeStyle =
                 rocket.color;
 
-            ctx.globalAlpha = .55;
+            ctx.globalAlpha = 0.55;
 
             ctx.lineWidth = 1.5;
 
@@ -1638,9 +1670,7 @@ function runFireworks() {
                 );
 
                 rockets.splice(i, 1);
-
             }
-
         }
 
 
@@ -1662,6 +1692,7 @@ function runFireworks() {
                 particle.vx *
                 (delta / 16);
 
+
             particle.y +=
                 particle.vy *
                 (delta / 16);
@@ -1669,6 +1700,7 @@ function runFireworks() {
 
             particle.vx *=
                 particle.friction;
+
 
             particle.vy *=
                 particle.friction;
@@ -1690,7 +1722,6 @@ function runFireworks() {
                 particles.splice(i, 1);
 
                 continue;
-
             }
 
 
@@ -1704,6 +1735,7 @@ function runFireworks() {
 
             ctx.beginPath();
 
+
             ctx.arc(
                 particle.x,
                 particle.y,
@@ -1712,14 +1744,16 @@ function runFireworks() {
                 Math.PI * 2
             );
 
+
             ctx.fillStyle =
                 particle.color;
+
 
             ctx.globalAlpha =
                 alpha;
 
-            ctx.fill();
 
+            ctx.fill();
         }
 
 
@@ -1742,9 +1776,7 @@ function runFireworks() {
             cancelAnimationFrame(
                 celebrationAnimationFrame
             );
-
         }
-
     }
 
 
@@ -1755,8 +1787,8 @@ function runFireworks() {
     setTimeout(() => {
 
         explode(
-            width * .25,
-            height * .35,
+            width * 0.25,
+            height * 0.35,
             colors[0]
         );
 
@@ -1766,8 +1798,8 @@ function runFireworks() {
     setTimeout(() => {
 
         explode(
-            width * .72,
-            height * .28,
+            width * 0.72,
+            height * 0.28,
             colors[3]
         );
 
@@ -1777,8 +1809,8 @@ function runFireworks() {
     setTimeout(() => {
 
         explode(
-            width * .5,
-            height * .2,
+            width * 0.5,
+            height * 0.2,
             colors[1]
         );
 
@@ -1788,8 +1820,8 @@ function runFireworks() {
     setTimeout(() => {
 
         explode(
-            width * .32,
-            height * .48,
+            width * 0.32,
+            height * 0.48,
             colors[4]
         );
 
@@ -1799,7 +1831,6 @@ function runFireworks() {
     requestAnimationFrame(
         animate
     );
-
 }
 
 
@@ -1838,10 +1869,8 @@ zoomableImages.forEach(image => {
             lightbox.classList.add(
                 "active"
             );
-
         }
     );
-
 });
 
 
@@ -1850,7 +1879,6 @@ function closeImageLightbox() {
     lightbox.classList.remove(
         "active"
     );
-
 }
 
 
@@ -1869,9 +1897,7 @@ lightbox.addEventListener(
         ) {
 
             closeImageLightbox();
-
         }
-
     }
 );
 
@@ -1887,15 +1913,14 @@ document.addEventListener(
         if (
             event.key !== "Escape"
         ) {
+
             return;
         }
 
+
         closeGallery();
-
         closeGalleryEnding();
-
         closeImageLightbox();
-
     }
 );
 
@@ -1909,9 +1934,45 @@ yesBtn.addEventListener(
     event => {
 
         event.preventDefault();
-
     }
 );
+
+
+/* =========================================================
+   VÍDEOS — ÁUDIO
+========================================================= */
+
+const videos =
+    document.querySelectorAll("video");
+
+
+videos.forEach((video) => {
+
+    video.muted = false;
+    video.defaultMuted = false;
+    video.volume = 1;
+
+
+    video.addEventListener(
+        "loadedmetadata",
+        () => {
+
+            video.muted = false;
+            video.defaultMuted = false;
+            video.volume = 1;
+        }
+    );
+
+
+    video.addEventListener(
+        "play",
+        () => {
+
+            video.muted = false;
+            video.volume = 1;
+        }
+    );
+});
 
 
 /* =========================================================
@@ -1927,6 +1988,7 @@ window.addEventListener(
                 "active"
             )
         ) {
+
             return;
         }
 
@@ -1934,6 +1996,5 @@ window.addEventListener(
             O próximo disparo da comemoração
             recriará o canvas com o tamanho correto.
         */
-
     }
 );

@@ -2454,3 +2454,14 @@ section > .container {
         display: none !important;
     }
 }
+
+
+/* =========================================================
+   PAUSA FINAL — AGORA OLHA PRA MIM
+========================================================= */
+
+html.proposal-hold,
+body.proposal-hold {
+    overflow: hidden !important;
+    height: 100%;
+}
