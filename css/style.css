@@ -163,23 +163,17 @@ body.gallery-open {
 
 #musicControl {
     position: fixed;
-
+    top: calc(18px + env(safe-area-inset-top));
     right: calc(18px + env(safe-area-inset-right));
-    bottom: calc(18px + env(safe-area-inset-bottom));
-
-    z-index: 5000;
-
+    bottom: auto;
+    z-index: 9500;
     width: 45px;
     height: 45px;
-
     border: 1px solid rgba(255, 255, 255, .25);
     border-radius: 50%;
-
     color: #fff;
     background: rgba(0, 0, 0, .65);
-
     cursor: pointer;
-
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -775,6 +769,15 @@ section > .container {
     cursor: pointer;
 }
 
+
+.gallery-photo-container,
+#galleryPhoto {
+    touch-action: pan-y;
+}
+
+#galleryPhoto.dragging {
+    cursor: grabbing;
+}
 
 /* =========================================================
    FINAL DA GALERIA
