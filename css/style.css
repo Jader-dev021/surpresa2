@@ -857,7 +857,8 @@ section > .container {
 .gallery-ending-close {
     position: absolute;
     top: max(15px, env(safe-area-inset-top));
-    right: max(20px, env(safe-area-inset-right));
+    left: max(20px, env(safe-area-inset-left));
+    right: auto;
     z-index: 3;
 
     width: 48px;
@@ -2286,8 +2287,8 @@ section > .container {
         .gallery-ending-close {
     position: absolute;
     top: max(15px, env(safe-area-inset-top));
-    right: max(20px, env(safe-area-inset-right));
-    z-index: 3;
+    left: max(16px, env(safe-area-inset-left));
+    right: auto;
 
     width: 48px;
     height: 48px;
