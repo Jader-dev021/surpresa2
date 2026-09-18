@@ -52,18 +52,6 @@ let relationshipAccepted =
 const RELATIONSHIP_KEY = "relationshipStart";
 const ACCEPTED_KEY = "relationshipAccepted";
 
-/*
-    Depois do pedido, se você quiser colocar o horário
-    diretamente no código, basta preencher esta variável.
-
-    Exemplo:
-    const FIXED_RELATIONSHIP_START =
-        "2026-09-19T18:42:31.000-03:00";
-
-    Enquanto estiver vazia, o site usa o horário salvo
-    no localStorage.
-*/
-
 const FIXED_RELATIONSHIP_START = "";
 
 /* =========================================================
@@ -275,45 +263,22 @@ const proofPhotos =
 
 const proofCaptions = [
     "Você lembra disso? ❤️",
-
     "Às vezes você nem percebe o quanto esses pequenos detalhes significam pra mim.",
-
     "Um jeito seu de demonstrar carinho.",
-
     "Mais uma vez em que você cuidou de mim sem perceber.",
-
     "Essas coisas ficam guardadas.",
-
     "Porque carinho também aparece nos detalhes.",
-
     "Você talvez nem tenha pensado muito nisso na hora.",
-
     "Mas eu pensei.",
-
     "Eu percebi.",
-
     "Eu guardei.",
-
     "E foi importante pra mim.",
-
     "Cada pequeno gesto conta.",
-
     "Cada conversa conta.",
-
     "Cada cuidado conta.",
-
     "Você demonstra mais do que imagina.",
-
     "E ainda existem muitas outras que eu poderia mostrar. ❤️"
 ];
-
-/*
-    Pré-carrega todas as imagens.
-
-    Assim, quando a pessoa deslizar,
-    a próxima foto já estará disponível
-    e a troca ficará muito mais imediata.
-*/
 
 proofPhotos.forEach((src) => {
     const image = new Image();
@@ -321,16 +286,6 @@ proofPhotos.forEach((src) => {
 });
 
 let galleryIndex = 0;
-
-/*
-    Troca a foto da galeria.
-
-    A versão anterior esperava 180ms antes
-    de alterar o src. Isso fazia a foto anterior
-    aparecer por uma fração de segundo.
-
-    Agora o src é alterado imediatamente.
-*/
 
 function showGalleryPhoto(index) {
     if (
@@ -355,12 +310,6 @@ function showGalleryPhoto(index) {
 
     galleryPhoto.src =
         proofPhotos[index];
-
-    /*
-        Dá dois ciclos de renderização ao navegador
-        para aplicar o novo src antes de remover
-        a animação de saída.
-    */
 
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -449,7 +398,7 @@ function previousProof() {
 }
 
 /* =========================================================
-   SWIPE DA GALERIA — MOBILE / TABLET / POINTER
+   SWIPE / MOUSE DA GALERIA
 ========================================================= */
 
 let galleryStartX = 0;
@@ -461,10 +410,6 @@ let galleryPointerId = null;
 let galleryChanging = false;
 
 const GALLERY_SWIPE_THRESHOLD = 55;
-
-/*
-    Começa o gesto.
-*/
 
 galleryPhoto.addEventListener(
     "pointerdown",
@@ -509,10 +454,6 @@ galleryPhoto.addEventListener(
     }
 );
 
-/*
-    Acompanha o movimento.
-*/
-
 galleryPhoto.addEventListener(
     "pointermove",
     (event) => {
@@ -538,12 +479,6 @@ galleryPhoto.addEventListener(
             galleryCurrentY -
             galleryStartY;
 
-        /*
-            Se o movimento for horizontal,
-            impedimos que o navegador trate
-            o gesto como scroll horizontal.
-        */
-
         if (
             Math.abs(deltaX) >
             Math.abs(deltaY)
@@ -555,10 +490,6 @@ galleryPhoto.addEventListener(
         passive: false
     }
 );
-
-/*
-    Finaliza o gesto.
-*/
 
 galleryPhoto.addEventListener(
     "pointerup",
@@ -595,10 +526,39 @@ galleryPhoto.addEventListener(
 
         galleryPointerId = null;
 
-        /*
-            Movimento vertical:
-            deixa o navegador cuidar.
-        */
+        /* -----------------------------------------
+           CLIQUE DE MOUSE
+
+           Esquerdo = voltar
+           Direito = próxima
+        ----------------------------------------- */
+
+        if (
+            event.pointerType ===
+                "mouse" &&
+            Math.abs(deltaX) <
+                GALLERY_SWIPE_THRESHOLD &&
+            Math.abs(deltaY) <
+                GALLERY_SWIPE_THRESHOLD
+        ) {
+            galleryChanging = true;
+
+            if (event.button === 0) {
+                previousProof();
+            } else if (event.button === 2) {
+                nextProof();
+            }
+
+            setTimeout(() => {
+                galleryChanging = false;
+            }, 220);
+
+            return;
+        }
+
+        /* -----------------------------------------
+           SWIPE
+        ----------------------------------------- */
 
         if (
             Math.abs(deltaY) >=
@@ -607,23 +567,12 @@ galleryPhoto.addEventListener(
             return;
         }
 
-        /*
-            Movimento pequeno:
-            considera apenas um toque.
-        */
-
         if (
             Math.abs(deltaX) <
             GALLERY_SWIPE_THRESHOLD
         ) {
             return;
         }
-
-        /*
-            Bloqueia uma segunda troca
-            enquanto a animação da foto
-            está acontecendo.
-        */
 
         galleryChanging = true;
 
@@ -638,10 +587,6 @@ galleryPhoto.addEventListener(
         }, 220);
     }
 );
-
-/*
-    Caso o navegador cancele o gesto.
-*/
 
 galleryPhoto.addEventListener(
     "pointercancel",
@@ -659,6 +604,67 @@ galleryPhoto.addEventListener(
         galleryPhoto.classList.remove(
             "dragging"
         );
+    }
+);
+
+/* =========================================================
+   EVITA MENU DO BOTÃO DIREITO NA FOTO
+========================================================= */
+
+galleryPhoto.addEventListener(
+    "contextmenu",
+    (event) => {
+        if (
+            proofGallery.classList.contains(
+                "active"
+            )
+        ) {
+            event.preventDefault();
+        }
+    }
+);
+
+/* =========================================================
+   TECLAS DA GALERIA
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+        if (
+            !proofGallery.classList.contains(
+                "active"
+            ) ||
+            galleryChanging
+        ) {
+            return;
+        }
+
+        if (event.key === "ArrowLeft") {
+            event.preventDefault();
+
+            galleryChanging = true;
+
+            previousProof();
+
+            setTimeout(() => {
+                galleryChanging = false;
+            }, 220);
+
+            return;
+        }
+
+        if (event.key === "ArrowRight") {
+            event.preventDefault();
+
+            galleryChanging = true;
+
+            nextProof();
+
+            setTimeout(() => {
+                galleryChanging = false;
+            }, 220);
+        }
     }
 );
 
@@ -718,10 +724,6 @@ function closeGalleryEnding() {
         "gallery-open"
     );
 }
-
-/*
-    X do final da galeria.
-*/
 
 if (galleryEndingClose) {
     galleryEndingClose.addEventListener(
