@@ -854,6 +854,49 @@ section > .container {
     font-size: clamp(1.5rem, 4vw, 3rem);
 }
 
+.gallery-ending-close {
+    position: absolute;
+    top: max(15px, env(safe-area-inset-top));
+    right: max(20px, env(safe-area-inset-right));
+    z-index: 3;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    color: #fff;
+    background: rgba(255, 255, 255, .06);
+
+    font-size: 2rem;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .35s ease,
+        transform .35s ease,
+        opacity .35s ease;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+@media (hover: hover) {
+    .gallery-ending-close:hover {
+        background: rgba(255, 255, 255, .12);
+        transform: scale(1.08);
+    }
+}
+
+.gallery-ending-close:active {
+    transform: scale(.92);
+}
 
 /* =========================================================
    FINS DE SEMANA
@@ -2052,6 +2095,8 @@ section > .container {
     }
 
 
+
+
     /* SÁBADO */
 
     .sunset-section {
@@ -2237,6 +2282,50 @@ section > .container {
         font-size:
             clamp(1.4rem, 7vw, 2rem);
     }
+
+        .gallery-ending-close {
+    position: absolute;
+    top: max(15px, env(safe-area-inset-top));
+    right: max(20px, env(safe-area-inset-right));
+    z-index: 3;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    color: #fff;
+    background: rgba(255, 255, 255, .06);
+
+    font-size: 2rem;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .35s ease,
+        transform .35s ease,
+        opacity .35s ease;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+@media (hover: hover) {
+    .gallery-ending-close:hover {
+        background: rgba(255, 255, 255, .12);
+        transform: scale(1.08);
+    }
+}
+
+.gallery-ending-close:active {
+    transform: scale(.92);
+}
 
 
     /* COMEMORAÇÃO */

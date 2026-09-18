@@ -63,6 +63,7 @@ const ACCEPTED_KEY = "relationshipAccepted";
     Enquanto estiver vazia, o site usa o horário salvo
     no localStorage.
 */
+
 const FIXED_RELATIONSHIP_START = "";
 
 /* =========================================================
@@ -112,8 +113,10 @@ startBtn.addEventListener("click", async () => {
 musicControl.addEventListener("click", async () => {
     if (musicPlaying) {
         music.pause();
+
         musicPlaying = false;
         musicControl.textContent = "♪";
+
         return;
     }
 
@@ -175,8 +178,8 @@ const revealElements =
 
 const revealObserver =
     new IntersectionObserver(
-        entries => {
-            entries.forEach(entry => {
+        (entries) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add(
                         "visible"
@@ -190,7 +193,7 @@ const revealObserver =
         }
     );
 
-revealElements.forEach(element => {
+revealElements.forEach((element) => {
     revealObserver.observe(element);
 });
 
@@ -260,6 +263,9 @@ const galleryTotal =
 const galleryEnding =
     document.getElementById("galleryEnding");
 
+const galleryEndingClose =
+    document.getElementById("galleryEndingClose");
+
 const proofPhotos =
     Array.from(
         { length: 16 },
@@ -301,28 +307,68 @@ const proofCaptions = [
     "E ainda existem muitas outras que eu poderia mostrar. ❤️"
 ];
 
+/*
+    Pré-carrega todas as imagens.
+
+    Assim, quando a pessoa deslizar,
+    a próxima foto já estará disponível
+    e a troca ficará muito mais imediata.
+*/
+
+proofPhotos.forEach((src) => {
+    const image = new Image();
+    image.src = src;
+});
+
 let galleryIndex = 0;
 
+/*
+    Troca a foto da galeria.
+
+    A versão anterior esperava 180ms antes
+    de alterar o src. Isso fazia a foto anterior
+    aparecer por uma fração de segundo.
+
+    Agora o src é alterado imediatamente.
+*/
+
 function showGalleryPhoto(index) {
-    galleryPhoto.classList.add("changing");
+    if (
+        index < 0 ||
+        index >= proofPhotos.length
+    ) {
+        return;
+    }
 
-    setTimeout(() => {
-        galleryPhoto.src =
-            proofPhotos[index];
+    galleryPhoto.classList.add(
+        "changing"
+    );
 
-        galleryCaption.textContent =
-            proofCaptions[index];
+    galleryCaption.textContent =
+        proofCaptions[index];
 
-        galleryCurrent.textContent =
-            index + 1;
+    galleryCurrent.textContent =
+        index + 1;
 
-        galleryTotal.textContent =
-            proofPhotos.length;
+    galleryTotal.textContent =
+        proofPhotos.length;
 
-        galleryPhoto.classList.remove(
-            "changing"
-        );
-    }, 180);
+    galleryPhoto.src =
+        proofPhotos[index];
+
+    /*
+        Dá dois ciclos de renderização ao navegador
+        para aplicar o novo src antes de remover
+        a animação de saída.
+    */
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            galleryPhoto.classList.remove(
+                "changing"
+            );
+        });
+    });
 }
 
 function openGallery() {
@@ -386,6 +432,7 @@ function nextProof() {
     }
 
     closeGallery();
+
     showGalleryEnding();
 }
 
@@ -409,7 +456,6 @@ let galleryStartX = 0;
 let galleryStartY = 0;
 let galleryCurrentX = 0;
 let galleryCurrentY = 0;
-
 let galleryDragging = false;
 let galleryPointerId = null;
 let galleryChanging = false;
@@ -419,9 +465,10 @@ const GALLERY_SWIPE_THRESHOLD = 55;
 /*
     Começa o gesto.
 */
+
 galleryPhoto.addEventListener(
     "pointerdown",
-    event => {
+    (event) => {
         if (
             !proofGallery.classList.contains(
                 "active"
@@ -465,9 +512,10 @@ galleryPhoto.addEventListener(
 /*
     Acompanha o movimento.
 */
+
 galleryPhoto.addEventListener(
     "pointermove",
-    event => {
+    (event) => {
         if (
             !galleryDragging ||
             event.pointerId !==
@@ -495,6 +543,7 @@ galleryPhoto.addEventListener(
             impedimos que o navegador trate
             o gesto como scroll horizontal.
         */
+
         if (
             Math.abs(deltaX) >
             Math.abs(deltaY)
@@ -510,9 +559,10 @@ galleryPhoto.addEventListener(
 /*
     Finaliza o gesto.
 */
+
 galleryPhoto.addEventListener(
     "pointerup",
-    event => {
+    (event) => {
         if (
             !galleryDragging ||
             event.pointerId !==
@@ -549,6 +599,7 @@ galleryPhoto.addEventListener(
             Movimento vertical:
             deixa o navegador cuidar.
         */
+
         if (
             Math.abs(deltaY) >=
             Math.abs(deltaX)
@@ -560,6 +611,7 @@ galleryPhoto.addEventListener(
             Movimento pequeno:
             considera apenas um toque.
         */
+
         if (
             Math.abs(deltaX) <
             GALLERY_SWIPE_THRESHOLD
@@ -572,6 +624,7 @@ galleryPhoto.addEventListener(
             enquanto a animação da foto
             está acontecendo.
         */
+
         galleryChanging = true;
 
         if (deltaX < 0) {
@@ -589,9 +642,10 @@ galleryPhoto.addEventListener(
 /*
     Caso o navegador cancele o gesto.
 */
+
 galleryPhoto.addEventListener(
     "pointercancel",
-    event => {
+    (event) => {
         if (
             event.pointerId !==
             galleryPointerId
@@ -627,13 +681,16 @@ function showGalleryEnding() {
     );
 
     const paragraphs =
-        galleryEnding.querySelectorAll("p");
+        galleryEnding.querySelectorAll(
+            "p"
+        );
 
     paragraphs.forEach(
-        paragraph =>
+        (paragraph) => {
             paragraph.classList.remove(
                 "show"
-            )
+            );
+        }
     );
 
     paragraphs.forEach(
@@ -662,6 +719,17 @@ function closeGalleryEnding() {
     );
 }
 
+/*
+    X do final da galeria.
+*/
+
+if (galleryEndingClose) {
+    galleryEndingClose.addEventListener(
+        "click",
+        closeGalleryEnding
+    );
+}
+
 /* =========================================================
    AGORA OLHA PRA MIM — MOMENTO FINAL
 ========================================================= */
@@ -670,8 +738,8 @@ const FINAL_HOLD_TIME = 30000;
 
 const finalObserver =
     new IntersectionObserver(
-        entries => {
-            entries.forEach(entry => {
+        (entries) => {
+            entries.forEach((entry) => {
                 if (
                     entry.isIntersecting &&
                     !finalReached
@@ -846,7 +914,7 @@ function registerNoAttempt() {
 
 noBtn.addEventListener(
     "pointerenter",
-    event => {
+    (event) => {
         if (
             event.pointerType ===
             "mouse"
@@ -858,7 +926,7 @@ noBtn.addEventListener(
 
 noBtn.addEventListener(
     "pointerdown",
-    event => {
+    (event) => {
         if (
             event.pointerType ===
                 "touch" ||
@@ -874,7 +942,7 @@ noBtn.addEventListener(
 
 noBtn.addEventListener(
     "click",
-    event => {
+    (event) => {
         event.preventDefault();
 
         if (noAttempts === 0) {
@@ -932,6 +1000,7 @@ yesBtn.addEventListener(
         );
 
         showRelationship(true);
+
         startCounter();
 
         playAcceptanceCelebration(
@@ -1107,6 +1176,7 @@ function playAcceptanceCelebration(
     );
 
     createCelebrationEmojis();
+
     runFireworks();
 
     setTimeout(() => {
@@ -1412,6 +1482,7 @@ function runFireworks() {
                     speed,
 
                 gravity: 0.02,
+
                 friction: 0.99,
 
                 life:
@@ -1518,8 +1589,11 @@ function runFireworks() {
                 rocket.color;
 
             ctx.globalAlpha = 0.55;
+
             ctx.lineWidth = 1.5;
+
             ctx.stroke();
+
             ctx.globalAlpha = 1;
 
             if (
@@ -1686,7 +1760,7 @@ const zoomableImages =
     );
 
 zoomableImages.forEach(
-    image => {
+    (image) => {
         image.addEventListener(
             "click",
             () => {
@@ -1718,7 +1792,7 @@ closeLightbox.addEventListener(
 
 lightbox.addEventListener(
     "click",
-    event => {
+    (event) => {
         if (
             event.target ===
             lightbox
@@ -1734,7 +1808,7 @@ lightbox.addEventListener(
 
 document.addEventListener(
     "keydown",
-    event => {
+    (event) => {
         if (
             event.key !==
             "Escape"
@@ -1754,7 +1828,7 @@ document.addEventListener(
 
 yesBtn.addEventListener(
     "dblclick",
-    event => {
+    (event) => {
         event.preventDefault();
     }
 );
@@ -1768,7 +1842,7 @@ const videos =
         "video"
     );
 
-videos.forEach(video => {
+videos.forEach((video) => {
     video.muted = false;
     video.defaultMuted = false;
     video.volume = 1;
