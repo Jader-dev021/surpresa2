@@ -2558,3 +2558,23 @@ body.proposal-hold {
     overflow: hidden !important;
     height: 100%;
 }
+
+
+#thirdVideo {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    transition:
+        opacity 1s ease,
+        max-height 1.2s ease,
+        visibility 1s ease;
+}
+
+#thirdVideo.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    max-height: 1200px;
+}

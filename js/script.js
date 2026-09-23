@@ -54,19 +54,17 @@ const ACCEPTED_KEY = "relationshipAccepted";
 
 const FIXED_RELATIONSHIP_START = "";
 
+
 /* =========================================================
    INICIALIZAÇÃO
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+
     if (relationshipAccepted) {
         showQuestion(false, true);
         showRelationship(false);
         startCounter();
-
-        setTimeout(() => {
-            playAcceptanceCelebration(false);
-        }, 700);
     }
 
     createPetals(8);
@@ -118,6 +116,46 @@ musicControl.addEventListener("click", async () => {
             "Não foi possível iniciar a música."
         );
     }
+});
+
+/* =========================================================
+   MÚSICA — PAUSA AO SAIR / RETOMA AO VOLTAR
+========================================================= */
+
+let musicWasPlayingBeforeHidden = false;
+
+document.addEventListener("visibilitychange", async () => {
+
+    if (document.hidden) {
+
+        musicWasPlayingBeforeHidden =
+            musicPlaying && !music.paused;
+
+        if (musicWasPlayingBeforeHidden) {
+            music.pause();
+            musicPlaying = false;
+        }
+
+        return;
+    }
+
+    if (
+        musicWasPlayingBeforeHidden &&
+        music.paused
+    ) {
+        try {
+            await music.play();
+
+            musicPlaying = true;
+            musicControl.textContent = "Ⅱ";
+
+        } catch {
+            musicPlaying = false;
+            musicControl.textContent = "♪";
+        }
+    }
+
+    musicWasPlayingBeforeHidden = false;
 });
 
 /* =========================================================
@@ -263,20 +301,20 @@ const proofPhotos =
 
 const proofCaptions = [
     "Você lembra disso? ❤️",
-    "Às vezes você nem percebe o quanto esses pequenos detalhes significam pra mim.",
-    "Um jeito seu de demonstrar carinho.",
-    "Mais uma vez em que você cuidou de mim sem perceber.",
-    "Essas coisas ficam guardadas.",
-    "Porque carinho também aparece nos detalhes.",
-    "Você talvez nem tenha pensado muito nisso na hora.",
-    "Mas eu pensei.",
-    "Eu percebi.",
-    "Eu guardei.",
-    "E foi importante pra mim.",
-    "Cada pequeno gesto conta.",
-    "Cada conversa conta.",
-    "Cada cuidado conta.",
-    "Você demonstra mais do que imagina.",
+    "Um pequeno gesto que significou muito pra mim.",
+    "Eu tava no trabalho, cansado, e essa mensagem melhorou meu dia.",
+    "Você sempre melhora meus dias.",
+    "Ver você me incluir nos seus planos...",
+    "Valorizando meu jeito (minha maior insegurança).",
+    "O carinho maravilhoso.",
+    "As declarações...",
+    "E o que falar desse?",
+    "Sem palavras...",
+    "Me valorizando.",
+    "Nosso sonho.",
+    "Foi uma brincadeira, mas no fundo era séria kkk.",
+    "O apoio que você sempre me dá.",
+    "...",
     "E ainda existem muitas outras que eu poderia mostrar. ❤️"
 ];
 
@@ -769,6 +807,27 @@ finalObserver.observe(
     finalSection
 );
 
+
+const questionObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+
+            if (
+                entry.isIntersecting &&
+                relationshipAccepted
+            ) {
+                playAcceptanceCelebration(false);
+            }
+
+        });
+    },
+    {
+        threshold: 0.7
+    }
+);
+
+questionObserver.observe(question);
+
 /* =========================================================
    PERGUNTA
 ========================================================= */
@@ -1079,6 +1138,36 @@ function startCounter() {
             updateCounter,
             1000
         );
+}
+
+const thirdVideo =
+    document.getElementById("thirdVideo");
+
+const relationshipObserver =
+    new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (
+                    entry.isIntersecting &&
+                    relationshipAccepted
+                ) {
+                    thirdVideo.classList.add("show");
+
+                    relationshipObserver.unobserve(
+                        entry.target
+                    );
+                }
+            });
+        },
+        {
+            threshold: 0.5
+        }
+    );
+
+if (thirdVideo) {
+    relationshipObserver.observe(
+        relationship
+    );
 }
 
 function updateCounter() {
