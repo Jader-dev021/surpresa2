@@ -35,10 +35,8 @@ body {
             transparent 100%
         ),
         #080808;
-
     color: #fff;
 }
-
 
 img {
     display: block;
@@ -72,18 +70,14 @@ body.gallery-open {
     width: 100%;
     height: 100dvh;
     min-height: 100svh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding:
         clamp(20px, 5vw, 40px)
         clamp(20px, 6vw, 50px);
-
     text-align: center;
     overflow: hidden;
-
     background:
         radial-gradient(
             circle at center,
@@ -91,7 +85,6 @@ body.gallery-open {
             #080808 60%,
             #000 100%
         );
-
     transition:
         opacity 1.5s ease,
         visibility 1.5s ease;
@@ -132,15 +125,11 @@ body.gallery-open {
 #startBtn {
     min-height: 48px;
     padding: 14px clamp(24px, 5vw, 32px);
-
     color: #fff;
     background: rgba(255, 255, 255, .05);
-
     border: 1px solid rgba(255, 255, 255, .3);
     border-radius: 999px;
-
     cursor: pointer;
-
     transition:
         background .4s ease,
         color .4s ease,
@@ -148,7 +137,6 @@ body.gallery-open {
 }
 
 @media (hover: hover) {
-
     #startBtn:hover {
         background: #fff;
         color: #000;
@@ -185,11 +173,9 @@ body.gallery-open {
 
 section {
     min-height: 80vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding:
         clamp(80px, 10vw, 120px)
         clamp(20px, 5vw, 40px);
@@ -208,7 +194,6 @@ section > .container {
 
 .section-title {
     margin-bottom: clamp(22px, 4vw, 30px);
-
     font-size: clamp(2.5rem, 8vw, 5.5rem);
     font-weight: normal;
     line-height: 1.05;
@@ -217,7 +202,6 @@ section > .container {
 .section-text {
     width: min(750px, 100%);
     margin-inline: auto;
-
     color: #ccc;
     font-size: clamp(.95rem, 2vw, 1.05rem);
     line-height: 1.9;
@@ -235,7 +219,6 @@ section > .container {
 .reveal {
     opacity: 0;
     transform: translateY(60px);
-
     transition:
         opacity 1.2s ease,
         transform 1.2s ease;
@@ -253,21 +236,17 @@ section > .container {
 
 .hero {
     position: relative;
-
     min-height: 100svh;
     height: 100svh;
-
     text-align: center;
     overflow: hidden;
 }
 
 .hero::before {
     content: "";
-
     position: absolute;
     inset: 0;
     z-index: 1;
-
     background:
         linear-gradient(
             to bottom,
@@ -279,22 +258,16 @@ section > .container {
 
 .hero-image {
     position: absolute;
-
     width: min(82vw, 620px);
     height: min(72svh, 760px);
-
     object-fit: cover;
-
     border-radius:
         43px
         16px
         52px
         23px;
-
     transform: rotate(-1.5deg);
-
     filter: brightness(.72);
-
     box-shadow:
         0 30px 100px rgba(0, 0, 0, .8);
 }
@@ -302,7 +275,6 @@ section > .container {
 .hero-content {
     position: relative;
     z-index: 2;
-
     width: min(900px, 100%);
     margin-top: 55svh;
 }
@@ -315,7 +287,6 @@ section > .container {
 
 .hero p {
     margin-top: clamp(15px, 3vw, 20px);
-
     color: #ddd;
     font-size: clamp(.95rem, 2vw, 1.05rem);
     font-style: italic;
@@ -333,13 +304,9 @@ section > .container {
 .video-frame {
     width: min(400px, 100%);
     margin: clamp(35px, 6vw, 50px) auto 0;
-
     overflow: hidden;
-
     border-radius: clamp(18px, 3vw, 25px);
-
     background: #111;
-
     box-shadow:
         0 30px 100px rgba(0, 0, 0, .6);
 }
@@ -364,24 +331,18 @@ section > .container {
 
 .timeline::before {
     content: "";
-
     position: absolute;
     top: 0;
     bottom: 0;
     left: 50%;
-
     width: 1px;
-
     background: rgba(255, 255, 255, .16);
-
     transform: translateX(-50%);
 }
 
 .timeline-item {
     position: relative;
-
     width: 50%;
-
     padding:
         clamp(30px, 4vw, 40px)
         clamp(30px, 5vw, 50px);
@@ -399,17 +360,12 @@ section > .container {
 
 .timeline-item::after {
     content: "";
-
     position: absolute;
     top: 65px;
-
     width: 12px;
     height: 12px;
-
     border-radius: 50%;
-
     background: #f19caf;
-
     box-shadow:
         0 0 0 6px #050505,
         0 0 20px rgba(241, 156, 175, .5);
@@ -426,14 +382,10 @@ section > .container {
 .timeline-item > img {
     width: min(100%, 240px);
     height: auto;
-
     border-radius: 18px;
-
     cursor: zoom-in;
-
     box-shadow:
         0 15px 40px rgba(0, 0, 0, .5);
-
     transition:
         transform .5s ease,
         filter .5s ease;
@@ -448,7 +400,6 @@ section > .container {
 }
 
 @media (hover: hover) {
-
     .timeline-item > img:hover {
         transform: scale(1.04);
         filter: brightness(1.08);
@@ -458,7 +409,6 @@ section > .container {
 .timeline-item h3 {
     margin-top: 22px;
     margin-bottom: 12px;
-
     font-size: clamp(1.4rem, 3vw, 1.8rem);
     font-weight: normal;
     line-height: 1.2;
@@ -466,9 +416,7 @@ section > .container {
 
 .timeline-item p {
     width: min(340px, 100%);
-
     color: #bbb;
-
     font-size: clamp(.92rem, 1.8vw, 1rem);
     line-height: 1.8;
 }
@@ -487,7 +435,6 @@ section > .container {
 .route-prints {
     display: flex;
     align-items: flex-start;
-
     gap: clamp(8px, 1.5vw, 15px);
 }
 
@@ -502,21 +449,16 @@ section > .container {
 .route-prints img {
     width: min(48%, 240px);
     height: auto;
-
     border-radius: 18px;
-
     cursor: zoom-in;
-
     box-shadow:
         0 15px 40px rgba(0, 0, 0, .5);
-
     transition:
         transform .5s ease,
         filter .5s ease;
 }
 
 @media (hover: hover) {
-
     .conversation-prints img:hover,
     .love-messages img:hover,
     .route-prints img:hover {
@@ -536,46 +478,34 @@ section > .container {
 
 .moments-grid {
     display: grid;
-
     grid-template-columns:
         repeat(4, minmax(0, 1fr));
-
     grid-auto-rows:
         clamp(180px, 16vw, 220px);
-
     gap: clamp(10px, 1.5vw, 15px);
-
     margin-top: clamp(40px, 6vw, 55px);
 }
 
 .moment {
     position: relative;
-
     min-width: 0;
-
     overflow: hidden;
-
     border-radius:
         clamp(16px, 2.5vw, 22px);
-
     background: #111;
 }
 
 .moment img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
     cursor: zoom-in;
-
     transition:
         transform .6s ease,
         filter .6s ease;
 }
 
 @media (hover: hover) {
-
     .moment:hover img {
         transform: scale(1.05);
         filter: brightness(1.08);
@@ -597,9 +527,7 @@ section > .container {
 
 .moments-footer {
     margin-top: 40px;
-
     color: #888;
-
     text-align: center;
     font-style: italic;
 }
@@ -616,21 +544,15 @@ section > .container {
 
 .gallery-start {
     margin-top: clamp(30px, 5vw, 45px);
-
     min-height: 48px;
-
     padding:
         14px
         clamp(24px, 5vw, 30px);
-
     border: 1px solid rgba(255, 255, 255, .25);
     border-radius: 999px;
-
     color: #fff;
     background: rgba(255, 255, 255, .05);
-
     cursor: pointer;
-
     transition:
         background .4s ease,
         color .4s ease,
@@ -638,7 +560,6 @@ section > .container {
 }
 
 @media (hover: hover) {
-
     .gallery-start:hover {
         background: #fff;
         color: #000;
@@ -649,27 +570,20 @@ section > .container {
 .proof-gallery {
     position: fixed;
     inset: 0;
-
     z-index: 9000;
-
     width: 100%;
     height: 100dvh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding:
         max(20px, env(safe-area-inset-top))
         max(20px, env(safe-area-inset-right))
         max(20px, env(safe-area-inset-bottom))
         max(20px, env(safe-area-inset-left));
-
     background: rgba(0, 0, 0, .97);
-
     opacity: 0;
     visibility: hidden;
-
     transition:
         opacity .5s ease,
         visibility .5s ease;
@@ -683,15 +597,12 @@ section > .container {
 .gallery-content {
     width: min(700px, 100%);
     max-height: calc(100dvh - 50px);
-
     text-align: center;
 }
 
 .gallery-counter {
     margin-bottom: 20px;
-
     color: #f19caf;
-
     font-size: .85rem;
     letter-spacing: 2px;
 }
@@ -699,31 +610,22 @@ section > .container {
 .gallery-photo-container {
     width: 100%;
     height: min(65svh, 650px);
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
-
     border-radius: 22px;
 }
 
 .gallery-photo-container img {
     display: block;
-
     width: auto;
     height: auto;
-
     max-width: 100%;
     max-height: 100%;
-
     object-fit: contain;
-
     border-radius: 22px;
-
     user-select: none;
-
     transition:
         opacity .35s ease,
         transform .35s ease;
@@ -736,39 +638,28 @@ section > .container {
 
 .gallery-caption {
     width: min(600px, 100%);
-
     margin: 25px auto 0;
-
     color: #ddd;
-
     font-size: clamp(.95rem, 2vw, 1.1rem);
     line-height: 1.8;
 }
 
 .gallery-hint {
     margin-top: 25px;
-
     color: #777;
-
     font-size: .8rem;
 }
 
 .gallery-close {
     position: absolute;
-
     top: max(15px, env(safe-area-inset-top));
     right: max(20px, env(safe-area-inset-right));
-
     border: none;
     background: none;
-
     color: #fff;
-
     font-size: clamp(2.3rem, 6vw, 3rem);
-
     cursor: pointer;
 }
-
 
 .gallery-photo-container,
 #galleryPhoto {
@@ -779,6 +670,7 @@ section > .container {
     cursor: grabbing;
 }
 
+
 /* =========================================================
    FINAL DA GALERIA
 ========================================================= */
@@ -786,31 +678,22 @@ section > .container {
 .gallery-ending {
     position: fixed;
     inset: 0;
-
     z-index: 9100;
-
     width: 100%;
     height: 100dvh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding:
         max(30px, env(safe-area-inset-top))
         max(25px, env(safe-area-inset-right))
         max(30px, env(safe-area-inset-bottom))
         max(25px, env(safe-area-inset-left));
-
     text-align: center;
-
     background: #050505;
-
     overflow-y: auto;
-
     opacity: 0;
     visibility: hidden;
-
     transition:
         opacity 1s ease,
         visibility 1s ease;
@@ -827,15 +710,11 @@ section > .container {
 
 .gallery-ending p {
     margin-bottom: clamp(20px, 4vw, 30px);
-
     color: #ddd;
-
     font-size: clamp(1.1rem, 3vw, 2rem);
     line-height: 1.7;
-
     opacity: 0;
     transform: translateY(18px);
-
     transition:
         opacity 1.2s ease,
         transform 1.2s cubic-bezier(.22, 1, .36, 1);
@@ -848,9 +727,7 @@ section > .container {
 
 .gallery-ending .final-line {
     margin-top: clamp(40px, 7vw, 60px);
-
     color: #f19caf;
-
     font-size: clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -860,30 +737,22 @@ section > .container {
     left: max(20px, env(safe-area-inset-left));
     right: auto;
     z-index: 3;
-
     width: 48px;
     height: 48px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border: none;
     border-radius: 50%;
-
     color: #fff;
     background: rgba(255, 255, 255, .06);
-
     font-size: 2rem;
     line-height: 1;
-
     cursor: pointer;
-
     transition:
         background .35s ease,
         transform .35s ease,
         opacity .35s ease;
-
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -899,6 +768,7 @@ section > .container {
     transform: scale(.92);
 }
 
+
 /* =========================================================
    FINS DE SEMANA
 ========================================================= */
@@ -906,58 +776,43 @@ section > .container {
 .sunset-intro {
     width: min(700px, 100%);
     margin: 0 auto 50px;
-
     text-align: left;
 }
 
 .sunset-intro h2 {
     margin: 0;
-
     font-size: clamp(2.2rem, 5vw, 4rem);
     font-weight: 400;
-
     line-height: 1.1;
     letter-spacing: -.02em;
-
     color: #fff;
 }
 
 .sunset-intro p {
     margin-top: 18px;
-
     font-size: clamp(.9rem, 1.8vw, 1rem);
     line-height: 1.7;
-
     color: #aaa;
 }
 
 .sunset-gallery {
     width: min(900px, 100%);
     margin: 0 auto;
-
     display: grid;
-
     grid-template-columns:
         repeat(2, 1fr);
-
     gap: 14px;
 }
 
 .sunset-gallery img {
     display: block;
-
     width: 100%;
     height: 280px;
-
     object-fit: cover;
-
     border-radius: 18px;
-
     cursor: zoom-in;
-
     box-shadow:
         0 12px 30px rgba(0, 0, 0, .45);
-
     transition:
         transform .3s ease,
         filter .3s ease;
@@ -969,7 +824,6 @@ section > .container {
 }
 
 @media (hover: hover) {
-
     .sunset-gallery img:hover {
         transform: scale(1.015);
         filter: brightness(1.08);
@@ -987,32 +841,24 @@ section > .container {
 
 .letter {
     width: min(750px, 100%);
-
     margin:
         clamp(35px, 6vw, 50px)
         auto 0;
-
     padding:
         clamp(25px, 5vw, 50px);
-
     border:
         1px solid rgba(255, 255, 255, .1);
-
     border-radius:
         clamp(18px, 3vw, 25px);
-
     background:
         rgba(255, 255, 255, .03);
-
     box-shadow:
         0 30px 80px rgba(0, 0, 0, .4);
 }
 
 .letter p {
     margin-bottom: 20px;
-
     color: #ddd;
-
     font-size: clamp(1rem, 2vw, 1.1rem);
     line-height: 2;
 }
@@ -1024,17 +870,11 @@ section > .container {
 
 .final-section {
     min-height: 100svh;
-
     flex-direction: column;
-
     text-align: center;
-
     background: #000;
-
     opacity: .55;
-
     transform: scale(.97);
-
     transition:
         opacity 1.8s ease,
         transform 2.2s cubic-bezier(.22, 1, .36, 1);
@@ -1047,14 +887,10 @@ section > .container {
 
 .final-section h2 {
     font-size: clamp(3rem, 10vw, 7rem);
-
     font-weight: normal;
-
     line-height: .95;
-
     opacity: 0;
     transform: translateY(18px);
-
     transition:
         opacity 1.4s ease,
         transform 1.4s cubic-bezier(.22, 1, .36, 1);
@@ -1067,15 +903,10 @@ section > .container {
 
 .final-heart {
     margin-top: 30px;
-
     color: #f19caf;
-
     font-size: clamp(1.7rem, 4vw, 2rem);
-
     opacity: 0;
-
     transform: scale(.65);
-
     transition:
         opacity 1.4s ease .45s,
         transform 1.6s cubic-bezier(.22, 1, .36, 1) .45s;
@@ -1093,23 +924,17 @@ section > .container {
 
 #question {
     display: none;
-
     min-height: 100svh;
-
     flex-direction: column;
-
     text-align: center;
-
     background:
         radial-gradient(
             circle,
             #260f17,
             #000 65%
         );
-
     opacity: 0;
     transform: translateY(35px);
-
     transition:
         opacity 1.4s ease,
         transform 1.5s cubic-bezier(.22, 1, .36, 1);
@@ -1117,17 +942,14 @@ section > .container {
 
 #question.show {
     display: flex;
-
     opacity: 1;
     transform: translateY(0);
-
     animation:
         questionAppear
         1.5s cubic-bezier(.22, 1, .36, 1);
 }
 
 @keyframes questionAppear {
-
     0% {
         opacity: 0;
         transform:
@@ -1152,38 +974,28 @@ section > .container {
 
 #question h2 {
     margin-bottom: clamp(35px, 7vw, 50px);
-
     font-size: clamp(2.5rem, 8vw, 5rem);
-
     font-weight: normal;
-
     line-height: 1;
 }
 
 .buttons {
     position: relative;
-
     width: min(600px, 100%);
     height: 170px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     gap: 25px;
 }
 
 .answer-btn {
     min-width: 120px;
     min-height: 48px;
-
     padding:
         14px 28px;
-
     border-radius: 999px;
-
     cursor: pointer;
-
     transition:
         transform .35s cubic-bezier(.22, 1, .36, 1),
         opacity .3s ease,
@@ -1193,14 +1005,10 @@ section > .container {
 #yesBtn {
     position: relative;
     z-index: 2;
-
     color: #fff;
-
     background: #b94b64;
-
     border:
         1px solid #d66a83;
-
     box-shadow:
         0 8px 30px rgba(185, 75, 100, .15);
 }
@@ -1223,11 +1031,8 @@ section > .container {
 #noBtn {
     position: relative;
     z-index: 3;
-
     color: #ddd;
-
     background: #111;
-
     border:
         1px solid rgba(255, 255, 255, .15);
 }
@@ -1242,7 +1047,6 @@ section > .container {
         rotate(
             var(--no-rotation, 0deg)
         );
-
     transition:
         transform .55s cubic-bezier(.22, 1, .36, 1);
 }
@@ -1255,14 +1059,10 @@ section > .container {
 
 #noMessage {
     min-height: 28px;
-
     margin-top: 18px;
-
     color: #f19caf;
-
     opacity: 0;
     transform: translateY(8px);
-
     transition:
         opacity .45s ease,
         transform .45s ease;
@@ -1275,16 +1075,11 @@ section > .container {
 
 .accepted-message {
     margin-top: 28px;
-
     color: #f19caf;
-
     font-size: clamp(1rem, 3vw, 1.35rem);
-
     opacity: 0;
     transform: translateY(15px) scale(.96);
-
     pointer-events: none;
-
     transition:
         opacity 1s ease,
         transform 1s cubic-bezier(.22, 1, .36, 1);
@@ -1306,38 +1101,30 @@ section > .container {
 
 #relationship {
     display: none;
-
     min-height: 100svh;
-
     text-align: center;
-
     background:
         radial-gradient(
             circle,
             #260f17,
             #050505 65%
         );
-
     opacity: 0;
     transform: translateY(30px);
 }
 
 #relationship.show {
     display: flex;
-
     opacity: 1;
     transform: translateY(0);
-
     animation:
         relationshipAppear
         1.8s cubic-bezier(.22, 1, .36, 1);
 }
 
 @keyframes relationshipAppear {
-
     0% {
         opacity: 0;
-
         transform:
             translateY(45px)
             scale(.98);
@@ -1345,7 +1132,6 @@ section > .container {
 
     65% {
         opacity: 1;
-
         transform:
             translateY(-5px)
             scale(1.005);
@@ -1353,7 +1139,6 @@ section > .container {
 
     100% {
         opacity: 1;
-
         transform:
             translateY(0)
             scale(1);
@@ -1367,7 +1152,6 @@ section > .container {
 #relationship.show .relationship-content > * {
     opacity: 0;
     transform: translateY(18px);
-
     animation:
         relationshipChildAppear
         1s
@@ -1396,7 +1180,6 @@ section > .container {
 }
 
 @keyframes relationshipChildAppear {
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1405,58 +1188,42 @@ section > .container {
 
 .relationship-content h2 {
     margin-bottom: 20px;
-
     font-size: clamp(2.4rem, 7vw, 5rem);
-
     font-weight: normal;
-
     line-height: 1.1;
 }
 
 .relationship-subtitle {
     margin-bottom: clamp(35px, 6vw, 50px);
-
     color: #aaa;
-
     font-size: clamp(.9rem, 2vw, 1rem);
-
     font-style: italic;
 }
 
 .counter {
     display: grid;
-
     grid-template-columns:
         repeat(4, minmax(0, 1fr));
-
     gap: clamp(10px, 2vw, 15px);
 }
 
 .counter-box {
     min-width: 0;
-
     padding:
         clamp(18px, 3vw, 25px)
         10px;
-
     border:
         1px solid rgba(255, 255, 255, .1);
-
     border-radius: 20px;
-
     background:
         rgba(255, 255, 255, .025);
 }
 
 .counter-number {
     display: block;
-
     color: #f19caf;
-
     font-size: clamp(2rem, 6vw, 4rem);
-
     line-height: 1;
-
     transition:
         opacity .25s ease,
         transform .25s ease;
@@ -1464,25 +1231,17 @@ section > .container {
 
 .counter-label {
     display: block;
-
     margin-top: 10px;
-
     color: #aaa;
-
     font-size: clamp(.65rem, 1.5vw, .75rem);
-
     letter-spacing: 2px;
-
     text-transform: uppercase;
 }
 
 .counter-footer {
     margin-top: clamp(35px, 6vw, 50px);
-
     color: #ddd;
-
     font-size: clamp(.9rem, 2vw, 1rem);
-
     font-style: italic;
 }
 
@@ -1493,35 +1252,25 @@ section > .container {
 
 .petal {
     position: fixed;
-
     top: -40px;
-
     width: 12px;
     height: 18px;
-
     border-radius:
         100% 0 100% 0;
-
     background: #f19caf;
-
     opacity: .65;
-
     pointer-events: none;
-
     z-index: 100;
-
     animation:
         fall linear forwards;
 }
 
 @keyframes fall {
-
     to {
         transform:
             translateY(110vh)
             rotate(500deg)
             translateX(100px);
-
         opacity: 0;
     }
 }
@@ -1534,27 +1283,20 @@ section > .container {
 .acceptance-celebration {
     position: fixed;
     inset: 0;
-
     z-index: 12000;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
-
     background:
         radial-gradient(
             circle at center,
             rgba(70, 10, 25, .96),
             rgba(0, 0, 0, .98) 70%
         );
-
     opacity: 0;
     visibility: hidden;
-
     pointer-events: none;
-
     transition:
         opacity .8s ease,
         visibility .8s ease;
@@ -1572,39 +1314,30 @@ section > .container {
 #celebrationCanvas {
     position: absolute;
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     pointer-events: none;
 }
 
 .celebration-emojis {
     position: absolute;
     inset: 0;
-
     overflow: hidden;
-
     pointer-events: none;
 }
 
 .celebration-emoji {
     position: absolute;
-
     left: 50%;
     top: 50%;
-
     font-size:
         clamp(1.3rem, 4vw, 2.4rem);
-
     filter:
         drop-shadow(
             0 0 12px
             rgba(255, 105, 145, .35)
         );
-
     opacity: 0;
-
     animation:
         emojiFly
         var(--emoji-duration)
@@ -1613,10 +1346,8 @@ section > .container {
 }
 
 @keyframes emojiFly {
-
     0% {
         opacity: 0;
-
         transform:
             translate(-50%, -50%)
             scale(.2)
@@ -1629,7 +1360,6 @@ section > .container {
 
     100% {
         opacity: 0;
-
         transform:
             translate(
                 calc(-50% + var(--emoji-x)),
@@ -1643,19 +1373,13 @@ section > .container {
 .celebration-content {
     position: relative;
     z-index: 4;
-
     width: min(800px, 90%);
-
     text-align: center;
-
     pointer-events: none;
-
     transform:
         translateY(25px)
         scale(.94);
-
     opacity: 0;
-
     transition:
         opacity 1.2s ease .25s,
         transform 1.4s cubic-bezier(.22, 1, .36, 1) .25s;
@@ -1663,7 +1387,6 @@ section > .container {
 
 .acceptance-celebration.active .celebration-content {
     opacity: 1;
-
     transform:
         translateY(0)
         scale(1);
@@ -1671,33 +1394,24 @@ section > .container {
 
 .celebration-eyebrow {
     margin-bottom: 18px;
-
     color: #f19caf;
-
     font-size: .75rem;
-
     letter-spacing: 4px;
-
     text-transform: uppercase;
 }
 
 .celebration-small {
     color: #ddd;
-
     font-size:
         clamp(1rem, 3vw, 1.5rem);
 }
 
 .celebration-content h2 {
     margin-top: 8px;
-
     font-size:
         clamp(4rem, 15vw, 9rem);
-
     font-weight: normal;
-
     line-height: .9;
-
     text-shadow:
         0 0 35px
         rgba(241, 156, 175, .35);
@@ -1705,12 +1419,9 @@ section > .container {
 
 .celebration-content p {
     margin-top: 25px;
-
     color: #f19caf;
-
     font-size:
         clamp(1.2rem, 4vw, 2rem);
-
     font-style: italic;
 }
 
@@ -1722,27 +1433,20 @@ section > .container {
 #lightbox {
     position: fixed;
     inset: 0;
-
     z-index: 9998;
-
     width: 100%;
     height: 100dvh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding:
         max(20px, env(safe-area-inset-top))
         max(20px, env(safe-area-inset-right))
         max(20px, env(safe-area-inset-bottom))
         max(20px, env(safe-area-inset-left));
-
     background: rgba(0, 0, 0, .95);
-
     opacity: 0;
     visibility: hidden;
-
     transition: .4s ease;
 }
 
@@ -1754,28 +1458,20 @@ section > .container {
 #lightbox img {
     width: auto;
     height: auto;
-
     max-width: 95vw;
     max-height: 90dvh;
-
     object-fit: contain;
-
     border-radius: 20px;
 }
 
 #closeLightbox {
     position: absolute;
-
     top: max(15px, env(safe-area-inset-top));
     right: max(20px, env(safe-area-inset-right));
-
     border: none;
     background: none;
-
     color: #fff;
-
     font-size: clamp(2.3rem, 6vw, 3rem);
-
     cursor: pointer;
 }
 
@@ -1786,43 +1482,29 @@ section > .container {
 
 .timeline-note {
     position: absolute;
-
     right: 3%;
-
     width: 180px;
-
     padding: 12px 14px;
-
     text-align: center;
-
     background:
         rgba(255, 255, 255, .025);
-
     border:
         1px solid rgba(255, 255, 255, .08);
-
     border-radius: 12px;
-
     opacity: .65;
-
     z-index: 2;
 }
 
 .timeline-note p {
     margin: 0;
-
     font-size: .68rem;
-
     line-height: 1.5;
-
     font-style: italic;
 }
 
 .timeline-note p + p {
     margin-top: 7px;
-
     font-size: .7rem;
-
     opacity: .9;
 }
 
@@ -1842,9 +1524,439 @@ section > .container {
 .careta img {
     width: 100%;
     height: 100%;
-
     object-fit: cover !important;
     object-position: center 85% !important;
+}
+
+
+/* =========================================================
+   PAUSA FINAL — AGORA OLHA PRA MIM
+========================================================= */
+
+html.proposal-hold,
+body.proposal-hold {
+    overflow: hidden !important;
+    height: 100%;
+}
+
+#thirdVideo {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    transition:
+        opacity 1s ease,
+        max-height 1.2s ease,
+        visibility 1s ease;
+}
+
+#thirdVideo.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    max-height: 1200px;
+}
+
+
+/* =========================================================
+   SITE ESTÁTICO — PEDIDO JÁ REALIZADO
+========================================================= */
+
+#question .static-accepted-message {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+#thirdVideo {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    max-height: none;
+    overflow: visible;
+}
+
+#thirdVideo.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    max-height: none;
+}
+
+
+/* =========================================================
+   ANIMAÇÃO FINAL — TEXTO CENTRALIZADO
+========================================================= */
+
+.story-ending {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 25px;
+    text-align: center;
+    background: #050505;
+    overflow: hidden;
+}
+
+.story-ending-content {
+    width: min(750px, 100%);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.story-ending-content p {
+    margin: 0 auto 35px;
+    color: #fff;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    line-height: 1.8;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+.story-ending-content p.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.story-ending-content p:last-child {
+    margin-top: 55px;
+    margin-bottom: 0;
+    color: #f19caf;
+    font-size: clamp(1.5rem, 4vw, 2.7rem);
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   GALERIA DO PEDIDO — VARAL DE POLAROIDS
+========================================================= */
+
+.proposal-gallery {
+    position: relative;
+    min-height: 100svh;
+    padding: 110px 35px 140px;
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(229, 9, 54, 0.07),
+            transparent 55%
+        ),
+        #050505;
+    overflow: hidden;
+}
+
+.proposal-gallery-content {
+    position: relative;
+    z-index: 2;
+    width: min(1250px, 100%);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.proposal-gallery .section-kicker {
+    display: block;
+    margin-bottom: 14px;
+    color: #f19caf;
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.proposal-gallery h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.3rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1;
+}
+
+.proposal-gallery-intro {
+    width: min(600px, 100%);
+    margin: 25px auto 90px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   VARAL
+========================================================= */
+
+.photo-clothesline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 220px));
+    justify-content: center;
+    column-gap: 55px;
+    row-gap: 110px;
+    padding: 35px 0 50px;
+}
+
+.clothesline-wire {
+    position: absolute;
+    top: 25px;
+    left: 3%;
+    right: 3%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.08);
+}
+
+.clothesline-wire::before,
+.clothesline-wire::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 18%;
+    height: 25px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.clothesline-wire::before {
+    left: 18%;
+    border-radius: 0 0 50% 50%;
+}
+
+.clothesline-wire::after {
+    right: 18%;
+    border-radius: 0 0 50% 50%;
+}
+
+
+/* =========================================================
+   POLAROIDS
+========================================================= */
+
+.polaroid {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 12px 22px;
+    background: #f7f4ef;
+    box-shadow:
+        0 18px 35px rgba(0, 0, 0, 0.45),
+        0 4px 8px rgba(0, 0, 0, 0.25);
+    transform-origin: top center;
+    opacity: 0;
+    transform: translateY(-35px) rotate(0deg);
+    transition:
+        opacity 0.8s ease,
+        transform 0.9s cubic-bezier(.22, 1, .36, 1),
+        box-shadow 0.3s ease;
+}
+
+.proposal-gallery.active .polaroid {
+    opacity: 1;
+}
+
+.proposal-gallery.active .polaroid-1 {
+    transform: translateY(0) rotate(-3deg);
+    transition-delay: 0.1s;
+}
+
+.proposal-gallery.active .polaroid-2 {
+    transform: translateY(0) rotate(2deg);
+    transition-delay: 0.22s;
+}
+
+.proposal-gallery.active .polaroid-3 {
+    transform: translateY(0) rotate(-1.5deg);
+    transition-delay: 0.34s;
+}
+
+.proposal-gallery.active .polaroid-4 {
+    transform: translateY(0) rotate(3deg);
+    transition-delay: 0.46s;
+}
+
+.proposal-gallery.active .polaroid-5 {
+    transform: translateY(0) rotate(2deg);
+    transition-delay: 0.58s;
+}
+
+.proposal-gallery.active .polaroid-6 {
+    transform: translateY(0) rotate(-2.5deg);
+    transition-delay: 0.70s;
+}
+
+.proposal-gallery.active .polaroid-7 {
+    transform: translateY(0) rotate(1.5deg);
+    transition-delay: 0.82s;
+}
+
+.proposal-gallery.active .polaroid-8 {
+    transform: translateY(0) rotate(-3deg);
+    transition-delay: 0.94s;
+}
+
+@media (hover: hover) {
+    .polaroid:hover {
+        z-index: 10;
+        box-shadow:
+            0 25px 50px rgba(0, 0, 0, 0.6),
+            0 5px 12px rgba(0, 0, 0, 0.3);
+        transform:
+            translateY(-12px)
+            rotate(0deg)
+            scale(1.04) !important;
+    }
+}
+
+
+/* =========================================================
+   FOTO
+========================================================= */
+
+.polaroid-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #ddd;
+}
+
+.polaroid-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+@media (hover: hover) {
+    .polaroid:hover .polaroid-photo img {
+        transform: scale(1.03);
+    }
+}
+
+
+/* =========================================================
+   LEGENDA
+========================================================= */
+
+.polaroid figcaption {
+    min-height: 25px;
+    padding: 13px 4px 0;
+    color: #222;
+    font-family: "Segoe Print", "Bradley Hand", cursive;
+    font-size: 0.82rem;
+    line-height: 1.3;
+    text-align: center;
+}
+
+
+/* =========================================================
+   PREGADOR
+========================================================= */
+
+.polaroid-clip {
+    position: absolute;
+    z-index: 5;
+    top: -17px;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 35px;
+    font-size: 1.15rem;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+}
+
+
+/* =========================================================
+   DECORAÇÕES DE FUNDO
+========================================================= */
+
+.proposal-decor {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.decor {
+    position: absolute;
+    display: block;
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    opacity: 0.09;
+    filter: grayscale(20%);
+    user-select: none;
+    animation:
+        proposalDecorFloat 7s ease-in-out infinite;
+}
+
+.decor-1 {
+    top: 14%;
+    left: 7%;
+    transform: rotate(-18deg);
+}
+
+.decor-2 {
+    top: 30%;
+    right: 8%;
+    transform: rotate(15deg);
+    animation-delay: -2s;
+}
+
+.decor-3 {
+    top: 58%;
+    left: 5%;
+    transform: rotate(-10deg);
+    animation-delay: -4s;
+}
+
+.decor-4 {
+    top: 72%;
+    right: 7%;
+    transform: rotate(12deg);
+    animation-delay: -1s;
+}
+
+.decor-5 {
+    top: 84%;
+    left: 14%;
+    transform: rotate(20deg);
+    animation-delay: -3s;
+}
+
+.decor-6 {
+    top: 48%;
+    right: 17%;
+    transform: rotate(-15deg);
+    animation-delay: -5s;
+}
+
+.decor-7 {
+    top: 22%;
+    left: 20%;
+    transform: rotate(8deg);
+    animation-delay: -6s;
+}
+
+.decor-8 {
+    top: 87%;
+    right: 19%;
+    transform: rotate(-12deg);
+    animation-delay: -2.5s;
+}
+
+@keyframes proposalDecorFloat {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -10px;
+    }
 }
 
 
@@ -1876,7 +1988,6 @@ section > .container {
     .moments-grid {
         grid-template-columns:
             repeat(3, minmax(0, 1fr));
-
         grid-auto-rows: 190px;
     }
 
@@ -1925,14 +2036,15 @@ section > .container {
 
     section {
         min-height: auto;
-
         padding:
             clamp(75px, 12vw, 90px)
             clamp(18px, 5vw, 25px);
     }
 
 
-    /* INTRO */
+    /* =====================================================
+       INTRO
+    ===================================================== */
 
     #intro {
         padding:
@@ -1943,19 +2055,19 @@ section > .container {
     }
 
 
-    /* HERO */
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .hero {
         min-height: 100svh;
         height: 100svh;
-
         padding-inline: 18px;
     }
 
     .hero-image {
         width: 88vw;
         height: min(62svh, 570px);
-
         border-radius:
             32px
             14px
@@ -1973,7 +2085,9 @@ section > .container {
     }
 
 
-    /* TIMELINE */
+    /* =====================================================
+       TIMELINE
+    ===================================================== */
 
     .timeline {
         margin-top: 45px;
@@ -1986,37 +2100,29 @@ section > .container {
     .timeline-item,
     .timeline-item:nth-child(odd),
     .timeline-item:nth-child(even) {
-
         width: 100%;
-
         margin: 0;
-
         padding:
             32px
             0
             32px
             clamp(40px, 11vw, 50px);
-
         text-align: left;
     }
 
     .timeline-item::after,
     .timeline-item:nth-child(odd)::after,
     .timeline-item:nth-child(even)::after {
-
         left: 8px;
         right: auto;
-
         top: 58px;
     }
 
     .timeline-item > img,
     .timeline-item:nth-child(odd) > img,
     .timeline-item:nth-child(even) > img {
-
         width: 100%;
         max-width: none;
-
         margin: 0;
     }
 
@@ -2027,25 +2133,22 @@ section > .container {
 
     .timeline-item p,
     .timeline-item:nth-child(odd) p {
-
         width: 100%;
         max-width: none;
-
         margin-left: 0;
     }
 
 
-    /* PRINTS */
+    /* =====================================================
+       PRINTS
+    ===================================================== */
 
     .conversation-prints,
     .love-messages,
     .route-prints {
-
         width: 100%;
-
         justify-content:
             flex-start !important;
-
         gap:
             clamp(8px, 2vw, 12px);
     }
@@ -2053,28 +2156,23 @@ section > .container {
     .conversation-prints img,
     .love-messages img,
     .route-prints img {
-
         width:
             calc(50% - 6px);
-
         max-width: none;
-
         border-radius: 14px;
     }
 
 
-    /* MOMENTOS */
+    /* =====================================================
+       MOMENTOS
+    ===================================================== */
 
     .moments-grid {
-
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
-
         grid-auto-rows:
             clamp(150px, 42vw, 180px);
-
         gap: 10px;
-
         margin-top: 40px;
     }
 
@@ -2096,9 +2194,9 @@ section > .container {
     }
 
 
-
-
-    /* SÁBADO */
+    /* =====================================================
+       SÁBADO
+    ===================================================== */
 
     .sunset-section {
         min-height: auto;
@@ -2116,14 +2214,12 @@ section > .container {
     .sunset-gallery {
         grid-template-columns: 1fr;
         grid-template-rows: none;
-
         gap: 12px;
     }
 
     .sunset-gallery .sunset-main {
         grid-column: auto;
         grid-row: auto;
-
         aspect-ratio: 4 / 5;
         height: auto;
     }
@@ -2131,13 +2227,9 @@ section > .container {
     .sunset-gallery img {
         width: 100%;
         height: auto;
-
         min-height: 0;
-
         aspect-ratio: 4 / 3;
-
         object-fit: cover;
-
         border-radius: 16px;
     }
 
@@ -2146,13 +2238,14 @@ section > .container {
     }
 
 
-    /* CARTA */
+    /* =====================================================
+       CARTA
+    ===================================================== */
 
     .letter {
         padding:
             clamp(25px, 6vw, 32px)
             clamp(20px, 6vw, 30px);
-
         border-radius: 18px;
     }
 
@@ -2162,11 +2255,12 @@ section > .container {
     }
 
 
-    /* PERGUNTA */
+    /* =====================================================
+       PERGUNTA
+    ===================================================== */
 
     #question {
         min-height: 100svh;
-
         padding-inline: 20px;
     }
 
@@ -2178,7 +2272,6 @@ section > .container {
     .buttons {
         width: 100%;
         height: 190px;
-
         gap: 15px;
     }
 
@@ -2188,18 +2281,18 @@ section > .container {
     }
 
 
-    /* RELACIONAMENTO */
+    /* =====================================================
+       RELACIONAMENTO
+    ===================================================== */
 
     #relationship {
         min-height: 100svh;
-
         padding-inline: 20px;
     }
 
     .counter {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
-
         gap: 10px;
     }
 
@@ -2215,10 +2308,11 @@ section > .container {
     }
 
 
-    /* GALERIA */
+    /* =====================================================
+       GALERIA DE PROVAS
+    ===================================================== */
 
     .proof-gallery {
-
         padding:
             55px
             16px
@@ -2232,20 +2326,17 @@ section > .container {
 
     .gallery-photo-container {
         height: 55svh;
-
         border-radius: 16px;
     }
 
     .gallery-photo-container img {
         max-width: 100%;
         max-height: 55svh;
-
         border-radius: 16px;
     }
 
     .gallery-caption {
         margin-top: 18px;
-
         font-size: .95rem;
         line-height: 1.6;
     }
@@ -2256,12 +2347,12 @@ section > .container {
     }
 
 
-    /* FINAL GALERIA */
+    /* =====================================================
+       FINAL GALERIA
+    ===================================================== */
 
     .gallery-ending {
-
         align-items: flex-start;
-
         padding-top: 80px;
         padding-bottom: 60px;
     }
@@ -2273,63 +2364,44 @@ section > .container {
     .gallery-ending p {
         font-size:
             clamp(1.05rem, 5vw, 1.4rem);
-
         line-height: 1.6;
     }
 
     .gallery-ending .final-line {
         margin-top: 40px;
-
         font-size:
             clamp(1.4rem, 7vw, 2rem);
     }
 
-        .gallery-ending-close {
-    position: absolute;
-    top: max(15px, env(safe-area-inset-top));
-    left: max(16px, env(safe-area-inset-left));
-    right: auto;
-
-    width: 48px;
-    height: 48px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: none;
-    border-radius: 50%;
-
-    color: #fff;
-    background: rgba(255, 255, 255, .06);
-
-    font-size: 2rem;
-    line-height: 1;
-
-    cursor: pointer;
-
-    transition:
-        background .35s ease,
-        transform .35s ease,
-        opacity .35s ease;
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-@media (hover: hover) {
-    .gallery-ending-close:hover {
-        background: rgba(255, 255, 255, .12);
-        transform: scale(1.08);
+    .gallery-ending-close {
+        position: absolute;
+        top: max(15px, env(safe-area-inset-top));
+        left: max(16px, env(safe-area-inset-left));
+        right: auto;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 50%;
+        color: #fff;
+        background: rgba(255, 255, 255, .06);
+        font-size: 2rem;
+        line-height: 1;
+        cursor: pointer;
+        transition:
+            background .35s ease,
+            transform .35s ease,
+            opacity .35s ease;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
-}
-
-.gallery-ending-close:active {
-    transform: scale(.92);
-}
 
 
-    /* COMEMORAÇÃO */
+    /* =====================================================
+       COMEMORAÇÃO
+    ===================================================== */
 
     .celebration-content {
         width: 92%;
@@ -2341,10 +2413,11 @@ section > .container {
     }
 
 
-    /* LIGHTBOX */
+    /* =====================================================
+       LIGHTBOX
+    ===================================================== */
 
     #lightbox {
-
         padding:
             50px
             15px
@@ -2354,24 +2427,20 @@ section > .container {
     #lightbox img {
         max-width: 100%;
         max-height: 85dvh;
-
         border-radius: 16px;
     }
 
 
-    /* TIMELINE NOTE */
+    /* =====================================================
+       TIMELINE NOTE
+    ===================================================== */
 
     .timeline-note {
-
         position: relative;
-
         right: auto;
-
         width: min(80%, 300px);
-
         margin:
             10px auto 25px;
-
         opacity: .7;
     }
 
@@ -2381,6 +2450,149 @@ section > .container {
 
     .timeline-note p + p {
         font-size: .74rem;
+    }
+
+
+    /* =====================================================
+       GALERIA DO PEDIDO — MOBILE
+    ===================================================== */
+
+    .proposal-gallery {
+        width: 100%;
+        min-height: 100svh;
+        padding:
+            85px
+            12px
+            100px;
+        overflow: hidden;
+    }
+
+    .proposal-gallery-content {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .proposal-gallery h2 {
+        width: 100%;
+        padding-inline: 8px;
+        font-size:
+            clamp(2rem, 9vw, 3.2rem);
+        line-height: 1.05;
+    }
+
+    .proposal-gallery-intro {
+        width: 100%;
+        max-width: 420px;
+        margin:
+            20px auto
+            65px;
+        padding-inline: 10px;
+        font-size:
+            clamp(.88rem, 3.8vw, 1rem);
+        line-height: 1.65;
+    }
+
+    .photo-clothesline {
+        width: 100%;
+        max-width: 100%;
+        display: grid;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+        justify-content: stretch;
+        column-gap: 16px;
+        row-gap: 78px;
+        padding:
+            32px
+            4px
+            45px;
+    }
+
+    .clothesline-wire {
+        top: 22px;
+        left: 4%;
+        right: 4%;
+    }
+
+    .clothesline-wire::before,
+    .clothesline-wire::after {
+        width: 22%;
+        height: 18px;
+    }
+
+    .polaroid {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        padding:
+            7px
+            7px
+            15px;
+    }
+
+    .polaroid-photo {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+    }
+
+    .polaroid-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .polaroid figcaption {
+        min-height: 20px;
+        padding:
+            8px
+            2px
+            0;
+        font-size: .63rem;
+        line-height: 1.25;
+    }
+
+    .polaroid-clip {
+        top: -13px;
+        width: 24px;
+        height: 30px;
+        font-size: .9rem;
+    }
+
+    .proposal-gallery.active .polaroid-1 {
+        transform: rotate(-3deg);
+    }
+
+    .proposal-gallery.active .polaroid-2 {
+        transform: rotate(2deg);
+    }
+
+    .proposal-gallery.active .polaroid-3 {
+        transform: rotate(-1.5deg);
+    }
+
+    .proposal-gallery.active .polaroid-4 {
+        transform: rotate(3deg);
+    }
+
+    .proposal-gallery.active .polaroid-5 {
+        transform: rotate(2deg);
+    }
+
+    .proposal-gallery.active .polaroid-6 {
+        transform: rotate(-2.5deg);
+    }
+
+    .proposal-gallery.active .polaroid-7 {
+        transform: rotate(1.5deg);
+    }
+
+    .proposal-gallery.active .polaroid-8 {
+        transform: rotate(-3deg);
+    }
+
+    .decor {
+        font-size: 1.15rem;
+        opacity: .055;
     }
 }
 
@@ -2448,7 +2660,6 @@ section > .container {
     .route-prints img {
         width:
             calc(50% - 3.5px);
-
         border-radius: 11px;
     }
 
@@ -2495,6 +2706,66 @@ section > .container {
         min-width: 100px;
         padding-inline: 18px;
     }
+
+
+    /* =====================================================
+       GALERIA DO PEDIDO — TELAS MUITO PEQUENAS
+    ===================================================== */
+
+    .proposal-gallery {
+        padding:
+            75px
+            8px
+            85px;
+    }
+
+    .proposal-gallery h2 {
+        font-size:
+            clamp(1.9rem, 9vw, 2.6rem);
+    }
+
+    .proposal-gallery-intro {
+        padding-inline: 8px;
+        margin-bottom: 55px;
+        font-size: .84rem;
+    }
+
+    .photo-clothesline {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+        column-gap: 10px;
+        row-gap: 62px;
+        padding:
+            30px
+            2px
+            35px;
+    }
+
+    .polaroid {
+        padding:
+            6px
+            6px
+            12px;
+    }
+
+    .polaroid figcaption {
+        font-size: .55rem;
+        padding-top: 7px;
+    }
+
+    .polaroid-clip {
+        top: -12px;
+        font-size: .78rem;
+    }
+
+    .clothesline-wire {
+        left: 3%;
+        right: 3%;
+    }
+
+    .decor {
+        font-size: .95rem;
+    }
 }
 
 
@@ -2531,10 +2802,8 @@ section > .container {
     *,
     *::before,
     *::after {
-
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-
         transition-duration: .01ms !important;
     }
 
@@ -2546,35 +2815,4 @@ section > .container {
     .acceptance-celebration {
         display: none !important;
     }
-}
-
-
-/* =========================================================
-   PAUSA FINAL — AGORA OLHA PRA MIM
-========================================================= */
-
-html.proposal-hold,
-body.proposal-hold {
-    overflow: hidden !important;
-    height: 100%;
-}
-
-
-#thirdVideo {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    max-height: 0;
-    overflow: hidden;
-    transition:
-        opacity 1s ease,
-        max-height 1.2s ease,
-        visibility 1s ease;
-}
-
-#thirdVideo.show {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    max-height: 1200px;
 }

@@ -46,13 +46,10 @@ let finalReached = false;
 let noAttempts = 0;
 let counterInterval = null;
 
-let relationshipAccepted =
-    localStorage.getItem("relationshipAccepted") === "true";
-
-const RELATIONSHIP_KEY = "relationshipStart";
-const ACCEPTED_KEY = "relationshipAccepted";
-
-const FIXED_RELATIONSHIP_START = "";
+// O site agora conta a partir de um horário fixo do pedido.
+// Depois, basta colocar aqui o horário exato do clique no navegador.
+// Exemplo: "2026-09-19T17:08:00-03:00"
+const FIXED_RELATIONSHIP_START = null;
 
 
 /* =========================================================
@@ -60,13 +57,6 @@ const FIXED_RELATIONSHIP_START = "";
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-
-    if (relationshipAccepted) {
-        showQuestion(false, true);
-        showRelationship(false);
-        startCounter();
-    }
-
     createPetals(8);
 });
 
@@ -774,29 +764,29 @@ if (galleryEndingClose) {
    AGORA OLHA PRA MIM — MOMENTO FINAL
 ========================================================= */
 
-const FINAL_HOLD_TIME = 30000;
-
 const finalObserver =
     new IntersectionObserver(
         (entries) => {
+
             entries.forEach((entry) => {
+
                 if (
                     entry.isIntersecting &&
                     !finalReached
                 ) {
+
                     finalReached = true;
 
                     finalSection.classList.add(
                         "active"
                     );
 
-                    setTimeout(() => {
-                        question.classList.add(
-                            "show"
-                        );
-                    }, FINAL_HOLD_TIME);
+                    showQuestion(false);
+
                 }
+
             });
+
         },
         {
             threshold: 0.7
@@ -807,55 +797,19 @@ finalObserver.observe(
     finalSection
 );
 
-
-const questionObserver = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
-
-            if (
-                entry.isIntersecting &&
-                relationshipAccepted
-            ) {
-                playAcceptanceCelebration(false);
-            }
-
-        });
-    },
-    {
-        threshold: 0.7
-    }
-);
-
-questionObserver.observe(question);
-
 /* =========================================================
    PERGUNTA
 ========================================================= */
 
 function showQuestion(
-    scroll = false,
-    accepted = false
+    scroll = false
 ) {
-    question.classList.add(
-        "show"
-    );
+    question.classList.add("show");
 
-    if (accepted) {
-        question.classList.add(
-            "accepted"
-        );
-
-        yesBtn.classList.add(
-            "accepted"
-        );
-
-        noBtn.classList.add(
-            "accepted"
-        );
-
-        questionTitle.textContent =
-            "Você aceita? ❤️";
-    }
+    // A partir daqui a página é uma história estática: o pedido já aconteceu.
+    // O contador e os blocos seguintes ficam disponíveis sem depender de clique.
+    showRelationship(false);
+    startCounter();
 
     if (scroll) {
         setTimeout(() => {
@@ -868,237 +822,29 @@ function showQuestion(
 }
 
 /* =========================================================
-   BOTÃO NÃO
+   BOTÕES DA HISTÓRIA
 ========================================================= */
 
-function moveNoButton() {
-    const buttons =
-        document.querySelector(
-            ".buttons"
-        );
+// Os botões permanecem visíveis como parte do registro do pedido,
+// mas não controlam mais o restante do site.
+noBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+});
 
-    if (!buttons) {
-        return;
-    }
-
-    const buttonRect =
-        noBtn.getBoundingClientRect();
-
-    const areaRect =
-        buttons.getBoundingClientRect();
-
-    const maxX =
-        Math.max(
-            30,
-            (areaRect.width -
-                buttonRect.width) /
-                2 -
-                10
-        );
-
-    const maxY =
-        Math.max(
-            50,
-            (areaRect.height -
-                buttonRect.height) /
-                2 -
-                10
-        );
-
-    let x =
-        (Math.random() * 2 - 1) *
-        maxX;
-
-    let y =
-        (Math.random() * 2 - 1) *
-        maxY;
-
-    if (Math.abs(x) < 80) {
-        x +=
-            x < 0
-                ? -90
-                : 90;
-    }
-
-    const rotation =
-        Math.random() * 16 - 8;
-
-    noBtn.style.setProperty(
-        "--no-x",
-        `${x}px`
-    );
-
-    noBtn.style.setProperty(
-        "--no-y",
-        `${y}px`
-    );
-
-    noBtn.style.setProperty(
-        "--no-rotation",
-        `${rotation}deg`
-    );
-
-    noBtn.classList.add(
-        "dodging"
-    );
-}
-
-function registerNoAttempt() {
-    if (relationshipAccepted) {
-        return;
-    }
-
-    noAttempts++;
-
-    moveNoButton();
-
-    let message = "";
-
-    if (noAttempts === 1) {
-        message =
-            "Tem certeza? 👀";
-    } else if (noAttempts === 2) {
-        message =
-            "Pensa com carinho... ❤️";
-    } else {
-        message =
-            "Opção indisponível 😂";
-    }
-
-    noMessage.textContent =
-        message;
-
-    noMessage.classList.add(
-        "message-visible"
-    );
-}
-
-noBtn.addEventListener(
-    "pointerenter",
-    (event) => {
-        if (
-            event.pointerType ===
-            "mouse"
-        ) {
-            registerNoAttempt();
-        }
-    }
-);
-
-noBtn.addEventListener(
-    "pointerdown",
-    (event) => {
-        if (
-            event.pointerType ===
-                "touch" ||
-            event.pointerType ===
-                "pen"
-        ) {
-            event.preventDefault();
-
-            registerNoAttempt();
-        }
-    }
-);
-
-noBtn.addEventListener(
-    "click",
-    (event) => {
-        event.preventDefault();
-
-        if (noAttempts === 0) {
-            registerNoAttempt();
-        }
-    }
-);
-
-/* =========================================================
-   SIM
-========================================================= */
-
-yesBtn.addEventListener(
-    "click",
-    async () => {
-        const now =
-            new Date().toISOString();
-
-        let start =
-            localStorage.getItem(
-                RELATIONSHIP_KEY
-            );
-
-        if (!start) {
-            start = now;
-
-            localStorage.setItem(
-                RELATIONSHIP_KEY,
-                start
-            );
-        }
-
-        localStorage.setItem(
-            ACCEPTED_KEY,
-            "true"
-        );
-
-        relationshipAccepted =
-            true;
-
-        question.classList.add(
-            "accepted"
-        );
-
-        yesBtn.classList.add(
-            "accepted"
-        );
-
-        noBtn.classList.add(
-            "accepted"
-        );
-
-        noMessage.classList.remove(
-            "message-visible"
-        );
-
-        showRelationship(true);
-
-        startCounter();
-
-        playAcceptanceCelebration(
-            true
-        );
-
-        music.currentTime = 0;
-        music.volume = 0;
-
-        try {
-            await music.play();
-
-            musicPlaying = true;
-
-            musicControl.textContent =
-                "Ⅱ";
-
-            fadeMusicIn();
-        } catch {
-            musicPlaying = false;
-
-            musicControl.textContent =
-                "♪";
-        }
-    }
-);
+yesBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+});
 
 /* =========================================================
    RELACIONAMENTO
 ========================================================= */
 
-function showRelationship(
-    scroll = false
-) {
-    relationship.classList.add(
-        "show"
-    );
+function showRelationship(scroll = false) {
+    relationship.classList.add("show");
+
+    if (thirdVideo) {
+        thirdVideo.classList.add("show");
+    }
 
     if (scroll) {
         setTimeout(() => {
@@ -1114,127 +860,47 @@ function showRelationship(
    CONTADOR
 ========================================================= */
 
-function getRelationshipStart() {
-    if (FIXED_RELATIONSHIP_START) {
-        return FIXED_RELATIONSHIP_START;
-    }
-
-    return localStorage.getItem(
-        RELATIONSHIP_KEY
-    );
-}
-
 function startCounter() {
     if (counterInterval) {
-        clearInterval(
-            counterInterval
-        );
+        clearInterval(counterInterval);
     }
 
     updateCounter();
 
-    counterInterval =
-        setInterval(
-            updateCounter,
-            1000
-        );
-}
-
-const thirdVideo =
-    document.getElementById("thirdVideo");
-
-const relationshipObserver =
-    new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (
-                    entry.isIntersecting &&
-                    relationshipAccepted
-                ) {
-                    thirdVideo.classList.add("show");
-
-                    relationshipObserver.unobserve(
-                        entry.target
-                    );
-                }
-            });
-        },
-        {
-            threshold: 0.5
-        }
-    );
-
-if (thirdVideo) {
-    relationshipObserver.observe(
-        relationship
+    counterInterval = setInterval(
+        updateCounter,
+        1000
     );
 }
 
 function updateCounter() {
-    const start =
-        getRelationshipStart();
-
-    if (!start) {
+    if (!FIXED_RELATIONSHIP_START) {
+        daysElement.textContent = "—";
+        hoursElement.textContent = "—";
+        minutesElement.textContent = "—";
+        secondsElement.textContent = "—";
         return;
     }
 
-    const startDate =
-        new Date(start);
+    const startDate = new Date(FIXED_RELATIONSHIP_START);
+    const now = new Date();
 
-    const now =
-        new Date();
+    if (Number.isNaN(startDate.getTime())) {
+        return;
+    }
 
-    let elapsed =
-        Math.max(
-            0,
-            now - startDate
-        );
+    const elapsed = Math.max(0, now - startDate);
+    const totalSeconds = Math.floor(elapsed / 1000);
 
-    const totalSeconds =
-        Math.floor(
-            elapsed / 1000
-        );
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
 
-    const days =
-        Math.floor(
-            totalSeconds / 86400
-        );
-
-    const hours =
-        Math.floor(
-            (totalSeconds % 86400) /
-            3600
-        );
-
-    const minutes =
-        Math.floor(
-            (totalSeconds % 3600) /
-            60
-        );
-
-    const seconds =
-        totalSeconds % 60;
-
-    daysElement.textContent =
-        days;
-
-    hoursElement.textContent =
-        String(hours).padStart(
-            2,
-            "0"
-        );
-
-    minutesElement.textContent =
-        String(minutes).padStart(
-            2,
-            "0"
-        );
-
-    secondsElement.textContent =
-        String(seconds).padStart(
-            2,
-            "0"
-        );
+    daysElement.textContent = days;
+    hoursElement.textContent = String(hours).padStart(2, "0");
+    minutesElement.textContent = String(minutes).padStart(2, "0");
+    secondsElement.textContent = String(seconds).padStart(2, "0");
 }
 
 /* =========================================================
@@ -1847,7 +1513,7 @@ const closeLightbox =
 
 const zoomableImages =
     document.querySelectorAll(
-        ".timeline-item img, .sunset-gallery img, .moment img"
+        ".timeline-item img, .sunset-gallery img, .moment img, .proposal-gallery img"
     );
 
 zoomableImages.forEach(
@@ -1956,6 +1622,101 @@ videos.forEach((video) => {
     );
 });
 
+
+/* =========================================================
+   ANIMAÇÃO FINAL — O NOSSO COMEÇO
+========================================================= */
+
+const storyEnding =
+    document.getElementById("storyEnding");
+
+const storyEndingLines = [
+    {
+        element: document.getElementById("storyEndingLine1"),
+        text: "Achou que tinha acabado?"
+    },
+    {
+        element: document.getElementById("storyEndingLine2"),
+        text: "Isso foi só o começo"
+    },
+    {
+        element: document.getElementById("storyEndingLine3"),
+        text: "de tudo que vivemos e ainda vamos viver. ❤️"
+    }
+];
+
+let storyEndingStarted = false;
+
+function wait(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function typeStoryEndingLine(element, text, speed = 65) {
+    if (!element) {
+        return;
+    }
+
+    element.textContent = "";
+    element.classList.add("typing");
+
+    for (const character of text) {
+        element.textContent += character;
+        await wait(speed);
+    }
+
+    element.classList.remove("typing");
+}
+
+async function playStoryEnding() {
+    if (storyEndingStarted || !storyEnding) {
+        return;
+    }
+
+    storyEndingStarted = true;
+    storyEnding.classList.add("active");
+
+    for (let i = 0; i < storyEndingLines.length; i++) {
+        const line = storyEndingLines[i];
+
+        if (!line.element) {
+            continue;
+        }
+
+        line.element.classList.remove("visible");
+        await wait(i === 0 ? 900 : 1300);
+        line.element.classList.add("visible");
+        await typeStoryEndingLine(line.element, line.text);
+
+        if (i < storyEndingLines.length - 1) {
+            await wait(1700);
+        }
+    }
+
+    await wait(2600);
+    storyEnding.classList.add("fade-out");
+}
+
+if (storyEnding) {
+    const storyEndingObserver =
+        new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        playStoryEnding();
+                        storyEndingObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.6
+            }
+        );
+
+    storyEndingObserver.observe(storyEnding);
+}
+
 /* =========================================================
    RESIZE DO CANVAS
 ========================================================= */
@@ -1977,3 +1738,27 @@ window.addEventListener(
         */
     }
 );
+
+
+/* =========================================================
+   ANIMAÇÃO — GALERIA DO PEDIDO
+========================================================= */
+
+const proposalGallery = document.getElementById("proposalGallery");
+
+if (proposalGallery) {
+    const proposalGalleryObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    proposalGallery.classList.add("active");
+                }
+            });
+        },
+        {
+            threshold: 0.2
+        }
+    );
+
+    proposalGalleryObserver.observe(proposalGallery);
+}
