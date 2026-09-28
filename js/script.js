@@ -49,7 +49,7 @@ let counterInterval = null;
 // O site agora conta a partir de um horário fixo do pedido.
 // Depois, basta colocar aqui o horário exato do clique no navegador.
 // Exemplo: "2026-09-19T17:08:00-03:00"
-const FIXED_RELATIONSHIP_START = null;
+const FIXED_RELATIONSHIP_START = "2026-09-19T17:50:00-03:00";
 
 
 /* =========================================================
