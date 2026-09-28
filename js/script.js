@@ -36,7 +36,7 @@ const celebrationCanvas =
     document.getElementById("celebrationCanvas");
 const celebrationEmojis =
     document.getElementById("celebrationEmojis");
-
+const thirdVideo = document.getElementById("thirdVideo");
 /* =========================================================
    ESTADO
 ========================================================= */
@@ -1490,6 +1490,29 @@ function runFireworks() {
     requestAnimationFrame(
         animate
     );
+}
+
+let acceptanceCelebrationStarted = false;
+
+if (acceptedMessage) {
+    const acceptanceObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (
+                entry.isIntersecting &&
+                !acceptanceCelebrationStarted
+            ) {
+                acceptanceCelebrationStarted = true;
+
+                playAcceptanceCelebration();
+
+                acceptanceObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.6
+    });
+
+    acceptanceObserver.observe(acceptedMessage);
 }
 
 /* =========================================================
