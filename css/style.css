@@ -1596,7 +1596,7 @@ body.proposal-hold {
     justify-content: center;
     padding: 60px 25px;
     text-align: center;
-    background: #050505;
+    background: black;
     overflow: hidden;
 }
 
@@ -1616,7 +1616,7 @@ body.proposal-hold {
     transform: translateY(25px);
 }
 
-.story-ending-content p.show {
+.story-ending-content p.visible {
     opacity: 1;
     transform: translateY(0);
 }
